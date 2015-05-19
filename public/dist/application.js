@@ -388,7 +388,6 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
 // pick list containing a mix of places and predicted search terms.
             var map;
             var input;
-
             function initialize() {
                 var markers = [];
 
@@ -396,6 +395,7 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
                     zoom: 8,
                     center: new google.maps.LatLng(-34.397, 150.644)
                 };
+
 
                 map = new google.maps.Map(document.getElementById('map-canvas'),
                     mapOptions);
@@ -420,7 +420,8 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
                         return;
                     }
                     var i;
-                    for (i = 0, marker; marker = markers[i]; i++) {
+                    var marker;
+                    for (i = 0; marker = markers[i]; i++) {
                         marker.setMap(null);
                     }
 
@@ -428,7 +429,8 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
                     markers = [];
                     var bounds = new google.maps.LatLngBounds();
                     var i;
-                    for (i = 0, place; place = places[i]; i++) {
+                    var place;
+                    for (i = 0; place = places[i]; i++) {
                         var image = {
                             url: place.icon,
                             size: new google.maps.Size(71, 71),
@@ -466,6 +468,7 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
                     searchBox.setBounds(bounds);
                 });
             }
+            /*initialize();*/
             google.maps.event.addDomListener(window, 'load', initialize);
         };
 
@@ -493,6 +496,8 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
         $scope.createDisplay = function() {
             $scope.selection = [];
 
+
+
             // helper method to get the selected
             $scope.selectedGuests = function selectedGuests() {
                 return filterFilter($scope.guests, { selected: true });
@@ -506,26 +511,24 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
             }, true);
         };
 
-            // Create new Evenementz
 		$scope.create = function() {
 			// Create new Evenement object
 
             var beginDate  = $scope.evenement.beginDate;
             var beginTime  = $scope.evenement.beginTime;
+
             beginDate = beginDate.split('-');
-            var beginDate1 = beginDate[2]+'-'+beginDate[1]+'-'+beginDate[0]+' '+beginTime+':00';
             var begin1 = new Date();
             var begin2 = begin1.getTimezoneOffset();
-            var beginCurrentUTCTimeStamp = (new Date(beginDate1).getTime());
+            var beginCurrentUTCTimeStamp = (new Date(beginDate[1]+' '+beginDate[1]+', '+beginDate[0]+' '+beginTime).getTime());
             var beginUTC0TS = beginCurrentUTCTimeStamp + (begin2*60000);
 
             var endDate  = $scope.evenement.endDate;
             var endTime  = $scope.evenement.endTime;
             endDate = endDate.split('-');
-            var endDate1 = endDate[2]+'-'+endDate[1]+'-'+endDate[0]+' '+endTime+':00';
             var end1 = new Date();
             var end2 = end1.getTimezoneOffset();
-            var endCurrentUTCTimeStamp = (new Date(endDate1).getTime());
+            var endCurrentUTCTimeStamp = (new Date(endDate[1]+' '+endDate[1]+', '+endDate[0]+' '+endTime).getTime());
             var endUTC0TS = endCurrentUTCTimeStamp + (end2*60000);
 
 
@@ -552,8 +555,7 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
                 evenement.guests.push({_id: $scope.selection[j]});
             }
 
-
-            console.log(evenement);
+            alert(JSON.stringify(evenement));
 
 			// Redirect after save
 			evenement.$save(function(response) {

@@ -28,12 +28,12 @@ module.exports = {
 	facebook: {
 		clientID: process.env.FACEBOOK_ID || '884615724928206',
 		clientSecret: process.env.FACEBOOK_SECRET || 'a40353835e26cf370aa1fcebd493221a',
-		callbackURL: '/auth/facebook/callback'
+		callbackURL: 'http://46.101.169.145:3000/auth/facebook/callback'
 	},
 	twitter: {
 		clientID: process.env.TWITTER_KEY || 'HVuAiZ2JFGxp38Wfjp9kQCQBr',
 		clientSecret: process.env.TWITTER_SECRET || 'P48jmn0lBvsQXbg89tLa2wsUjCZAvFJuJieePVsjNZAirVB8Em',
-		callbackURL: '/auth/twitter/callback'
+		callbackURL: 'http://46.101.169.145:3000/auth/facebook/callback'
 	},
 	google: {
 		clientID: process.env.GOOGLE_ID || 'APP_ID',

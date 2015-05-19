@@ -1,0 +1,128 @@
+/*------------------------------------*\
+    #CART
+\*------------------------------------*/
+
+$border-thead:1px solid $color-1;
+
+.cart{
+  &__infos{
+    color:$color-2;
+    border-bottom: $border-thead;
+    @include rem-fix(height, 4);
+    padding:0;
+    &--icon{
+      font-size:1.5em;
+      float:left;
+      height:100%;
+      background:$color-2;
+      color:white;
+      @include rem-fix(padding, 1, 1.2);
+      @include rem-fix(margin-right, 1);
+    }
+    &--title{
+      width:100%;
+      display:block;
+      font-size:1.2em;
+      text-transform:uppercase;
+      font-family: 'Bitter-Regular', sans-serif;
+      margin:0;
+      @include rem-fix(padding, 1, 0.8);
+    }
+  }
+  &__list{
+    @include rem-fix(padding-left, 0);
+    tbody, thead, tr{
+      display:block;
+      width:100%;
+    }
+    thead{
+      tr:first-child{
+        @include rem-fix(padding, 0, 0, 1, 0);
+      }
+      tr{
+        color: $color-2;
+        @include rem-fix(height, 4);
+        @include rem-fix(padding, 1);
+        border-bottom: $border-thead;
+        th{
+          @include rem-fix(padding, 1, 0);
+        }
+      }
+    }
+    tbody{
+      tr{
+        max-height:80px;
+        &:hover{
+          .cart__list__item--delete{
+            display:inline;
+          }
+        }
+      }
+      tr:first-child{
+        @include rem-fix(margin-top, 1);
+      }
+    }
+    tfoot{
+      float:right;
+      width:25%;
+    }
+    &--title{
+      font-weight:bold;
+      text-align:center;
+    }
+    &__item{
+      @include rem-fix(padding, 1, 0);
+      @include rem-fix(margin-top, 0.7);
+      text-align:center;
+      &--total{
+        float:right;
+        text-align:center;
+        font-weight:bold;
+        background-color:$color-flash;
+        color:$color-3;
+        @include rem-fix(padding, 1, 0);
+      }
+      &--image{
+        img{
+          display:block;
+          height:80px;
+          float:right;
+        }
+        text-align:left;
+        @include rem-fix(margin-top, 0);
+        @include rem-fix(padding, 0);
+      }
+      &--desc{
+        @include rem-fix(margin-top, 0.4);
+        font-weight:bold;
+        color:$color-3;
+        span{
+          font-weight:inherit;
+          font-size:0.6em;
+          display:block;
+        }
+      }
+      &--unitPrice{
+        @include rem-fix(padding, 1.4);
+      }
+      &--quantity{
+        input{
+          width:40px;
+          @include rem-fix(padding, 0.2);
+        }
+      }
+      &--total{
+        @include rem-fix(margin-top, 0.7);
+      }
+      &--delete{
+        border-radius:50%;
+        background-color:black;
+        color:white;
+        position:relative;
+          bottom:50px;
+        display:none;
+
+      }
+    }
+  }
+}

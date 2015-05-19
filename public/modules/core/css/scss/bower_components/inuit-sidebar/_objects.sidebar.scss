@@ -1,0 +1,92 @@
+header{
+  .right{
+    text-align: right;
+  }
+  .left{
+    text-align: left;
+  }
+  .sidebar-menu{
+    z-index: 1001;
+    width: 75%;
+    position: fixed;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    background-color: $blue;
+    display: block;
+    height: 100%;
+    nav{
+      a{
+        padding: 15px 30px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+        display: block;
+        color: white;
+        text-decoration: none;
+        &:hover{
+          background-color: $gray;
+          color: $blue;
+        }
+      }
+      p{
+        padding: 15px 30px;
+        margin: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+        display: block;
+        color: rgba(255, 255, 255, 0.7);
+        text-transform: uppercase;
+      }
+      .profile{
+        padding-right: 30px;
+        color: rgba(0, 0, 0, 0.5);
+        span{
+          display: inline-block;
+          vertical-align: top;
+          line-height: 50px;
+          padding: 0 15px 0 0;
+        }
+      }
+      ul{
+        padding: 0;
+        li{
+          list-style-type: none;
+          ul{
+            padding: 0;
+            li{
+              list-style-type: none;
+            }
+          }
+        }
+      }
+    }
+  }
+  #remote-right-menu.close{
+    -webkit-transform: translate(133.33%);
+    -moz-transform: translate(133.33%);
+    -o-transform: translate(133.33%);
+    -ms-transform: translate(133.33%);
+    transform: translate(133.33%);
+  }
+  #remote-right-menu.open{
+    -webkit-transform: translate(33.33%);
+    -moz-transform: translate(33.33%);
+    -o-transform: translate(33.33%);
+    -ms-transform: translate(33.33%);
+    transform: translate(33.33%);
+  }
+
+  #remote-left-menu.close{
+    -webkit-transform: translate(-100%);
+    -moz-transform: translate(-100%);
+    -o-transform: translate(-100%);
+    -ms-transform: translate(-100%);
+    transform: translate(-100%);
+  }
+  #remote-left-menu.open{
+    -webkit-transform: translate(0);
+    -moz-transform: translate(0);
+    -o-transform: translate(0);
+    -ms-transform: translate(0);
+    transform: translate(0);
+  }
+}

@@ -1,0 +1,120 @@
+/*------------------------------------*\
+    #LISTS
+\*------------------------------------*/
+
+/**
+ * Remove extra vertical spacing when nesting lists.
+ */
+ul, ol{
+  margin: 0;
+  padding: 0;
+  h1, h2, h3, h4, p{
+    margin: 0;
+    padding: 0;
+  }
+}
+
+li {
+  list-style-type: none;
+
+    > ul,
+    > ol {
+        margin-bottom: 0;
+    }
+
+}
+
+.reset-children-style{
+  li{
+    list-style-type: none;
+  }
+  a{
+    color:black;
+    text-decoration:none;
+  }
+}
+
+.reset-style{
+    list-style-type: none;
+    color:black;
+    text-decoration:none;
+}
+
+.reset-marg-padd{
+  margin:0;
+  padding:0;
+}
+
+.list{
+  &-evenements{
+    li{
+      a{
+        -webkit-background-size: cover; /* pour anciens Chrome et Safari */
+        background-size: cover; /* version standardisée */
+        position: relative;
+        :after {
+          content:'';
+          display:block;
+          clear: both;
+        }
+        height: 100px;
+        border-bottom: 1px solid $blue;
+        display: block;
+        .preview-thumbnail{
+          position: relative;
+          display: inline-block;
+          width: 100px;
+          height: 100px;
+          overflow: hidden;
+        }
+        img{
+          min-width: 100%;
+          max-height: 100%;
+          max-width: none;
+        }
+        img.reverseDim{
+          max-width: 100%;
+          max-height: none;
+          min-height: 100%;
+          left: 0 !important;
+        }
+        .infos{
+          display: inline-block;
+          background-color: rgba(0, 0, 0, 0.85);
+          padding-left: 10px;
+          width: calc(100% - 110px);
+          height: 100%;
+          color: white;
+          vertical-align: top;
+          h4{
+            padding: 10px 0;
+          }
+          p>span{
+            color: $blue;
+          }
+          small{
+            width: 100%;
+            padding-top: 10px;
+            span{
+              width: 50%;
+              float: left;
+            }
+            .localisation{
+              text-align: right;
+            }
+          }
+        }
+      }
+    }
+  }
+  &-w-all{
+    li{
+      a{
+        display: block;
+        width: 100%;
+      }
+    }
+  }
+}
+
+

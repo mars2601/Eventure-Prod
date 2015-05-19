@@ -1,0 +1,17 @@
+/*------------------------------------*\
+    #WRAPPER
+\*------------------------------------*/
+
+/**
+ * A simple abstraction for making equal-width navigation wrapper.
+ */
+
+// Predefine the variables below in order to alter and enable specific features.
+$inuit-wrapper-namespace:        wrapper;
+
+.#{$inuit-wrapper-namespace},
+%#{$inuit-wrapper-namespace} {
+    margin:  0 auto;
+    padding: 0;
+    width: 90%;
+}

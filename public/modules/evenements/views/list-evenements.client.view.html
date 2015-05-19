@@ -1,0 +1,23 @@
+<section data-ng-controller="EvenementsController" data-ng-init="find()">
+
+    <ul class="list list-evenements list-w-all">
+        <li data-ng-repeat="evenement in evenements | filter:EventsFilterMine(users)"  class="list-group-item">
+            <a data-ng-href="#!/evenements/{{evenement._id}}" ng-style="{'background-image':'url({{evenement.coverImage[0].dataUrl}})'}">
+                <div class="preview-thumbnail">
+                    <img id="list-preview" style="position: relative; left:-{{(((evenement.coverImage[0].width/evenement.coverImage[0].height)*100)-100)/2}}px; top:-{{(((evenement.coverImage[0].height/evenement.coverImage[0].width)*100)-100)/2}}px;" ng-class="{reverseDim: evenement.coverImage[0].width < evenement.coverImage[0].height}" class="image image-thumbnail"  ng-src="{{evenement.coverImage[0].dataUrl}}"/>
+                </div><!--
+                --><div class="infos">
+                    <h4 data-ng-bind="evenement.name"></h4>
+                    <p class="by">par <span data-ng-bind="evenement.user.displayName"></span></p>
+                    <small>
+                        <span class="time" data-ng-bind="evenement.created | date:'fullDate'"></span>
+                        <span class="localisation" data-ng-bind="evenement.localisation[0].name"></span>
+                    </small>
+                </div>
+            </a>
+        </li>
+    </ul>
+    <div class="alert alert-warning text-center" data-ng-hide="!evenements.$resolved || evenements.length">
+    	No Evenements yet, why don't you <a href="/#!/evenements/create">create one</a>?
+    </div>
+</section>

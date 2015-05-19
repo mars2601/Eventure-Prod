@@ -1,0 +1,75 @@
+<section data-ng-controller="EvenementsController" data-ng-init="createDisplay()">
+    <div class="page-header">
+        <h1>New Evenement</h1>
+    </div>
+    <div class="col-md-12">
+        <form class="form-horizontal" data-ng-submit="create()" novalidate>
+            <fieldset>
+                <div class="form-group">
+                    <label class="control-label" for="evenement.name">Name</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="evenement.name" id="evenement.name" class="form-control" placeholder="Name" required>
+                    </div>
+                    <label class="control-label" for="evenement.description">Description</label>
+                    <div class="controls">
+                        <input type="text" data-ng-model="evenement.description" id="evenement.description" class="form-control" placeholder="Description">
+                    </div>
+
+
+                    <label class="control-label" for="evenement.coverImage">Visuel de l'évenement</label>
+                    <div class="controls">
+                        <input type="file" ng-file-select="onFileSelect($files)" accept="image/*" data-ng-model="evenement.coverImage" id="evenement.coverImage" class="form-control">
+                    </div>
+                    <b>Preview:</b><br />
+                    <i ng-hide="imageSrc">No image choosed</i>
+                    <img id="image-preview" width="200px" height="200px" ng-src="{{imageSrc}}" /><br/>
+                    <!--<b>Progress:</b>
+                    <progress value="{{progress}}"></progress>
+                    <progress value="10" max="100"></progress>
+                    <p>{{imageSrc}}</p>
+                    <p>{{progress}}</p>-->
+
+
+                    <label class="control-label" for="evenement.beginDate">Date de début</label>
+                    <div class="controls">
+                        <input type="date" data-ng-model="evenement.beginDate" id="evenement.beginDate" class="form-control" required>
+                    </div>
+                    <label class="control-label" for="evenement.beginTime">Heure de début</label>
+                    <div class="controls">
+                        <input type="time" data-ng-model="evenement.beginTime" id="evenement.beginTime" class="form-control" required>
+                    </div>
+
+                    <label class="control-label" for="evenement.endDate">Date de fin</label>
+                    <div class="controls">
+                        <input type="date" data-ng-model="evenement.endDate" id="evenement.endDate" class="form-control" required>
+                    </div>
+                    <label class="control-label" for="evenement.endTime">Heure de fin</label>
+                    <div class="controls">
+                        <input type="time" data-ng-model="evenement.endTime" id="evenement.endTime" class="form-control" required>
+                    </div>
+
+                </div>
+                <div>
+                    <div >
+                        <label ng-repeat="guest in guests">
+                            <input type="checkbox" name="selectedGuests[]" ng-model="guest.selected" value="{{guest._id}}">{{guest.displayName}}<br>
+                        </label>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-default">
+                </div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+
+
+            </fieldset>
+            <div class="map" data-ng-init="googleMapPointer()">
+                <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+                <div style="height: 300px" id="map-canvas"></div>
+            </div>
+        </form>
+    </div>
+</section>

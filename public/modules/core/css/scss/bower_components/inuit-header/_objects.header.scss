@@ -1,0 +1,40 @@
+/*------------------------------------*\
+    #HEADER
+\*------------------------------------*/
+
+.header{
+  &__container{
+    background: $dark;
+    height: 55px;
+  }
+  &__title{
+    text-align:center;
+    font-size:1.5em;
+    margin:0;
+    padding-top: 0;
+  }
+  &__link{
+    display:inline-block;
+    color:$blue;
+    text-decoration:none;
+    font-size:1.2em;
+    margin:0;
+    line-height: 55px;
+  }
+  &__border-link{
+    line-height: 55px;
+    text-align:center;
+    font-size:1.1em;
+    span{
+      top: 2px;
+      position: relative;
+    }
+  }
+  &__border-link:first-child{
+    font-size:1.6em;
+    span{
+      top: 2px;
+      position: relative;
+    }
+  }
+}

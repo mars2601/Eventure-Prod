@@ -1,0 +1,43 @@
+/*------------------------------------*\
+    #FOOTER
+\*------------------------------------*/
+
+.footer{
+  @include rem-fix(min-height, 8);
+  background-color:$color-1;
+  &__content{
+    &--legal{
+      color:black;
+      @include rem-fix(margin, 2, 0, 0);
+      @include rem-fix(padding, 0.5, 0);
+      a{
+        color:$color-flash;
+        text-decoration:underline;
+      }
+    }
+  }
+}
+.cart--promo{
+  @include rem-fix(margin-top, 2);
+}
+.news-letter{
+  @include rem-fix(margin-top, 2);
+  @include inuit-font-size(18px);
+  float:right;
+  &__label{
+    @include rem-fix(padding, 0.5);
+  }
+  &__input{
+    @include rem-fix(padding, 0.6);
+    border-style:none;
+    box-shadow: 0;
+    @include rem-fix(border-radius, 0.2, 0, 0, 0.2);
+  }
+  &__input+input{
+    @include rem-fix(border-radius, 0, 0.2, 0.2, 0);
+    border-left:1px solid black;
+  }
+  fieldset{
+    display:inline;
+  }
+}

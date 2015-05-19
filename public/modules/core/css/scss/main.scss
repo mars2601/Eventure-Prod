@@ -1,0 +1,33 @@
+@import "bower_components/inuit-defaults/settings.defaults";
+@import "bower_components/inuit-colors/generic.colors";
+
+@import "bower_components/inuit-lists/base.lists";
+@import "bower_components/inuit-images/base.images";
+
+@import "bower_components/inuit-mixins/tools.mixins";
+
+@import "bower_components/inuit-icon-font/generic.icon-font";
+
+@import "bower_components/inuit-wrapper/objects.wrapper";
+@import "bower_components/inuit-layout/objects.layout";
+@import "bower_components/inuit-header/objects.header";
+@import "bower_components/inuit-sidebar/objects.sidebar";
+@import "bower_components/inuit-nav/objects.nav";
+@import "bower_components/inuit-wrapper/objects.wrapper";
+
+
+
+
+
+@import "bower_components/inuit-widths/trumps.widths";
+
+body{
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+}
+
+/* single property*/
+
+.profilePicture{
+  border-radius: 50%;
+}

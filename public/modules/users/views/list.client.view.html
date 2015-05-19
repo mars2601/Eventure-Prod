@@ -1,0 +1,8 @@
+<section data-ng-controller="SettingsController" data-ng-init="findAll()">
+    <div class="list-users" data-ng-repeat="eachUser in allUsers">
+        <p   class="list-group-item">
+            <h4 data-ng-bind="eachUser.displayName"></h4>
+            <h4 data-ng-bind="eachUser.username"></h4>
+        </p>
+    </div>
+</section>

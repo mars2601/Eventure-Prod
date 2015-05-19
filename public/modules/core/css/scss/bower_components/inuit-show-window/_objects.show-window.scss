@@ -1,0 +1,175 @@
+/*------------------------------------*\
+    #SHOW-WINDOW
+\*------------------------------------*/
+
+
+.show-products{
+  @include rem-fix(padding, 1, 0, 2);
+}
+
+.preview{
+  text-align:center;
+  padding:0;
+  &__max--image{
+
+  }
+  &__min{
+    @include rem-fix(margin-top, 1);
+    @include rem-fix(padding-right, 2);
+    border-right:1px solid rgba(100, 100, 100 , 0.3);
+    &--image{
+      @include rem-fix(margin-top, 0.5);
+    }
+    &--tissues{
+      @include rem-fix(margin-top, 2);
+      position:relative;
+      &--title{
+        text-align:center;
+        font-size:1.3em;
+        background:rgba(255, 255, 255, 0.8);
+        position:absolute;
+        @include rem-fix(top, 3);
+        width:100%;
+      }
+      &--prov{
+        display:block;
+        @include rem-fix(margin, 0.5);
+        font-family: 'Bitter-Regular', sans-serif;
+        color:$color-3;
+        font-size:0.9em;
+      }
+      &--certificated{
+        position:absolute;
+        font-size:0.9em;
+        text-transform:uppercase;
+        top:0;
+        right:0;
+        @include rem-fix(padding, 0.3, 0.5);
+        background-color:$color-3;
+        color:white;
+        font-weight:bold;
+      }
+    }
+  }
+}
+.infos{
+  @include rem-fix(margin-top, 1);
+  @include rem-fix(padding-left, 3);
+  &__title{
+    font-size:2em;
+    @include rem-fix(margin, 1, 0, 0);
+  }
+  &__price{
+    font-size:2em;
+    @include rem-fix(padding-top, 0.5);
+    font-family: 'Bitter-Regular', sans-serif;
+    &--shipping{
+      opacity:0.8;
+    }
+    &--shippingAmount{
+      @include rem-fix(padding, 1);
+      font-size:1.2em;
+      span{
+        font-size:0.7em;
+        position:relative;
+        bottom:6px;
+      }
+    }
+    &--shippingInfos{
+      display:block;
+      font-size:0.7em;
+      margin: 0;
+    }
+    &:before{
+      content:"";
+      display:block;
+      border-top:5px solid $color-flash;
+      width:30px;
+      height:2px;
+      @include rem-fix(padding-bottom, 1);
+    }
+  }
+  &__presentation{
+    @include rem-fix(margin, 0, 0, 1.5);
+    font-size:1.4em;
+  }
+  &__form{
+    @include rem-fix(margin, 2, 0);
+    &--row{
+      @include rem-fix(padding, 0.5, 0);
+      @include rem-fix(margin, 0);
+      select{
+        border:none;
+        box-shadow:none;
+        border-radius:0px;
+        background:$color-1;
+        @include rem-fix(margin, 0, 1);
+      }
+      input[type="number"]{
+        @include rem-fix(width, 4);
+        @include rem-fix(padding, 0.2);
+        &:focus{
+          outline-style: none;
+          border:1px solid $color-flash;
+          @include rem-fix(padding, 0.2);
+        }
+      }
+    }
+  }
+  &__add{
+    @include rem-fix(padding, 0.5, 1);
+    background-color:$color-flash;
+    color:$color-3;
+    font-family: 'Bitter-Regular', sans-serif;
+    font-size:1.7em;
+    text-decoration:none;
+    display:inline-block;
+    &--arrow{
+      display:block;
+      float:right;
+      position:relative;
+      @include rem-fix(padding, 0.3, 0, 0.3, 0.5);
+      font-size:1.3em;
+      color:white;
+
+      -webkit-transform: translate3d(0px, 0px, 0px);
+      -moz-transform: translate3d(0px, 0px, 0px);
+      -o-transform: translate3d(0px, 0px, 0px);
+      -ms-transform: translate3d(0px, 0px, 0px);
+      transform: translate3d(0px, 0px, 0px);
+
+      -webkit-transition: all 0.3s ease;
+      -moz-transition: all 0.3s ease;
+      -o-transition: all 0.3s ease;
+      transition: all 0.3s ease;
+    }
+    &:hover{
+      .infos__add--arrow{
+          @include rem-fix(padding, 0.3, 0, 0.3, 1.2);
+          color:$color-3;
+      }
+    }
+  }
+  &__washes{
+    opacity:0.5;
+    ul{
+      margin:0;
+      @include rem-fix(margin-top, 2);
+      border:0;
+      padding:0;
+    }
+    &--item{
+      color:black;
+      list-style-type:none;
+      @include rem-fix(margin-top, 0.3);
+      @include rem-fix(padding, 0.8, 3.5);
+      background: url('../img/washes/40.gif') no-repeat;
+    }
+    &--item+li{
+      background: url('../img/washes/iron.gif') no-repeat;
+    }
+    &--item+li+li{
+      background: url('../img/washes/dry.gif') no-repeat;
+    }
+  }
+}

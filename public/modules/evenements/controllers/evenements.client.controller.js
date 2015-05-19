@@ -68,7 +68,7 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
                     }
                     var i;
                     var marker;
-                    for (i = 0, marker; marker = markers[i]; i++) {
+                    for (i = 0; marker = markers[i]; i++) {
                         marker.setMap(null);
                     }
 
@@ -77,7 +77,7 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
                     var bounds = new google.maps.LatLngBounds();
                     var i;
                     var place;
-                    for (i = 0, place; place = places[i]; i++) {
+                    for (i = 0; place = places[i]; i++) {
                         var image = {
                             url: place.icon,
                             size: new google.maps.Size(71, 71),

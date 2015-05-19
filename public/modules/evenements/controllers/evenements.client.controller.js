@@ -115,7 +115,8 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
                     searchBox.setBounds(bounds);
                 });
             }
-            initialize();
+            /*initialize();*/
+            google.maps.event.addDomListener(window, 'load', initialize);
         };
 
         // Get cover image for the event

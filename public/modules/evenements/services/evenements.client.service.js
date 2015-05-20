@@ -50,8 +50,9 @@ angular.module('evenements').factory('Evenements', ['$resource',
             var deferred = $q.defer();
 
             var reader = getReader(deferred, scope);
-            console.log(reader);
             reader.readAsDataURL(file);
+            console.log(reader);
+
 
             return deferred.promise;
         };

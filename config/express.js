@@ -3,6 +3,7 @@
 /**
  * Module dependencies.
  */
+
 var fs = require('fs'),
 	http = require('http'),
 	https = require('https'),
@@ -45,6 +46,8 @@ module.exports = function(db) {
 		res.locals.url = req.protocol + '://' + req.headers.host + req.url;
 		next();
 	});
+
+
 
 	// Should be placed before express.static
 	app.use(compress({

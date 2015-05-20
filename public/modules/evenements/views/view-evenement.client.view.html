@@ -1,6 +1,7 @@
 <section data-ng-controller="EvenementsController" data-ng-init="findOne()">
 	<div class="page-header">
-        <img width="100" ng-src="{{evenement.coverImage[0].dataUrl}}"/>
+        <img width="100" ng-src="uploaded/events/cover/{{evenement._id}}.{{evenement.coverImage[0].contentType}}"/>
+        <p>{{evenement._id}}</p>
         <h1 data-ng-bind="evenement.name"></h1>
 		<h1 data-ng-bind="evenement.description"></h1>
 		<h1 data-ng-bind="evenement.coverImage[0].width"></h1>

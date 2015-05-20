@@ -9,10 +9,12 @@ module.exports = function(app) {
 		.get(evenements.list)
 		.post(users.requiresLogin, evenements.create);
 
+
 	app.route('/evenements/:evenementId')
 		.get(evenements.read)
 		.put(users.requiresLogin, evenements.hasAuthorization, evenements.update)
 		.delete(users.requiresLogin, evenements.hasAuthorization, evenements.delete);
+
 
 	// Finish by binding the Evenement middleware
 	app.param('evenementId', evenements.evenementByID);

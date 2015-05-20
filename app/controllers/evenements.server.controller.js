@@ -5,8 +5,42 @@
  */
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
+    fs = require('fs'),
+    uploadPath = "./public/uploaded/",
+    eventCoverPath = "events/cover/",
 	Evenement = mongoose.model('Evenement'),
 	_ = require('lodash');
+
+exports.storeImage = function(req, res){
+    var evenement = req.evenement ;
+};
+
+exports.imageUpload = function(req, res) {
+    var file = req.files.file,
+        path = './public/profile/img/';
+
+    // Logic for handling missing file, wrong mimetype, no buffer, etc.
+
+    var buffer = file.buffer, //Note: buffer only populates if you set inMemory: true.
+        fileName = file.name;
+    var stream = fs.createWriteStream(path + fileName);
+    stream.write(buffer);
+    stream.on('error', function(err) {
+        console.log('Could not write file to memory.');
+        res.status(400).send({
+            message: 'Problem saving the file. Please try again.'
+        });
+    });
+    stream.on('finish', function() {
+        console.log('File saved successfully.');
+        var data = {
+            message: 'File saved successfully.'
+        };
+        res.jsonp(data);
+    });
+    stream.end();
+    console.log('Stream ended.');
+};
 
 /**
  * Create a Evenement
@@ -14,13 +48,19 @@ var mongoose = require('mongoose'),
 exports.create = function(req, res) {
 	var evenement = new Evenement(req.body);
 	evenement.user = req.user;
-
 	evenement.save(function(err) {
-		if (err) {
+        if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
+            var imageBuffer = new Buffer(evenement.coverImage[0].dataUrl, 'base64');
+            var imagePath = uploadPath+eventCoverPath+evenement._id+"."+evenement.coverImage[0].contentType;
+            console.error(imagePath);
+
+            fs.writeFile( imagePath, imageBuffer, function(err) {
+                console.error("img crashed");
+            });
 			res.jsonp(evenement);
 		}
 	});

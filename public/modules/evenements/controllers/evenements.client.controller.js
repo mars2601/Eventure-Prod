@@ -7,6 +7,13 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
         $scope.guests = Users.query();
         /*global Google */
 
+ /*       $scope.uploadFile = function(){
+            var file = $scope.myFile;
+            console.log('file is ' + JSON.stringify(file));
+            var uploadUrl = "/fileUpload";
+            fileUpload.uploadFileToUrl(file, uploadUrl);
+        };*/
+
         /* users Filtered by guest, see if he's guest or not*/
         $scope.UserFilterGuest = function(eve) {
             return function( user ) {
@@ -115,8 +122,10 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
                     searchBox.setBounds(bounds);
                 });
             }
-            /*initialize();*/
+            initialize();
+/*
             google.maps.event.addDomListener(window, 'load', initialize);
+*/
         };
 
         // Get cover image for the event
@@ -125,15 +134,22 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
             fileReader.readAsDataUrl($scope.file, $scope)
                 .then(function(result) {
                     $scope.imageSrc = result;
-                    var imageSrcSplit = result.split(';base64'); // return data:image/*
+                    var imageSrcSplit = result.split(';base64,'); // return data:image/*
                     var imageTypeSplit = imageSrcSplit[0].split('image/'); // return * the type of the image
                     $scope.imageContentType = imageTypeSplit[1];
+                    $scope.base64Data = imageSrcSplit[1];
                     var i = new Image();
                     i.src = result;
                     $scope.originalWidth = i.width;
                     $scope.originalHeight = i.height;
+
+                    /*require("fs").writeFile("/tmp/out.png", base64Data, 'base64', function(err) {
+                        console.log(err);
+                    });*/
                 });
+
         };
+
 
         $scope.$on('fileProgress', function(e, progress) {
             $scope.progress = progress.loaded / progress.total;
@@ -190,19 +206,18 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
                     lat: $scope.lat,
                     long: $scope.long
                 }],
+                image: null,
                 coverImage: [{
                     contentType: $scope.imageContentType,
                     width: $scope.originalWidth,
                     height: $scope.originalHeight,
-                    dataUrl: $scope.imageSrc
+                    dataUrl: $scope.base64Data
                 }]
 			});
 
             for (var j = 0; j < $scope.selection.length; j++){
                 evenement.guests.push({_id: $scope.selection[j]});
             }
-
-            alert(JSON.stringify(evenement));
 
 			// Redirect after save
 			evenement.$save(function(response) {
@@ -281,3 +296,4 @@ angular.module('evenements').directive('ngFileSelect',function(){
         }
     };
 });
+

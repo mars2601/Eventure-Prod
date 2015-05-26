@@ -9,11 +9,20 @@ module.exports = function(app) {
 		.get(evenements.list)
 		.post(users.requiresLogin, evenements.create);
 
+    app.route('/all-evenements')
+        .post(users.requiresLogin);
 
-	app.route('/evenements/:evenementId')
+    app.route('/users/me').get(users.me);
+    app.route('/users.update').put(users.update);
+    app.route('/users').get(users.list);
+    app.route('/users/accounts').delete(users.removeOAuthProvider);
+
+
+    app.route('/evenements/:evenementId')
 		.get(evenements.read)
 		.put(users.requiresLogin, evenements.hasAuthorization, evenements.update)
-		.delete(users.requiresLogin, evenements.hasAuthorization, evenements.delete);
+		.delete(users.requiresLogin, evenements.hasAuthorization, evenements.delete)
+        .put(users.update);
 
 
 	// Finish by binding the Evenement middleware

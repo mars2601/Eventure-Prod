@@ -52,37 +52,23 @@ li {
         -webkit-background-size: cover; /* pour anciens Chrome et Safari */
         background-size: cover; /* version standardisée */
         position: relative;
+        height: 90px;
+        border-bottom: 1px solid $blue;
+        display: block;
         :after {
           content:'';
           display:block;
           clear: both;
         }
-        height: 100px;
-        border-bottom: 1px solid $blue;
-        display: block;
-        .preview-thumbnail{
-          position: relative;
-          display: inline-block;
-          width: 100px;
-          height: 100px;
-          overflow: hidden;
-        }
-        img{
-          min-width: 100%;
-          max-height: 100%;
-          max-width: none;
-        }
-        img.reverseDim{
-          max-width: 100%;
-          max-height: none;
-          min-height: 100%;
-          left: 0 !important;
+        .preview-thumbnail {
+          width: 90px;
+          height: 90px;
         }
         .infos{
           display: inline-block;
-          background-color: rgba(0, 0, 0, 0.85);
+          background-color: $dark-opacity;
           padding-left: 10px;
-          width: calc(100% - 110px);
+          width: calc(100% - 100px);
           height: 100%;
           color: white;
           vertical-align: top;
@@ -95,12 +81,24 @@ li {
           small{
             width: 100%;
             padding-top: 10px;
+            font-size: 0.7em;
+            display: block;
+            :after {
+              content:'';
+              display:block;
+              clear: both;
+            }
             span{
-              width: 50%;
               float: left;
             }
             .localisation{
               text-align: right;
+              width: calc(50% - 10px);
+              padding-right: 10px;
+            }
+            .time{
+              width: calc(50% - 10px);
+              padding-right: 10px;
             }
           }
         }
@@ -117,4 +115,30 @@ li {
   }
 }
 
+// media queries after NEXUS 5 (360 width)
+@media screen and (max-width: 359px) {
+  .list{
+    &-evenements{
+      li{
+        a{
+          height: 70px;
+          .preview-thumbnail{
+            width: 70px;
+            height: 70px;
+          }
 
+          .infos{
+            small{
+              padding-top: 5px;
+            }
+            width: calc(100% - 80px);
+            height: 100%;
+            h4{
+              padding: 5px 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}

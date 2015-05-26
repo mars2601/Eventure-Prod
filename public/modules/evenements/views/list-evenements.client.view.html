@@ -1,16 +1,22 @@
-<section data-ng-controller="EvenementsController" data-ng-init="find()">
+<section class="list-wrapper" data-ng-controller="EvenementsController" data-ng-init="find('mine')">
 
     <ul class="list list-evenements list-w-all">
-        <li data-ng-repeat="evenement in evenements | filter:EventsFilterMine(users)"  class="list-group-item">
+        <div class="list-filter">
+            <button data-ng-click="showList = EventsFilterGuest(evenements)">Invitations</button> | <button data-ng-click="showList = EventsFilterAuthor(evenements)">Mes évenements</button> |
+            <a href="/#!/all-evenements">Rechercher:<input type="text"/></a>
+            <p>{{showList}}</p>
+
+        </div>
+        <li data-ng-repeat="evenement in evenements | filter:showList"  class="list-group-item">
             <a data-ng-href="#!/evenements/{{evenement._id}}" ng-style="{'background-image':'url(uploaded/events/cover/{{evenement._id}}.{{evenement.coverImage[0].contentType}})'}">
                 <div class="preview-thumbnail">
-                    <img id="list-preview" style="position: relative; left:-{{(((evenement.coverImage[0].width/evenement.coverImage[0].height)*100)-100)/2}}px; top:-{{(((evenement.coverImage[0].height/evenement.coverImage[0].width)*100)-100)/2}}px;" ng-class="{reverseDim: evenement.coverImage[0].width < evenement.coverImage[0].height}" class="image image-thumbnail"  ng-src="uploaded/events/cover/{{evenement._id}}.{{evenement.coverImage[0].contentType}}"/>
+                    <img id="list-preview" style="position: relative; left:-{{((evenement.coverImage[0].width/(evenement.coverImage[0].height/90))-90)/2}}px; top:-{{((evenement.coverImage[0].height/(evenement.coverImage[0].width/90))-90)/2}}px;" ng-class="{reverseDim: evenement.coverImage[0].width < evenement.coverImage[0].height, originalDim: evenement.coverImage[0].width > evenement.coverImage[0].height}" class="image image-thumbnail"  ng-src="uploaded/events/cover/{{evenement._id}}.{{evenement.coverImage[0].contentType}}"/>
                 </div><!--
                 --><div class="infos">
                     <h4 data-ng-bind="evenement.name"></h4>
                     <p class="by">par <span data-ng-bind="evenement.user.displayName"></span></p>
                     <small>
-                        <span class="time" data-ng-bind="evenement.created | date:'fullDate'"></span>
+                        <span class="time" data-ng-bind="evenement.beginTimestamp | date:'fullDate'"></span>
                         <span class="localisation" data-ng-bind="evenement.localisation[0].name"></span>
                     </small>
                 </div>
@@ -18,6 +24,6 @@
         </li>
     </ul>
     <div class="alert alert-warning text-center" data-ng-hide="!evenements.$resolved || evenements.length">
-    	No Evenements yet, why don't you <a href="/#!/evenements/create">create one</a>?
+    	Aucun Evenement en vue. <a href="/#!/evenements/create">Créer un évenement</a>?
     </div>
 </section>

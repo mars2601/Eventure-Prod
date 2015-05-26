@@ -59,6 +59,20 @@ var UserSchema = new Schema({
 		default: '',
 		validate: [validateLocalStrategyPassword, 'Password should be longer']
 	},
+    requests: [
+        {
+            event_id:{
+                type: Schema.ObjectId
+            },
+            state: {
+                type: [{
+                    type: String,
+                    enum: ['waiting', 'accepted']
+                }],
+                default: ['waiting']
+            }
+        }
+    ],
 	salt: {
 		type: String
 	},

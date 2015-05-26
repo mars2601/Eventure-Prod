@@ -6,6 +6,7 @@
  * Responsive width classes based on your responsive settings.
  */
 
+
 @if $inuit-use-fractions == true {
 
     @each $breakpoint in $breakpoints {
@@ -232,3 +233,4 @@
     } // Close breakpoints loop.
 
 } // Close fractions @if.
+

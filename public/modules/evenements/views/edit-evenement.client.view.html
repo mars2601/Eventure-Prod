@@ -1,4 +1,4 @@
-<section data-ng-controller="EvenementsController" data-ng-init="findOne()">
+<!--<section data-ng-controller="EvenementsController" data-ng-init="findOne()">
     <div class="page-header">
         <h1>Edit Evenement</h1>
     </div>
@@ -17,6 +17,97 @@
 				<div data-ng-show="error" class="text-danger">
 					<strong data-ng-bind="error"></strong>
 				</div>
+            </fieldset>
+        </form>
+    </div>
+</section>-->
+
+
+<section data-ng-controller="EvenementsController" data-ng-init="findOne()">
+    <div class="event event-create" data-ng-init="createDisplay()">
+        <form  data-ng-submit="update()" enctype="multipart/form-data" style="background: url('uploaded/events/cover/{{evenement._id}}.{{evenement.coverImage[0].contentType}}') no-repeat center fixed;" novalidate>
+            <fieldset ng-class="{bckgImageTrue: evenement.coverImage[0].contentType}">
+                <div ng-init="restoreData(evenement)">
+                    <label class="control-label" for="evenement.name">Renommer l'évenement</label>
+                    <div>
+                        <input type="text" data-ng-model="evenement.name" id="evenement.name" class="form-control" placeholder="Ex: House party..." required>
+                    </div>
+                    <label class="control-label" for="evenement.description">Description de l'évenement</label>
+                    <div>
+                        <textarea data-ng-model="evenement.description" id="evenement.description" class="form-control" placeholder="Ex: The party of your life..."k> </textarea>
+                    </div>
+
+
+                    <label class="control-label" for="evenement.coverImage">Visuel de l'évenement</label>
+                    <div class="image-input">
+                        <div class="select">
+                            <input type="file" ng-file-select="onFileSelect($files)" accept="image/*"  data-ng-model="evenement.coverImage" id="evenement.coverImage" class="form-control">
+                        </div>
+                        <div class="preview-thumbnail">
+                            <img id="image-preview" class="preview" style="position: relative; left:-{{((evenement.coverImage[0].width/(evenement.coverImage[0].height/80))-80)/2}}px; top:-{{((evenement.coverImage[0].height/(evenement.coverImage[0].width/80))-80)/2}}px;" ng-class="{reverseDim: evenement.coverImage[0].width < evenement.coverImage[0].height, originalDim: evenement.coverImage[0].width > evenement.coverImage[0].height}" ng-src="uploaded/events/cover/{{evenement._id}}.{{evenement.coverImage[0].contentType}}" />
+                        </div>
+                    </div>
+                    <div class="one-half left">
+                        <label class="control-label" for="beginDate">Date de début</label>
+                        <input type="date" data-ng-model="evenement.beginDate" id="beginDate" class="form-control" required>
+                    </div>
+                    <div class="one-half left">
+                        <label class="control-label" for="beginTime">Heure de début</label>
+                        <input type="time" data-ng-model="evenement.beginTime" id="beginTime" class="form-control" required>
+                    </div>
+
+                    <div class="one-half left">
+                        <label class="control-label" for="evenement.endDate">Date de fin</label>
+                        <input type="date" data-ng-model="evenement.endDate" id="evenement.endDate" class="form-control" required>
+                    </div>
+                    <div class="one-half left">
+                        <label class="control-label" for="evenement.endTime">Heure de fin</label>
+                        <input type="time" data-ng-model="evenement.endTime" id="evenement.endTime" class="form-control" required>
+                    </div>
+
+                </div>
+
+                <!--<div>
+                    <div >
+                        <label ng-repeat="guest in guests">
+                            <input type="checkbox" name="selectedGuests[]" ng-model="guest.selected" value="{{guest._id}}">{{guest.displayName}}<br>
+                        </label>
+                    </div>
+
+                </div>-->
+                <!--<div class="guests">
+                    <p>Personnes invitées</p>
+                    <div>
+                        <label ng-repeat="guest in guests | filter:notMe(guests) | filter:UserFilterGuest(evenement)">
+                            <p ng-model="guest.selected">{{guest.displayName}}</p>
+                            <p>{{guest._id}}</p>
+                        </label>
+                    </div>
+                    <button type="button" ng-hide="guests.length < limit" ng-click="incrementLimit()">+ Voir plus</button><button type="button" ng-hide="limit <= limitStep" ng-click="decrementLimit()">-</button>
+                </div>-->
+                <div class="guests">
+                    <p>Inviter d'avantages de personnes</p>
+                    <div class="guests-filter">Rechercher: <input type="text" ng-model="searchText" /></div>
+                    <div>
+                        <label ng-repeat="guest in guests | filter:notMe(guests) |  filter:searchText | limitTo: limit">
+                            <input type="checkbox" name="selectedGuests[]" ng-change="checkedIsInvited(guest.selected, guest._id)" ng-checked="isInvited(evenement.guests, guest)" ngTrueValue="{{guest._id}}" ng-model="guest.selected" value="{{guest._id}}">{{guest.displayName}}<br>
+                        </label>
+                    </div>
+                    <button type="button" ng-hide="guests.length <= limit" ng-click="incrementLimit()">+ Voir plus</button><button type="button" ng-hide="limit <= limitStep" ng-click="decrementLimit()">-</button>
+                </div>
+                <div class="map" data-ng-init="googleMapPointer()">
+                    <label class="control-label" for="pac-input">Localisation</label>
+                    <input id="pac-input" class="controls" type="text" placeholder="{{evenement.localisation[0].name && evenement.localisation[0].name || 'Ex: Bruxelles'}}">
+<!--
+                    <div style="height: 20px" id="map-canvas"></div>
+-->
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Mettre à jour" class="link-buttons">
+                </div>
+                <div data-ng-show="error" class="text-danger">
+                    <strong data-ng-bind="error"></strong>
+                </div>
             </fieldset>
         </form>
     </div>

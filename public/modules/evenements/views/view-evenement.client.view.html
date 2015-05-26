@@ -1,35 +1,53 @@
 <section data-ng-controller="EvenementsController" data-ng-init="findOne()">
-	<div class="page-header">
-        <img width="100" ng-src="uploaded/events/cover/{{evenement._id}}.{{evenement.coverImage[0].contentType}}"/>
-        <p>{{evenement._id}}</p>
-        <h1 data-ng-bind="evenement.name"></h1>
-		<h1 data-ng-bind="evenement.description"></h1>
-		<h1 data-ng-bind="evenement.coverImage[0].width"></h1>
-		<h1 data-ng-bind="evenement.coverImage[0].height"></h1>
-		<h1 data-ng-bind="evenement.localisation[0].name"></h1>
-		<h1 data-ng-bind="evenement.beginTimestamp | date:'medium'"></h1>
-		<h1 data-ng-bind="evenement.endTimestamp | date:'medium'" ></h1>
+	<div class="event event-view" ng-init="restoreDataView(evenement, authentication.user)">
+        <div class="preview-thumbnail">
+            <div class="state">
+                <button class="link-buttons" ng-click="changeState(currentGuest)" ng-show="((authentication.user._id.indexOf(evenement.guests._id) != -1)  || (authentication.user._id == evenement.user._id))">{{buttonValue}}</button>
+                <button class="link-buttons" ng-click="askInvite(evenement)" ng-hide="((authentication.user._id.indexOf(evenement.guests._id) != -1)  || (authentication.user._id == evenement.user._id))" ng-disabled="askInviteButtonClass" ng-class="askInviteButtonClass ? 'send' : 'not-send'">{{askInviteButton}}</button>
+
+                <p class="state-info" ng-show="((authentication.user._id.indexOf(evenement.guests._id) != -1)  || (authentication.user._id == evenement.user._id))">{{stateValue}}</p>
+            </div>
+            <div class="sail"></div>
+            <img class="event-view-image" style="position: relative; top:-{{(evenement.coverImage[0].height/2)-(evenement.coverImage[0].height/4)}}px;" ng-class="{reverseDim: evenement.coverImage[0].width < evenement.coverImage[0].height, noCrop: evenement.coverImage[0].width > evenement.coverImage[0].height}" ng-src="uploaded/events/cover/{{evenement._id}}.{{evenement.coverImage[0].contentType}}"/>
+        </div>
+        <div class="infos">
+            <h1 data-ng-bind="evenement.name"></h1>
+            <p><i>par</i> <span data-ng-bind="evenement.user.displayName"></span></p>
+            <p data-ng-bind="evenement.description"></p>
+            <p data-ng-bind="evenement.localisation[0].name"></p>
+            <p><i>Débute le</i> <span data-ng-bind="evenement.beginTimestamp | date:'fullDate'"></span> <i>à</i> <span data-ng-bind="evenement.beginTimestamp | date:'shortTime'"></span></p>
+            <p><i>Finis le</i> <span data-ng-bind="evenement.endTimestamp | date:'fullDate'"></span> <i>à</i> <span data-ng-bind="evenement.endTimestamp | date:'shortTime'"></span></p>
+            <div class="list-users" data-ng-init="displayGuests(evenement.guests);">
+                <a data-ng-repeat="user in users | filter:UserFilterGuest(evenement)"  class="list-group-item">
+                    <p data-ng-bind="user.displayName"></p>
+                </a>
+            </div>
+            <div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == evenement.user._id))">
+                <a class="link-buttons" href="/#!/evenements/{{evenement._id}}/edit">
+                    Edit
+                </a>
+                <a class="link-buttons" data-ng-click="remove();">
+                    Delete
+                </a>
+                <ul>
+                    <li data-ng-repeat="newGuest in newGuests">
+                        {{newGuest}}
+                    </li>
+                </ul>
+            </div>
+            <small>
+                <em class="text-muted">
+                    Posted on
+                    <span data-ng-bind="evenement.created | date:'mediumDate'"></span>
+                    by
+                    <span data-ng-bind="evenement.user.displayName"></span>
+                </em>
+            </small>
+        </div>
+        <div class="posts" ng-show="((authentication.user._id.indexOf(evenement.guests._id) != -1)  || (authentication.user._id == evenement.user._id))">
+            Posts
+        </div>
 	</div>
-    <div class="list-users" data-ng-init="displayGuests(evenement.guests);">
-        <a data-ng-repeat="user in users | filter:UserFilterGuest(evenement)"  class="list-group-item">
-            <p data-ng-bind="user.displayName"></p>
-        </a>
-    </div>
-	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == evenement.user._id))">
-		<a class="btn btn-primary" href="/#!/evenements/{{evenement._id}}/edit">
-			Edit
-		</a>
-		<a class="btn btn-primary" data-ng-click="remove();">
-			Delete
-		</a>
-	</div>
-	<small>
-		<em class="text-muted">
-			Posted on
-			<span data-ng-bind="evenement.created | date:'mediumDate'"></span>
-			by
-			<span data-ng-bind="evenement.user.displayName"></span>
-		</em>
-	</small>
+
 
 </section>

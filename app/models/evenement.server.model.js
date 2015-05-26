@@ -75,7 +75,7 @@ var EvenementSchema = new Schema({
             state: {
                 type: [{
                     type: String,
-                    enum: ['present', 'participate', 'hesitate', 'missing', 'waiting']
+                    enum: ['waiting', 'willcome', 'income', 'present', 'return']
                 }],
                 default: ['waiting']
             }

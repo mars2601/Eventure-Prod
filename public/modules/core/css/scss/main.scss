@@ -3,6 +3,7 @@
 
 @import "bower_components/inuit-lists/base.lists";
 @import "bower_components/inuit-images/base.images";
+@import "bower_components/inuit-view/base.view";
 
 @import "bower_components/inuit-mixins/tools.mixins";
 
@@ -14,8 +15,7 @@
 @import "bower_components/inuit-sidebar/objects.sidebar";
 @import "bower_components/inuit-nav/objects.nav";
 @import "bower_components/inuit-wrapper/objects.wrapper";
-
-
+@import "bower_components/inuit-buttons/objects.linkButtons";
 
 
 
@@ -24,6 +24,8 @@
 body{
   font-family: 'Roboto', sans-serif;
   margin: 0;
+  height: 100%;
+  background-color: $dark;
 }
 
 /* single property*/
@@ -31,3 +33,9 @@ body{
 .profilePicture{
   border-radius: 50%;
 }
+
+.left{
+  float: left;
+}
+
+

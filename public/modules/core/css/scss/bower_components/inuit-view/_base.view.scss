@@ -1,0 +1,179 @@
+/*------------------------------------*\
+    #View
+\*------------------------------------*/
+
+.event{
+  &-view{
+    color: white;
+    .preview-thumbnail {
+      .state{
+        position: absolute;
+        top: 4%;
+        right: 4%;
+        z-index: 1001;
+      }
+      .sail{
+        height: 200px;
+        width: 100%;
+        display: block;
+        position: absolute;
+        z-index: 100;
+        background: -moz-linear-gradient(top,  rgba(229,229,229,0) 0%, rgba(118,119,121,0.1) 57%, rgba(35,36,39,0.9) 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(229,229,229,0)), color-stop(57%,rgba(118,119,121,0.1)), color-stop(100%,rgba(35,36,39,0.9))); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top,  rgba(229,229,229,0) 0%,rgba(118,119,121,0.1) 57%,rgba(35,36,39,0.9) 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top,  rgba(229,229,229,0) 0%,rgba(118,119,121,0.1) 57%,rgba(35,36,39,0.9) 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top,  rgba(229,229,229,0) 0%,rgba(118,119,121,0.1) 57%,rgba(35,36,39,0.9) 100%); /* IE10+ */
+        background: linear-gradient(to bottom,  rgba(229,229,229,0) 0%,rgba(118,119,121,0.1) 57%,rgba(35,36,39,0.9) 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00e5e5e5', endColorstr='#e6232427',GradientType=0 ); /* IE6-9 */
+
+      }
+      width: 100%;
+      height: 200px;
+    }
+    .infos{
+      z-index:1001;
+      position: relative;
+      padding: 0 4%;
+      h1{
+        &::first-letter{
+          text-transform: uppercase;
+        }
+        color: white;
+        margin: 0;
+        margin-top: -17px;
+        font-size: 1.4em;
+      }
+      p{
+        margin: 5px 0;
+        color: white;
+        i{
+          font-size: 0.95em;
+        }
+        span{
+          font-size: 1.025em;
+          color: $pink;
+        }
+      }
+      .pull-right{
+        padding: 15px 0;
+      }
+    }
+
+  }
+
+  &-create{
+    .controls {
+      margin-top: 16px;
+      border: 1px solid transparent;
+      border-radius: 2px 0 0 2px;
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      height: 60px;
+      outline: none;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    #pac-input {
+      background-color: #fff;
+      font-size: 15px;
+      font-weight: 300;
+      padding: 0 0 0 23px;
+      margin: 0;
+      text-overflow: ellipsis;
+      width: 100%;
+      margin-bottom: 15px;
+    }
+
+    #pac-input:focus {
+      border-color: #4d90fe;
+    }
+
+
+    #type-selector {
+      color: #fff;
+      background-color: #4d90fe;
+      padding: 5px 11px 0px 11px;
+    }
+
+    #type-selector label {
+      font-size: 13px;
+      font-weight: 300;
+    }
+    form{
+      -webkit-background-size: cover; /* pour anciens Chrome et Safari */
+      background-size: cover; /* version standardisée */
+      fieldset.bckgImageTrue{
+        background-color: $dark-opacity;
+      }
+      fieldset{
+        padding: 10px 4%;
+        margin: 0;
+        border: none;
+        color: white;
+        label{
+          padding: 10px 0 2px;
+          display: block;
+          color: rgba(255, 255, 255, 0.6);
+        }
+        input[type=file]{
+          padding: 0;
+        }
+        input[type=file]::-webkit-file-upload-button{
+          height: 60px;
+          font-size: 1.1em;
+          padding: 0 5% 0 0;
+          border:none;
+          color: rgba(0, 0, 0, 0.5);
+          background: white;
+          width: 100%;
+        }
+        input, textarea{
+          border-radius: 2px;
+          border:none;
+          width: 90%;
+          padding: 20px 5%;
+          background-color: white;
+          color: rgba(0, 0, 0, 0.5);
+        }
+        .image-input{
+          width: 100%;
+          height: 30px;
+          .select{
+            width: calc(100% - 80px);
+            float: left;
+          }
+          .preview-thumbnail{
+            position: relative;
+            -webkit-box-shadow: inset 0px 0px 1px 0px rgba(255, 255, 255, 0.75);
+            -moz-box-shadow:    inset 0px 0px 1px 0px rgba(255, 255, 255, 0.75);
+            box-shadow:         inset 0px 0px 1px 0px rgba(255, 255, 255, 0.75);
+            top: -10px;
+            height: 80px;
+            width: 80px;
+            float: left;
+          }
+        }
+      }
+    }
+  }
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */
+  color:    rgba(0, 0, 0, 0.5);
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  color:    rgba(0, 0, 0, 0.5);
+  opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+  color:    rgba(0, 0, 0, 0.5);
+  opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+  color:    rgba(0, 0, 0, 0.5);
+}
+
+// media queries after NEXUS 5 (360 width)
+@media screen and (max-width: 359px) {
+
+}

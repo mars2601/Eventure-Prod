@@ -23,15 +23,20 @@
                 </a>
             </div>
             <div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == evenement.user._id))">
-                <a class="link-buttons" href="/#!/evenements/{{evenement._id}}/edit">
+                <a class="link-buttons link-buttons-admin" href="/#!/evenements/{{evenement._id}}/edit">
                     Edit
                 </a>
-                <a class="link-buttons" data-ng-click="remove();">
+                <a class="link-buttons link-buttons-admin" data-ng-click="remove();">
                     Delete
                 </a>
+                <br/>
                 <ul>
-                    <li data-ng-repeat="newGuest in newGuests">
-                        {{newGuest}}
+                    <li data-ng-repeat="newGuest in newGuests" ng-init="adminInviteRequest()">
+                        <p>Demande d'invitation :</p><br/>
+                        {{newGuest.firstName}}
+                        {{newGuest.lastName}} :
+                        <button ng-click="accept(newGuest)" class="link-buttons link-buttons-admin">Accepter</button>
+                        <button ng-click="refuse(newGuest)" class="link-buttons link-buttons-admin">Refuser</button>
                     </li>
                 </ul>
             </div>

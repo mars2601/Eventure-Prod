@@ -524,6 +524,7 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
                 };
 
                 var evenement = $scope.evenement;
+                console.log(evenement);
                 evenement.$update(function() {
                     $location.path('evenements/' + evenement._id);
                 }, function(errorResponse) {
@@ -558,6 +559,55 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
                 $scope.askInviteButton = 'Demande d\'invitation envoyée';
                 $scope.askInviteButtonClass = true;
             }
+        };
+
+        $scope.adminInviteRequest = function(){
+            $scope.accept = function(newGuest){
+                // add in event guest and delete in user request
+                var evenement = $scope.evenement;
+                var user = newGuest;
+                evenement.guests.push({_id: user._id});
+
+                evenement.$update(function() {
+                    $location.path('evenements/' + evenement._id);
+                }, function(errorResponse) {
+                    $scope.error = errorResponse.data.message;
+                });
+
+                for(var i = 0; i < user.requests.length; i++){
+                    if(user.requests[i].event_id == evenement._id){
+                        user.requests.splice(i, 1);
+                    }
+                }
+
+                user.$update(function(response) {
+                    $scope.success = true;
+                    Authentication.user = response;
+
+                }, function(response) {
+                    $scope.error = response.data.message;
+                });
+
+            };
+            $scope.refuse = function(newGuest){
+                // delete in user request
+                var user = newGuest;
+                var evenement = $scope.evenement;
+
+                for(var i = 0; i < user.requests.length; i++){
+                    if(user.requests[i].event_id == evenement._id){
+                        user.requests.splice(i, 1);
+                    }
+                }
+
+                user.$update(function(response) {
+                    $scope.success = true;
+                    Authentication.user = response;
+
+                }, function(response) {
+                    $scope.error = response.data.message;
+                });
+            };
         };
 
 

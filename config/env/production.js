@@ -21,10 +21,14 @@ module.exports = {
                 'public/lib/ngDialog/js/ngDialog.js',
                 'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
                 'public/lib/jquery/dist/jquery.min.js',
-                'public/lib/custom/init.js'
+                'public/lib/custom/init.js',
+                'public/lib/ng-file-upload/FileAPI.min.js',
+                'public/lib/ng-file-upload/angular-file-upload-shim.min.js',
+                'public/lib/angular/angular.js',
+                'public/lib/ng-file-upload/angular-file-upload.min.js'
 			]
 		},
-		css: 'public/dist/application.min.css',
+		css: 'public/modules/core/css/*.css',
 		js: 'public/dist/application.min.js'
 	},
 	facebook: {

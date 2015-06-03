@@ -43,6 +43,7 @@ exports.create = function(req, res) {
 	});
 };
 
+
 /**
  * Show the current Evenement
  */
@@ -74,6 +75,7 @@ exports.update = function(req, res) {
  */
 exports.delete = function(req, res) {
 	var evenement = req.evenement ;
+    console.error(evenement);
 
 	evenement.remove(function(err) {
 		if (err) {

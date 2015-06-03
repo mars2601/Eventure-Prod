@@ -92,6 +92,9 @@ var UserSchema = new Schema({
 	updated: {
 		type: Date
 	},
+    profileImage: {
+        type: String
+    },
 	created: {
 		type: Date,
 		default: Date.now

@@ -1,14 +1,31 @@
 /*------------------------------------*\
     #View
 \*------------------------------------*/
+.top-wrapper{
+
+  position: relative;
+  top: 55px;
+  padding-bottom: 55px;
+  &-filter{
+    top: 110px;
+  }
+}
 
 .event{
   &-view{
-    color: white;
+    background-color: $bckg;
+    position: relative;
+    color: $dark-text;
+    padding-bottom: 50px;
+    min-height: 100%;
+    i{
+      font-style: normal;
+    }
     .preview-thumbnail {
+      background-color: $bckg;
       .state{
         position: absolute;
-        top: 4%;
+        top: 8%;
         right: 4%;
         z-index: 1001;
       }
@@ -18,13 +35,13 @@
         display: block;
         position: absolute;
         z-index: 100;
-        background: -moz-linear-gradient(top,  rgba(229,229,229,0) 0%, rgba(118,119,121,0.1) 57%, rgba(35,36,39,0.9) 100%); /* FF3.6+ */
-        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(229,229,229,0)), color-stop(57%,rgba(118,119,121,0.1)), color-stop(100%,rgba(35,36,39,0.9))); /* Chrome,Safari4+ */
-        background: -webkit-linear-gradient(top,  rgba(229,229,229,0) 0%,rgba(118,119,121,0.1) 57%,rgba(35,36,39,0.9) 100%); /* Chrome10+,Safari5.1+ */
-        background: -o-linear-gradient(top,  rgba(229,229,229,0) 0%,rgba(118,119,121,0.1) 57%,rgba(35,36,39,0.9) 100%); /* Opera 11.10+ */
-        background: -ms-linear-gradient(top,  rgba(229,229,229,0) 0%,rgba(118,119,121,0.1) 57%,rgba(35,36,39,0.9) 100%); /* IE10+ */
-        background: linear-gradient(to bottom,  rgba(229,229,229,0) 0%,rgba(118,119,121,0.1) 57%,rgba(35,36,39,0.9) 100%); /* W3C */
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00e5e5e5', endColorstr='#e6232427',GradientType=0 ); /* IE6-9 */
+        background: -moz-linear-gradient(top,  rgba(107,107,107,0) 0%, rgba(14,14,17,0) 72%, rgba(14,14,17,0.65) 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(107,107,107,0)), color-stop(72%,rgba(14,14,17,0)), color-stop(100%,rgba(14,14,17,0.65))); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top,  rgba(107,107,107,0) 0%,rgba(14,14,17,0) 72%,rgba(14,14,17,0.65) 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top,  rgba(107,107,107,0) 0%,rgba(14,14,17,0) 72%,rgba(14,14,17,0.65) 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top,  rgba(107,107,107,0) 0%,rgba(14,14,17,0) 72%,rgba(14,14,17,0.65) 100%); /* IE10+ */
+        background: linear-gradient(to bottom,  rgba(107,107,107,0) 0%,rgba(14,14,17,0) 72%,rgba(14,14,17,0.65) 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#006b6b6b', endColorstr='#a60e0e11',GradientType=0 ); /* IE6-9 */
 
       }
       width: 100%;
@@ -34,18 +51,103 @@
       z-index:1001;
       position: relative;
       padding: 0 4%;
+      color: $dark-text;
+      padding-bottom: 40px;
+
       h1{
         &::first-letter{
           text-transform: uppercase;
         }
-        color: white;
+        color: $dark-text;
         margin: 0;
         margin-top: -17px;
         font-size: 1.4em;
+        padding-bottom: 7px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       }
-      p{
-        margin: 5px 0;
-        color: white;
+      .who{
+        i:first-child{
+          margin-right: 2px;
+        }
+      }
+      .localisation, .description{
+        span:nth-child(2){
+          color: $pink;
+        }
+        span{
+          font-weight: 300;
+        }
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding:7px 0 0;
+        margin: 7px 0;
+
+      }
+      .calendar{
+        display: inline-block;
+        width: 50%;
+        position: relative;
+        text-align: center;
+        padding: 7px 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+        .legend{
+          display: block;
+          width: 100%;
+          text-align: center;
+        }
+        .date{
+          display: inline-block;
+          position: relative;
+          width: 50%;
+          margin: 2px auto 0;
+          padding:4px 0;
+
+          border-radius: 2px;
+          border:1px solid $dark;
+          background-color: rgba(255, 255, 255, 0.1);
+          .y{
+            display: block;
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-size: 0.6em;
+            color: $bckg;
+          }
+          .d{
+            padding: 2px 0;
+            display: block;
+            font-size: 1.5em;
+            width: 100%;
+            text-align: center;
+            color: $pink;
+          }
+          .m{
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 2px 0;
+          }
+        }
+        .time{
+          display: block;
+          width: 100%;
+          text-align: center;
+          padding: 2px 0;
+          i{
+            span{
+              font-size: 0.8em;
+            }
+          }
+        }
+      }
+      .description{
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 7px 0;
+        margin: 0;
+      }
+      h1+p{
+        margin: 7px 0;
         i{
           font-size: 0.95em;
         }
@@ -64,33 +166,24 @@
   &-create{
     .controls {
       margin-top: 16px;
-      border: 1px solid transparent;
       border-radius: 2px 0 0 2px;
       box-sizing: border-box;
       -moz-box-sizing: border-box;
       height: 60px;
       outline: none;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     }
 
     #pac-input {
-      background-color: #fff;
-      font-size: 15px;
-      font-weight: 300;
-      padding: 0 0 0 23px;
       margin: 0;
       text-overflow: ellipsis;
       width: 100%;
       margin-bottom: 15px;
-    }
-
-    #pac-input:focus {
-      border-color: #4d90fe;
+      border-radius: 2px;
     }
 
 
     #type-selector {
-      color: #fff;
+      color: $dark-text;
       background-color: #4d90fe;
       padding: 5px 11px 0px 11px;
     }
@@ -106,34 +199,50 @@
         background-color: $dark-opacity;
       }
       fieldset{
+        background-color: $bckg;
         padding: 10px 4%;
         margin: 0;
         border: none;
-        color: white;
+        color: $dark-text;
+        .no-label{
+          margin-top: 20px;
+        }
         label{
           padding: 10px 0 2px;
-          display: block;
+          font-weight: 300;
+          font-size: 0.6;
+          display: inline-block;
           color: rgba(255, 255, 255, 0.6);
         }
         input[type=file]{
           padding: 0;
+          font-size: 1em;
+        }
+        input[type=submit]{
+          width: 100%;
         }
         input[type=file]::-webkit-file-upload-button{
           height: 60px;
           font-size: 1.1em;
           padding: 0 5% 0 0;
           border:none;
-          color: rgba(0, 0, 0, 0.5);
-          background: white;
+          color: $bckg;
+          background: $dark-text;
           width: 100%;
+          font-size: 0.72em;
         }
         input, textarea{
           border-radius: 2px;
           border:none;
           width: 90%;
           padding: 20px 5%;
-          background-color: white;
-          color: rgba(0, 0, 0, 0.5);
+          color: $dark-text;
+          background: rgba(0, 0, 0, 0.1);
+          border: 1px solid white;
+          &:focus{
+            outline:none;
+            border: 1px solid $blue;
+          }
         }
         .image-input{
           width: 100%;
@@ -151,29 +260,160 @@
             height: 80px;
             width: 80px;
             float: left;
+            border-radius: 2px;
           }
         }
       }
     }
   }
+  ::-webkit-input-placeholder { /* WebKit browsers */
+    color:    white;
+  }
+  :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    white;
+    opacity:  1;
+  }
+  ::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    white;
+    opacity:  1;
+  }
+  :-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    white;
+  }
 }
 
-::-webkit-input-placeholder { /* WebKit browsers */
-  color:    rgba(0, 0, 0, 0.5);
-}
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-  color:    rgba(0, 0, 0, 0.5);
-  opacity:  1;
-}
-::-moz-placeholder { /* Mozilla Firefox 19+ */
-  color:    rgba(0, 0, 0, 0.5);
-  opacity:  1;
-}
-:-ms-input-placeholder { /* Internet Explorer 10+ */
-  color:    rgba(0, 0, 0, 0.5);
-}
+
 
 // media queries after NEXUS 5 (360 width)
 @media screen and (max-width: 359px) {
 
+}
+
+.signin{
+  position: relative;
+  height: 100%;
+  background: url('../../../img/signinBckg/hand-person-smartphone-5000.jpg') no-repeat center fixed;
+  -webkit-background-size: cover; /* pour anciens Chrome et Safari */
+  background-size: cover; /* version standardisée */
+  display: table;
+  width: 100%;
+  .sail{
+    position: relative;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: table-cell;
+    vertical-align: middle;
+  }
+  &-section{
+    padding: 0 4%;
+    max-width: 500px;
+    margin: 0 auto;
+    display: block;
+    h3{
+      font-size: 0.8em;
+      text-align: center;
+      padding:8% 0 0;
+      margin: 0;
+      color: white;
+      opacity: 0.5;
+    }
+    .entry{
+      margin: 5px auto;
+      display: block;
+      width: 70%;
+      height: 40px;
+      border-radius: 20px;
+      text-decoration: none;
+      text-align: center;
+      line-height: 40px;
+      color: white;
+      text-transform: uppercase;
+      &-fb{
+        background-color: #415e9b;
+      }
+      &-tw{
+        background-color: #2eacf6;
+      }
+    }
+    a{
+      color: white;
+      text-decoration: none;
+    }
+    .register{
+      background-color: transparent;
+      border: 2px solid white;
+      height: 36px;
+      line-height: 36px;
+      border-radius: 20px;
+      text-align: center;
+      color: white;
+      padding: 0;
+      margin: 5px auto 0;
+      width: 50%;
+      display: block;
+      font-size: 0.7em;
+    }
+    .forgot-password{
+      font-size: 0.7em;
+      text-align: center;
+      margin-top: 5px;
+      position: relative;
+      span{
+        position: relative;
+        top: 1px;
+        margin-left: 2px;
+      }
+    }
+    form{
+      fieldset {
+        padding: 0;
+        margin: 0;
+        border: none;
+        color: white;
+        input, textarea {
+          display: block;
+          border-radius: 20px;
+          height: 40px;
+          line-height: 40px;
+          border: 2px solid white;
+          width: 70%;
+          padding: 0 20px;
+          margin: 5px auto;
+          color: white;
+          background: rgba(0, 0, 0, 0.1);
+          &:focus {
+            outline: none;
+            border: 1px solid black;
+          }
+        }
+        button[type="submit"]{
+          background-color: transparent;
+          border: 2px solid white;
+          height: 40px;
+          border-radius: 20px;
+          text-align: center;
+          color: white;
+          padding: 0;
+          margin: 0 auto;
+          width: 50%;
+          display: block;
+
+        }
+      }
+    }
+  }
+  ::-webkit-input-placeholder { /* WebKit browsers */
+    color:    white;
+  }
+  :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    white;
+    opacity:  1;
+  }
+  ::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    white;
+    opacity:  1;
+  }
+  :-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    white;
+  }
 }

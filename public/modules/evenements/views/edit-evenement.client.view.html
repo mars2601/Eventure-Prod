@@ -23,7 +23,7 @@
 </section>-->
 
 
-<section data-ng-controller="EvenementsController" data-ng-init="findOne()">
+<section class="top-wrapper" data-ng-controller="EvenementsController" data-ng-init="findOne()">
     <div class="event event-create" data-ng-init="createDisplay()">
         <form  data-ng-submit="update()" enctype="multipart/form-data" style="background: url('uploaded/events/cover/{{evenement._id}}.{{evenement.coverImage[0].contentType}}') no-repeat center fixed;" novalidate>
             <fieldset ng-class="{bckgImageTrue: evenement.coverImage[0].contentType}">

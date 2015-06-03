@@ -3,8 +3,10 @@
 angular.module('users').controller('AuthenticationController', ['$scope', '$http', '$location', 'Authentication',
 	function($scope, $http, $location, Authentication) {
 		$scope.authentication = Authentication;
+        console.log($scope.authentication.user);
 
-		// If user is signed in then redirect back home
+
+        // If user is signed in then redirect back home
 		if ($scope.authentication.user) $location.path('/timeline');
 
 		$scope.signup = function() {
@@ -24,7 +26,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 				// If successful we assign the response to the global user model
 				$scope.authentication.user = response;
 
-				// And redirect to the index page
+                // And redirect to the index page
 				$location.path('/timeline');
 			}).error(function(response) {
 				$scope.error = response.message;

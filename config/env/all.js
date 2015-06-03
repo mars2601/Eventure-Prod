@@ -13,7 +13,8 @@ module.exports = {
 	assets: {
 		lib: {
 			css: [
-			],
+                'public/lib/ngDialog/css/ngDialog.css',
+            ],
 			js: [
 				'public/lib/angular/angular.js',
 				'public/lib/angular-resource/angular-resource.js', 
@@ -23,6 +24,7 @@ module.exports = {
 				'public/lib/angular-sanitize/angular-sanitize.js', 
 				'public/lib/angular-ui-router/release/angular-ui-router.js',
 				'public/lib/angular-ui-utils/ui-utils.js',
+				'public/lib/ngDialog/js/ngDialog.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
 				'public/lib/jquery/dist/jquery.min.js',
 				'public/lib/custom/init.js',

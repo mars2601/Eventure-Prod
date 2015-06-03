@@ -1,14 +1,39 @@
 'use strict';
 
 // Evenements controller
-angular.module('evenements').controller('EvenementsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Evenements', 'Users', 'fileReader',
-	function($scope, $stateParams, $location, Authentication, Evenements, Users, fileReader) {
+angular.module('evenements').controller('EvenementsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Evenements', 'Users', 'fileReader', 'Menus', 'ngDialog',
+	function($scope, $stateParams, $location, Authentication, Evenements, Users, fileReader, Menus, ngDialog) {
 		$scope.authentication = Authentication;
         $scope.guests = Users.query();
+        $scope.menu = Menus.getMenu('bottombar');
         $scope.placeName = '';
         $scope.lat = '';
         $scope.long = '';
         $scope.defaultEventCover = './img/defaultEventCover.png';
+        $scope.loading = true;
+        $('.uil-ring-css').css("height", $( window ).height());
+
+
+
+        $scope.openCreatePost = function(){
+            ngDialog.open({ template: 'templateId',
+                            controller: 'PostsController',
+                            scope: $scope,
+                            overlay: true,
+                            closeByDocument: true
+            });
+            $(document).on('click', '.imageButton-photo', function(event) {
+                event.preventDefault();
+                $(".inputFile").click();
+            });
+            $(document).on('click', '.imageButton-blue', function(event) {
+                event.preventDefault();
+                $(".inputSubmit").click();
+            });
+        };
+
+        /*        $scope.createPost = function(){
+        }*/
 
 
 
@@ -23,16 +48,37 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
 
         /* users Filtered by guest, see if he's guest or not*/
         $scope.UserFilterGuest = function(eve) {
-            return function( user ) {
-                if(eve.guests){
-                    for(var i = 0; i < eve.guests.length; i++){
-                        if(user._id === eve.guests[i]._id){
-                            return true;
+            if(eve){
+                return function( user ) {
+                    if(eve.guests){
+                        for(var i = 0; i < eve.guests.length; i++){
+                            if(user._id === eve.guests[i]._id){
+                                return true;
+                            }
                         }
                     }
-                }
-            };
+                };
+            }
+
         };
+
+        $scope.displayGuests = function(user){
+
+            if(user.providerData){
+                switch(user.provider) {
+                    case 'twitter':
+                        var profilePictureGuest = user.providerData.profile_image_url_https;
+                        break;
+                    case 'facebook':
+                        var profilePictureGuest = 'http://graph.facebook.com/'+user.providerData.id+'/picture?type=square';
+                        break;
+                    default:
+                        var profilePictureGuest = 'a';
+                }
+            }else{
+                var profilePictureGuest = 'a';
+            }
+        }
 
         /* users Filtered by mine, see if I am invited or if I created the event*/
         $scope.EventsFilterMine = function() {
@@ -47,6 +93,7 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
 
         /* Filter the events where I'm invited */
         $scope.EventsFilterGuest = function(eve) {
+            $scope.currentItemFilter = 1;
             return function( eve ) {
                 for (var i = 0; i < eve.guests.length; i++) {
                     if (Authentication.user._id === eve.guests[i]._id) {
@@ -58,6 +105,7 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
 
         /* Filter the events that I created */
         $scope.EventsFilterAuthor = function(eve) {
+            $scope.currentItemFilter = 2;
             return function( eve ) {
                 if(Authentication.user._id === eve.user._id){
                     return true;
@@ -228,6 +276,8 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
 
             };
 
+
+
             $scope.isInvited = function(eve, guest){
                 if(eve){
                     for(var i = 0; i < eve.length; i++){
@@ -268,6 +318,7 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
                     $scope.inputDeSelection.push({_id});
                 }
             };
+            $scope.toggle = false;
         };
 
 		$scope.create = function() {
@@ -413,80 +464,145 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
 		};
 
 		// Find a specific list of Evenements
-		$scope.find = function(type) {
-			$scope.evenements = Evenements.query({all:false});
+        $scope.find = function(type) {
             $scope.users = Users.query();
-            console.log($scope.evenements);
+            Evenements.query({all:false}).$promise.then(function(data) {
+                // success handler
+                $scope.evenements = data;
+                $scope.loading = false;
+            }, function(error) {
+                // error handler
+            });
+            if ( document.location.href.indexOf('#1') > -1 ) {
+                $scope.currentItemFilter = 1;
+            }else if(document.location.href.indexOf('#2') > -1){
+                $scope.currentItemFilter = 2;
+            }
+
+            if($scope.currentItemFilter === 1){
+                $scope.showList = $scope.EventsFilterGuest($scope.evenements);
+            }else if($scope.currentItemFilter === 2){
+                $scope.showList = $scope.EventsFilterAuthor($scope.evenements);
+            }
         };
 
         // Find all Evenements
         $scope.findAll = function() {
-            $scope.evenements = Evenements.query({all:true});
-            console.log($scope.evenements);
+            Evenements.query({all:true}).$promise.then(function(data) {
+                // success handler
+                $scope.evenements = data;
+                $scope.loading = false;
+            }, function(error) {
+                // error handler
+            });
             $scope.users = Users.query();
+            $("#searchText").focus();
         };
 
 		// Find existing Evenement
 		$scope.findOne = function() {
-			$scope.evenement = Evenements.get({
+            $scope.askInviteButton = 'Demander un invitation';
+            Users.query().$promise.then(function(data) {
+                // success handler
+                $scope.users = data;
+            }, function(error) {
+                // error handler
+            });
+            Evenements.get({
 				evenementId: $stateParams.evenementId
-			});
+			}).$promise.then(function(data) {
+                    $scope.evenement = data;
+                    for(var i = 0; i < Authentication.user.requests.length; i++){
+                        if(Authentication.user.requests[i].event_id != $scope.evenement._id){
+                            $scope.askInviteButton = 'Demander un invitation';
+                            $scope.askInviteButtonClass = false;
+                        }else{
+                            $scope.askInviteButton = 'Demande d\'invitation envoyée';
+                            $scope.askInviteButtonClass = true;
+                        }
+                    }
+                    $scope.isAdmin = false;
+                    $scope.isGuest = false;
+                    $scope.isAny = true;
+
+
+                    for(var j = 0; j < $scope.evenement.guests.length; j++){
+                        if($scope.evenement.guests[j]._id === Authentication.user._id){
+                            $scope.isGuest = true;
+                            $scope.isAny = false;
+                        }else if($scope.evenement.user._id === Authentication.user._id){
+                            $scope.isAdmin = true;
+                            $scope.isAny = false;
+                        }
+                    }
+
+                    $scope.loading = false;
+
+                    if($scope.evenement.endTimestamp < Date.now()){
+                        $scope.eventIsPassed = true;
+                    }else{
+                        $scope.eventIsPassed = false;
+                    }
+
+                            for (var i = 0; i < $scope.evenement.guests.length; i++) {
+                                if ($scope.evenement.guests[i]._id === user._id) {
+                                    $scope.currentGuest = $scope.evenement.guests[i];
+                                }
+                            }
+                            $scope.newGuests = [];
+                    console.log($scope.users.length);
+                    if($scope.users.length > 0){
+
+                        if (Authentication.user._id === $scope.evenement.user._id) {
+                            console.log('admin');
+                            for (var j = 0; j < $scope.users.length; j++) {
+                                console.log($scope.users[j].requests);
+                                for(var g = 0; g < $scope.users[j].requests.length; g++){
+
+                                    console.log($scope.users[j].requests[g].event_id);
+                                    console.log($scope.evenement._id);
+
+                                    if ($scope.users[j].requests[g].event_id == $scope.evenement._id) {
+                                        $scope.newGuests.push($scope.users[j]);
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+
+
+
+                    $(".event-view-image").load(function(){
+                        if($(".event-view-image").height() > $(".event-view-image").width()){
+                            $(".event-view-image").css("top", -(($(".event-view-image").height()-200)/2))
+                                .css("height", "100%")
+                                .css("width", "auto");
+                        }else{
+                            $(".event-view-image").css("left", -(($(".event-view-image").width()-$(".sail").width)/2))
+                                .css("width", "100%")
+                                .css("height", "auto");
+                        }
+
+                    });
+
+
+
+                });
             $scope.users = Users.query();
             if($scope.buttonValue == undefined && $scope.stateValue == undefined){
                 $scope.buttonValue = "Viendra";
                 $scope.stateValue = "En attente";
             }
-            $scope.evenement.$promise.then(function(data) {
-                $scope.evenement = data;
-                for(var i = 0; i < Authentication.user.requests.length; i++){
-                    if(Authentication.user.requests[i].event_id != $scope.evenement._id){
-                        $scope.askInviteButton = 'Demander un invitation';
-                        $scope.askInviteButtonClass = false;
-                    }else{
-                        $scope.askInviteButton = 'Demande d\'invitation envoyée';
-                        $scope.askInviteButtonClass = true;
-                    }
-                }
-            });
+            $scope.evenement
+
+
+
 
         };
 
-        $scope.restoreDataView = function(evenement, user) {
-            $scope.users = Users.query();
-
-
-            $scope.users.$promise.then(function(dataUsers) {
-                evenement.$promise.then(function (data) {
-                    $scope.evenement = data;
-                    $scope.users = dataUsers;
-                    for (var i = 0; i < $scope.evenement.guests.length; i++) {
-                        if ($scope.evenement.guests[i]._id === user._id) {
-                            $scope.currentGuest = $scope.evenement.guests[i];
-                        }
-                    }
-                    $scope.newGuests = [];
-
-                    if (Authentication.user._id === $scope.evenement.user._id) {
-
-                        for (var j = 0; j < $scope.users.length; j++) {
-
-                            for(var g = 0; g < $scope.users[j].requests.length; g++){
-                                if ($scope.users[j].requests[g].event_id == $scope.evenement._id) {
-
-                                    console.log($scope.users[j].firstName);
-                                    console.log($scope.users[j]);
-                                    $scope.newGuests.push($scope.users[j]);
-                                    console.log($scope.newGuests);
-                                }
-                            }
-
-                        }
-                    }
-                });
-            });
-        };
             $scope.changeState = function(currentGuest){
-                console.log(currentGuest.state[0]);
+                console.log(currentGuest);
                 switch(currentGuest.state[0]) {
                     case 'waiting':
                         currentGuest.state[0] = 'willcome';
@@ -541,19 +657,25 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
                 }
             }
             if(allow == true){
-                Authentication.user.requests.push({event_id: eve._id});
+                Authentication.user.requests.push({event_id: eve._id,
+                                                    state: ['waiting']
+                                                });
+                $scope.user = Authentication.user;
+                console.log(Authentication.user);
 
-                var user = new Users(Authentication.user);
+                var user = new Users($scope.user);
+                console.log(user);
+
                 user.$update(function(response) {
                     $scope.success = true;
                     Authentication.user = response;
-
+                    console.log('votre demande a bien été effectuée');
+                    $scope.askInviteButton = 'Demande d\'invitation envoyée';
+                    $scope.askInviteButtonClass = true;
                 }, function(response) {
                     $scope.error = response.data.message;
                 });
-                console.log('votre demande a bien été effectuée');
-                $scope.askInviteButton = 'Demande d\'invitation envoyée';
-                $scope.askInviteButtonClass = true;
+
             }else{
                 console.log('vous êtes en attente de demande d\'invitations');
                 $scope.askInviteButton = 'Demande d\'invitation envoyée';

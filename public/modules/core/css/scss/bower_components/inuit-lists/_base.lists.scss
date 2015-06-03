@@ -45,7 +45,116 @@ li {
   padding:0;
 }
 
+.event-empty{
+  position: absolute;
+  top: 0;
+  padding: 20px 0;
+  width: 100%;
+  text-align: center;
+  span{
+    display: block;
+    width: 100%;
+    text-align: center;
+    color: $dark-text;
+  }
+  a{
+    font-size: 1em;
+    position: relative;
+    top: 20px;
+  }
+}
 .list{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: block;
+  &-filter{
+    padding: 0 2%;
+    width: 96%;
+    background-color: $blue;
+    position: fixed;
+    z-index: 10000;
+    top: 55px;
+    span[class^='icon-']{
+      display: block;
+      font-size: 2.2em;
+    }
+
+    a.but{
+      text-decoration: none;
+    }
+    .but{
+      vertical-align: top;
+      height: 55px;
+      display: inline-block;
+      border:none;
+      width: 31%;
+      background-color: transparent;
+      color: $dark;
+      font-size: 0.6em;
+      text-align: center;
+      padding: 0;
+      &:focus{
+        outline: none;
+      }
+      &-all{
+        position: relative;
+        p:first-child{
+          position: relative;
+          top: 10px;
+        }
+      }
+    }
+    .focus{
+      background-color: $blue-light;
+    }
+    .search{
+      height: 55px;
+      width: 38%;
+      color: $dark;
+      display: inline-block;
+      vertical-align: top;
+      position: relative;
+      span{
+        display: inline-block;
+        width: 25%;
+        font-size: 1.2em;
+        position: relative;
+        z-index: 101;
+        top: 5px;
+        left: calc(46% - 12px);
+      }
+      input{
+        display: inline-block;
+        width: 70%;
+        border: none;
+        margin:0 10%;
+        padding: 0 5%;
+        background-color: $blue;
+        border-bottom: 1px solid $dark;
+        position: relative;
+        top: -2px;
+        font-size: 1em;
+        -webkit-transition: all 5ms ease;
+        -moz-transition: all 5ms ease;
+        -ms-transition: all 5ms ease;
+        -o-transition: all 5ms ease;
+        transition: all 5ms ease;
+        &:focus{
+          outline: none;
+          font-size: 1.5em;
+          top: -15px;
+          z-index: 102;
+        }
+      }
+      &-all{
+        background-color: $blue-light;
+        input{
+          background-color: $blue-light;
+        }
+      }
+    }
+  }
   &-evenements{
     li{
       a{
@@ -70,10 +179,13 @@ li {
           padding-left: 10px;
           width: calc(100% - 100px);
           height: 100%;
-          color: white;
+          color: $dark-text;
           vertical-align: top;
           h4{
             padding: 10px 0;
+            &::first-letter{
+              text-transform: uppercase;
+            }
           }
           p>span{
             color: $blue;
@@ -88,13 +200,14 @@ li {
               display:block;
               clear: both;
             }
+            span[class^='icon-']{
+              margin-right: 4px;
+            }
             span{
               float: left;
             }
             .localisation{
               text-align: right;
-              width: calc(50% - 10px);
-              padding-right: 10px;
             }
             .time{
               width: calc(50% - 10px);
@@ -113,7 +226,73 @@ li {
       }
     }
   }
+  &-users{
+    h2{
+      color: $pink;
+      font-size: 1em;
+      margin: 7px 0;
+      font-weight: 300;
+      span{
+        font-size: 0.9em;
+        margin-right: 2px;
+        color: $dark-text;
+      }
+    }
+    &-item:nth-child(4n){
+    }
+    .guests-filter{
+      margin-bottom: 10px;
+    }
+    &-item{
+      color: $bckg;
+      width: 23%;
+      display: inline-block;
+      vertical-align: top;
+      margin: 1%;
+      text-align: center;
+      .displayName{
+        overflow: hidden;
+        display: block;
+        border-radius: 2px;
+        color: $dark-text;
+        padding: 8%;
+        background-color: $dark;
+        font-size: 0.9em;
+        img{
+          width: 40px;
+          height: 40px;
+          margin-bottom: 4px;
+        }
+      }
+      label.focus{
+        background-color: $pink;
+      }
+      input{
+        display: none;
+      }
+      div:first-child{
+        position: relative;
+        .profilePicture{
+          width: 45px;
+          height: 45px;
+          position: relative;
+        }
+      }
+      .name{
+        padding-right: 7px;
+        margin: 2px 0;
+        float: left;
+        display: block;
+        width: 100%;
+        text-align: center;
+        &::first-letter{
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
 }
+
 
 // media queries after NEXUS 5 (360 width)
 @media screen and (max-width: 359px) {
@@ -128,10 +307,11 @@ li {
           }
 
           .infos{
+            padding-left: 5px;
             small{
               padding-top: 5px;
             }
-            width: calc(100% - 80px);
+            width: calc(100% - 75px);
             height: 100%;
             h4{
               padding: 5px 0;

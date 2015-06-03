@@ -1,0 +1,267 @@
+/*------------------------------------*\
+    #Posts
+\*------------------------------------*/
+
+
+
+.posts{
+  &-list{
+    background-color: $dark-opacity;
+    position: relative;
+    .timeline{
+      position: absolute;
+      display: block;
+      height: 100%;
+      width: 2px;
+      background-color: $blue;
+      left: 14%;
+      top: 20px;
+      opacity: .6;
+      z-index: 1001;
+    }
+    .post{
+      width: 100%;
+      display: block;
+      margin-bottom:10px;
+      background-color: $dark;
+      position: relative;
+      .time{
+        font-size: 0.65em;
+        position: absolute;
+        top: 13px;
+        left:3%;
+        color: $dark-text;
+        z-index: 1004;
+        opacity: .6;
+      }
+      .push-right{
+        margin-left:15%;
+        padding: 2% 4% 2%;
+        position: relative;
+        .bullet{
+          span{
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            top: 7px;
+            left: 7px;
+            background-color: $pink;
+            border-radius: 100%;
+            z-index: 1003;
+          }
+          position: absolute;
+          display: block;
+          width: 24px;
+          height: 24px;
+          background-color: $dark;
+          left: calc(-1% - 11px);
+          border-radius: 49%;
+          top: 8px;
+          z-index: 1002;
+        }
+        .profilePicture{
+          top: 2px;
+          margin: 0 7px 0 0;
+          float: left;
+          width: 25px;
+          height: 25px;
+          position: relative;
+          min-width: inherit !important;
+        }
+        h2{
+          border-bottom:1px solid rgba(255, 255, 255, 0.3);
+          color: $dark-text;
+          padding: 4px 0 6px 0  ;
+          font-weight: 300;
+          opacity: .6;
+          &:first-letter{
+            text-transform: uppercase;
+          }
+        }
+        p{
+          padding: 6px 0 4px 0;
+          font-weight: 300;
+          color: $dark-text;
+        }
+        img.image-post{
+          border: 1px solid $dark-text;
+          border-radius: 2px;
+          min-width: 100%;
+          margin: 6px 0;
+        }
+      }
+    }
+  }
+  &-create{
+    .title{
+      font-size: 1.4em;
+      padding: 0;
+      margin: 0;
+      height: 55px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+      background-color: $dark;
+      color: $dark-text;
+    }
+    form{
+      -webkit-background-size: cover; /* pour anciens Chrome et Safari */
+      background-size: cover; /* version standardisée */
+      fieldset.bckgImageTrue{
+        background-color: $dark-opacity;
+      }
+      fieldset{
+        padding: 0;
+        margin: 0;
+        border: none;
+        color: $dark-text;
+        label{
+          padding: 10px 0 2px;
+          display: block;
+          color: $dark-text;
+        }
+        input[type=file]{
+          padding: 0;
+        }
+        input[type=file]::-webkit-file-upload-button{
+          height: 60px;
+          font-size: 1.1em;
+          padding: 0 5% 0 0;
+          border:none;
+          color: $dark-text;
+          background: $dark;
+          width: 100%;
+          text-indent: -1001%;
+          overflow: hidden;
+        }
+        input[type=submit]{
+          color: $dark;
+          background: $blue;
+          width: 100%;
+          text-indent: -1001%;
+          overflow: hidden;
+        }
+        input, textarea{
+          padding: 2%;
+          width: 100%;
+          color: $dark-text;
+          background: $bckg;
+          border: none;
+          &:focus{
+            outline:none;
+            border: none;
+          }
+        }
+        .image-input{
+          border-top: 1px solid rgba(0, 0, 0, 0.2);
+          width: 100%;
+          .preview-thumbnail{
+            position: relative;
+            -webkit-box-shadow: inset 0px 0px 1px 0px rgba(255, 255, 255, 0.75);
+            -moz-box-shadow:    inset 0px 0px 1px 0px rgba(255, 255, 255, 0.75);
+            box-shadow:         inset 0px 0px 1px 0px rgba(255, 255, 255, 0.75);
+            float: left;
+            width: 100%;
+            img{
+              width: 100%;
+            }
+          }
+        }
+        .select{
+          border-top: 1px solid rgba(0, 0, 0, 0.2);
+          background-color: $dark;
+          width: 100%;
+          height: 55px;
+          position: absolute;
+          bottom: 0;
+          .wrap{
+            position: relative;
+            .imageButton{
+              position: absolute;
+              width: 100%;
+              height: 100%;
+              font-size: 10px;
+              font-weight: bold;
+              text-align: center;
+              border: none;
+              background-color: $dark;
+              color: $dark-text;
+              text-transform: uppercase;
+              &-blue{
+                background-color: $blue;
+                color: $dark-text;
+              }
+              &:focus{
+                outline: none;
+              }
+              span{
+                font-size: 2.2em;
+                display: block;
+                margin-bottom: 1px;
+              }
+            }
+            padding: 0;
+            margin: 0;
+            width: 33.33%;
+            height: 100%;
+            display: inline-block;
+            vertical-align: top;
+            border: none;
+            border-radius: 0;
+          }
+        }
+      }
+    }
+  }
+  .navigation-bottom{
+    z-index: 10000;
+    position: fixed;
+    display: block;
+    width: 100%;
+    bottom: 0;
+    background-color: $dark;
+    -webkit-box-shadow: 0px -1px 1px 0px rgba(50, 50, 50, 0.15);
+    -moz-box-shadow:    0px -1px 1px 0px rgba(50, 50, 50, 0.15);
+    box-shadow:         0px -1px 1px 0px rgba(50, 50, 50, 0.15);
+    button{
+      height: 45px;
+      width: 100%;
+      text-align: center;
+      background-color: $dark;
+      color: $blue;
+      border: none;
+      text-transform: uppercase;
+      font-size: 1em;
+      position: relative;
+      b{
+        position: relative;
+        top: -6px;
+      }
+      span{
+        display: inline-block;
+        font-size: 1.8em;
+        margin-right: 7px;
+      }
+      &:focus{
+        outline: none;
+      }
+    }
+  }
+}
+
+
+.ngdialog{
+  &-content{
+    height: 100%;
+    position: fixed;
+    width: 100%;
+  }
+  &-close{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 55px;
+    height: 55px;
+    color: $blue;
+    font-size: 2.5em;
+    right: -10px;
+  }
+}

@@ -7,6 +7,9 @@ var _ = require('lodash'),
 	errorHandler = require('../errors.server.controller'),
 	mongoose = require('mongoose'),
 	passport = require('passport'),
+    fs = require('fs'),
+    uploadPath = './public/uploaded/',
+    eventCoverPath = 'users/profile/',
 	User = mongoose.model('User');
 
 /**
@@ -66,7 +69,8 @@ exports.signup = function(req, res) {
 				if (err) {
 					res.status(400).send(err);
 				} else {
-					res.json(user);
+                    console.error(user);
+                    res.json(user);
 				}
 			});
 		}
@@ -89,7 +93,8 @@ exports.signin = function(req, res, next) {
 				if (err) {
 					res.status(400).send(err);
 				} else {
-					res.json(user);
+                    console.error(user);
+                    res.json(user);
 				}
 			});
 		}
@@ -112,13 +117,14 @@ exports.oauthCallback = function(strategy) {
 		passport.authenticate(strategy, function(err, user, redirectURL) {
 			if (err || !user) {
 				return res.redirect('/#!/signin');
-			}
+            }
 			req.login(user, function(err) {
 				if (err) {
 					return res.redirect('/#!/signin');
 				}
 
 				return res.redirect(redirectURL || '/');
+
 			});
 		})(req, res, next);
 	};
@@ -155,6 +161,19 @@ exports.saveOAuthUserProfile = function(req, providerUserProfile, done) {
 				if (!user) {
 					var possibleUsername = providerUserProfile.username || ((providerUserProfile.email) ? providerUserProfile.email.split('@')[0] : '');
 					User.findUniqueUsername(possibleUsername, null, function(availableUsername) {
+
+                        var pP;
+                        switch(providerUserProfile.provider) {
+                            case 'twitter':
+                                pP = providerUserProfile.providerData.profile_image_url_https;
+                                break;
+                            case 'facebook':
+                                pP = 'http://graph.facebook.com/'+providerUserProfile.providerData.id+'/picture?type=square';
+                                break;
+                            default:
+                                pP = '';
+                        }
+
 						user = new User({
 							firstName: providerUserProfile.firstName,
 							lastName: providerUserProfile.lastName,
@@ -163,10 +182,19 @@ exports.saveOAuthUserProfile = function(req, providerUserProfile, done) {
 							displayName: providerUserProfile.displayName,
 							email: providerUserProfile.email,
 							provider: providerUserProfile.provider,
-							providerData: providerUserProfile.providerData
+							providerData: providerUserProfile.providerData,
+                            profileImage: pP
 						});
 
 
+                        console.log (user);
+/*
+                        user.push({});
+*/
+                        console.log (user);
+
+                        console.error(user);
+                        console.error('ok');
                         // And save the user
 						user.save(function(err) {
 							return done(err, user);
@@ -174,6 +202,7 @@ exports.saveOAuthUserProfile = function(req, providerUserProfile, done) {
 					});
 				} else {
 					return done(err, user);
+
 				}
 			}
 		});

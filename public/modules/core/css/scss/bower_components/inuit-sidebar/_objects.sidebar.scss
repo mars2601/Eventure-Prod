@@ -1,11 +1,13 @@
 header{
   .right{
     text-align: right;
+    padding-top: 10px;
   }
   .left{
     text-align: left;
   }
   .sidebar-menu{
+    top: 55px;
     z-index: 10001;
     width: 75%;
     position: fixed;
@@ -44,6 +46,9 @@ header{
           vertical-align: top;
           line-height: 50px;
           padding: 0 15px 0 0;
+          &:first-letter{
+            text-transform: uppercase;
+          }
         }
       }
       ul{

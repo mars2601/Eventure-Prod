@@ -1,33 +1,59 @@
-<section data-ng-controller="EvenementsController" data-ng-init="findOne()">
-	<div class="event event-view" ng-init="restoreDataView(evenement, authentication.user)">
+<section class="top-wrapper" data-ng-controller="EvenementsController" data-ng-init="findOne()">
+    <div class="event event-view">
         <div class="preview-thumbnail">
-            <div class="state">
-                <button class="link-buttons" ng-click="changeState(currentGuest)" ng-show="((authentication.user._id.indexOf(evenement.guests._id) != -1)  || (authentication.user._id == evenement.user._id))">{{buttonValue}}</button>
-                <button class="link-buttons" ng-click="askInvite(evenement)" ng-hide="((authentication.user._id.indexOf(evenement.guests._id) != -1)  || (authentication.user._id == evenement.user._id))" ng-disabled="askInviteButtonClass" ng-class="askInviteButtonClass ? 'send' : 'not-send'">{{askInviteButton}}</button>
+            <div class="state" ng-if="eventIsPassed == false">
+                <button class="link-buttons" ng-click="changeState(currentGuest)" ng-show="isGuest">{{buttonValue}}</button>
+                <button class="link-buttons" ng-click="askInvite(evenement)" ng-show="isAny" ng-disabled="askInviteButtonClass" ng-class="askInviteButtonClass ? 'send' : 'not-send'">{{askInviteButton}}</button>
 
-                <p class="state-info" ng-show="((authentication.user._id.indexOf(evenement.guests._id) != -1)  || (authentication.user._id == evenement.user._id))">{{stateValue}}</p>
+                <p class="state-info" ng-show="isGuest">{{stateValue}}</p>
             </div>
             <div class="sail"></div>
-            <img class="event-view-image" style="position: relative; top:-{{(evenement.coverImage[0].height/2)-(evenement.coverImage[0].height/4)}}px;" ng-class="{reverseDim: evenement.coverImage[0].width < evenement.coverImage[0].height, noCrop: evenement.coverImage[0].width > evenement.coverImage[0].height}" ng-src="uploaded/events/cover/{{evenement._id}}.{{evenement.coverImage[0].contentType}}"/>
+            <img class="event-view-image"
+                 style="position: relative;"
+                 ng-class="{reverseDim: evenement.coverImage[0].width < evenement.coverImage[0].height, noCrop: evenement.coverImage[0].width > evenement.coverImage[0].height}"
+                 ng-src="uploaded/events/cover/{{evenement._id}}.{{evenement.coverImage[0].contentType}}"/>
         </div>
         <div class="infos">
             <h1 data-ng-bind="evenement.name"></h1>
-            <p><i>par</i> <span data-ng-bind="evenement.user.displayName"></span></p>
-            <p data-ng-bind="evenement.description"></p>
-            <p data-ng-bind="evenement.localisation[0].name"></p>
-            <p><i>Débute le</i> <span data-ng-bind="evenement.beginTimestamp | date:'fullDate'"></span> <i>à</i> <span data-ng-bind="evenement.beginTimestamp | date:'shortTime'"></span></p>
-            <p><i>Finis le</i> <span data-ng-bind="evenement.endTimestamp | date:'fullDate'"></span> <i>à</i> <span data-ng-bind="evenement.endTimestamp | date:'shortTime'"></span></p>
-            <div class="list-users" data-ng-init="displayGuests(evenement.guests);">
-                <a data-ng-repeat="user in users | filter:UserFilterGuest(evenement)"  class="list-group-item">
-                    <p data-ng-bind="user.displayName"></p>
+            <p class="who"><i>par</i> <span data-ng-bind="evenement.user.displayName"></span></p>
+            <p class="localisation" ng-if="evenement.localisation[0].name"><span class="icon-location-pin"></span>&nbsp;<span data-ng-bind="evenement.localisation[0].name"></span></p>
+            <div class="calendar"><i class="legend">Débute le</i>
+                <div class="date">
+                    <span class="y" data-ng-bind="evenement.beginTimestamp | date:'y'"></span>
+                    <span class="d" data-ng-bind="evenement.beginTimestamp | date:'d'"></span>
+                    <span class="m" data-ng-bind="evenement.beginTimestamp | date:'m'"></span>
+                </div>
+                <div class="time">
+                    <i><span class="icon-clock"></span></i> <span data-ng-bind="evenement.beginTimestamp | date:'shortTime'"></span>
+                </div>
+            </div><!--
+            --><div class="calendar"><i class="legend">Fini le</i>
+                <div class="date">
+                    <span class="y" data-ng-bind="evenement.endTimestamp | date:'y'"></span>
+                    <span class="d" data-ng-bind="evenement.endTimestamp | date:'d'"></span>
+                    <span class="m" data-ng-bind="evenement.endTimestamp | date:'m'"></span>
+                </div>
+                <div class="time">
+                    <i><span class="icon-clock"></span></i> <span data-ng-bind="evenement.endTimestamp | date:'shortTime'"></span>
+                </div>
+            </div>
+            <p class="description" ng-if="evenement.description"><span class="icon-info"></span>&nbsp;<span>Infos:</span> <span data-ng-bind="evenement.description"></span></p>
+            <div class="list-users">
+                <h2><span class="icon-users"></span>&nbsp;Liste d'invités</h2>
+                <a data-ng-repeat="user in users | filter:UserFilterGuest(evenement)"  class="list-users-item">
+                    <div data-ng-init="displayGuests(user)" class="displayName">
+                        <img class="profilePicture" ng-src="{{user.profileImage}}" alt=""/><p class="name" data-ng-bind="user.firstName">
+                        <p class="name" data-ng-bind="user.lastName"></p>
+                    </div>
                 </a>
+
             </div>
             <div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == evenement.user._id))">
                 <a class="link-buttons link-buttons-admin" href="/#!/evenements/{{evenement._id}}/edit">
-                    Edit
+                    <span class="icon-new-message"></span> Edit
                 </a>
                 <a class="link-buttons link-buttons-admin" data-ng-click="remove();">
-                    Delete
+                    <span class="icon-circle-with-cross"></span> Delete
                 </a>
                 <br/>
                 <ul>
@@ -40,19 +66,52 @@
                     </li>
                 </ul>
             </div>
-            <small>
-                <em class="text-muted">
-                    Posted on
-                    <span data-ng-bind="evenement.created | date:'mediumDate'"></span>
-                    by
-                    <span data-ng-bind="evenement.user.displayName"></span>
-                </em>
-            </small>
         </div>
-        <div class="posts" ng-show="((authentication.user._id.indexOf(evenement.guests._id) != -1)  || (authentication.user._id == evenement.user._id))">
-            Posts
+
+        <div class="posts posts-list" ng-if="eventIsPassed == false" data-ng-controller="PostsController" data-ng-init="findPosts(evenement)">
+            <ul>
+                <span class="timeline"></span>
+                <li class="post" data-ng-repeat="post in posts" ng-init="currentUser = findAuthor(post.user_id)">
+                    <span class="time" data-ng-bind="post.created | date:'shortTime'"></span>
+                    <div class="push-right">
+                        <span class="bullet"><span></span></span>
+                        <img class="profilePicture" width="25" height="25" ng-hide="{{currentUser.profileImage === undefined}}" ng-src="{{currentUser.profileImage}}" alt=""/>
+                        <h2>{{currentUser.displayName}}</h2>
+                        <p data-ng-bind="post.textContent"></p>
+                        <img class="image-post" ng-if="post.coverImage[0].contentType != ''" ng-src="uploaded/posts/{{post._id}}.{{post.coverImage[0].contentType}}" alt=""/>
+                    </div>
+                </li>
+            </ul>
+            <span class="navigation navigation-bottom">
+                    <button ng-click="openCreatePost()"><span class="icon-camera_alt"></span><b>Post</b></button>
+            </span>
+            <script type="text/ng-template" id="templateId" data-ng-init="findPosts(evenement)">
+                <div class="posts-create">
+                    <h1 class="title">Create Post</h1>
+                    <form data-ng-submit="createPost(evenement)" novalidate>
+                        <fieldset>
+                            <div>
+                                <div>
+                                    <textarea rows="5" data-ng-model="post.textContent" id="post.textContent" class="form-control" placeholder="Yepaaa"></textarea>
+                                </div>
+                                <div class="image-input">
+                                    <div class="preview-thumbnail">
+                                        <img id="image-preview" class="preview" style="position: relative; left:-{{((originalWidth/(originalHeight/80))-80)/2}}px; top:-{{((originalHeight/(originalWidth/80))-80)/2}}px;" ng-class="{reverseDim: originalWidth < originalHeight, originalDim: originalWidth > originalHeight}" ng-src="{{imageSrc || defaultEventCover}}"/>
+                                    </div>
+                                </div>
+                                <div class="select">
+                                    <input class="wrap" type="checkbox" data-ng-model="post.type" name="post.type" id="post.type"><!--
+                                    --><div class="wrap"><button class="imageButton imageButton-photo"><span class="icon-camera_alt"></span>Photo</button><input type="file" ng-file-select="onFileSelect($files)" accept="image/*"  data-ng-model="post.coverImage" id="post.coverImage" class="inputFile"></div><!--
+                                    --><div class="wrap"><button class="imageButton imageButton-blue"><span class='icon-done'></span>Poster</button><input class="link-buttons inputSubmit" type="submit" value=""/></div>
+                                </div>
+
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </script>
         </div>
 	</div>
-
-
 </section>
+
+

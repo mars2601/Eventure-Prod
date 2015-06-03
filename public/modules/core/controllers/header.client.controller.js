@@ -10,6 +10,13 @@ angular.module('core').controller('HeaderController', ['$scope', '$location', 'A
         $scope.menuClassRight = 'close'; /*close the menus*/
         $scope.menuClassLeft = 'close'; /*close the menus*/
 
+        if($scope.authentication.user == ''){
+            $scope.showMenu = false;
+        }else{
+
+            $scope.showMenu = true;
+
+        }
 
         switch(Authentication.user.provider) {
             case 'twitter':

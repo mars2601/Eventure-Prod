@@ -10,16 +10,24 @@
 @import "bower_components/inuit-icon-font/generic.icon-font";
 
 @import "bower_components/inuit-wrapper/objects.wrapper";
+@import "bower_components/inuit-dialogBox/objects.dialogBox";
+@import "bower_components/inuit-posts/objects.posts";
 @import "bower_components/inuit-layout/objects.layout";
 @import "bower_components/inuit-header/objects.header";
 @import "bower_components/inuit-sidebar/objects.sidebar";
 @import "bower_components/inuit-nav/objects.nav";
 @import "bower_components/inuit-wrapper/objects.wrapper";
+@import "bower_components/inuit-loader/objects.loader";
 @import "bower_components/inuit-buttons/objects.linkButtons";
 
 
 
 @import "bower_components/inuit-widths/trumps.widths";
+
+html{
+  position: relative;
+  height: 100%;
+}
 
 body{
   font-family: 'Roboto', sans-serif;
@@ -30,12 +38,26 @@ body{
 
 /* single property*/
 
+.content{
+  .container{
+    height: 100%;
+    section:first-child{
+      height: 100%;
+    }
+  }
+  height: 100%;
+}
+
 .profilePicture{
   border-radius: 50%;
 }
 
 .left{
   float: left;
+}
+
+h2{
+  font-size: 1.2em;
 }
 
 

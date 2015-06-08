@@ -6,14 +6,14 @@ module.exports = {
 		title: 'Eventure - Development Environment'
 	},
 	facebook: {
-        clientID: process.env.FACEBOOK_ID || '1382193778748790',
-        clientSecret: process.env.FACEBOOK_SECRET || 'b449a91f961f5cea3f541f5c13f241d4',
-        callbackURL: 'http://eventure.marcel-pirnay.be:3000/auth/facebook/callback'
+		clientID: process.env.FACEBOOK_ID || '884615724928206',
+		clientSecret: process.env.FACEBOOK_SECRET || 'a40353835e26cf370aa1fcebd493221a',
+		callbackURL: 'http://192.168.1.3:3000/auth/facebook/callback'
 	},
 	twitter: {
-        clientID: process.env.TWITTER_KEY || 'QEgtRtXbDsmHthB9BWOEi9esw',
-        clientSecret: process.env.TWITTER_SECRET || 'tWDvq5UkfTnO7jv7ff66GxQF4JVIRkYlRH7l6eDAr3YVYdvgRC',
-        callbackURL: 'http://46.101.169.145:3000/auth/facebook/callback'
+		clientID: process.env.TWITTER_KEY || 'HVuAiZ2JFGxp38Wfjp9kQCQBr',
+		clientSecret: process.env.TWITTER_SECRET || 'P48jmn0lBvsQXbg89tLa2wsUjCZAvFJuJieePVsjNZAirVB8Em',
+		callbackURL: 'http://192.168.1.3:3000/auth/twitter/callback'
 	},
 	google: {
 		clientID: process.env.GOOGLE_ID || 'APP_ID',

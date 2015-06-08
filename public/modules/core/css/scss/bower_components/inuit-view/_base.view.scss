@@ -13,6 +13,7 @@
 
 .event{
   &-view{
+    font-family: 'Roboto', sans-serif;
     background-color: $bckg;
     position: relative;
     color: $dark-text;
@@ -83,61 +84,73 @@
         margin: 7px 0;
 
       }
+      .calendar+.calendar{
+        border-top: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
       .calendar{
         display: inline-block;
-        width: 50%;
+        width: 100%;
         position: relative;
-        text-align: center;
+        text-align: left;
         padding: 7px 0;
         border-top: 1px solid rgba(255, 255, 255, 0.1);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-
+        &-link{
+          position: absolute;
+          width: 4px;
+          height: 40px;
+          top: 55px;
+          left: 23px;
+          background-color: $dark-text;
+        }
         .legend{
-          display: block;
-          width: 100%;
+          display: inline-block;
+          width: 25%;
+          color: $light-text;
+          opacity: .5;
+          font-size: 0.9em;
           text-align: center;
+          font-weight: 100;
         }
         .date{
           display: inline-block;
           position: relative;
           width: 50%;
-          margin: 2px auto 0;
           padding:4px 0;
-
           border-radius: 2px;
-          border:1px solid $dark;
-          background-color: rgba(255, 255, 255, 0.1);
-          .y{
-            display: block;
-            position: absolute;
-            top: 0;
-            right: 0;
-            font-size: 0.6em;
-            color: $bckg;
-          }
           .d{
-            padding: 2px 0;
-            display: block;
-            font-size: 1.5em;
-            width: 100%;
+            padding: 0;
+            line-height: 50px;
+            display: inline-block;
             text-align: center;
+            font-size: 1.5em;
+            width: 50px;
+            height: 50px;
+            margin-right: 7px;
+            background-color: white;
             color: $pink;
+            font-weight: 100;
+            border-radius: 2px;
           }
           .m{
-            display: block;
-            width: 100%;
-            text-align: center;
-            padding: 2px 0;
+            display: inline-block;
+            padding: 0;
+            font-weight: 500;
+          }
+          .y{
+            font-weight: 100;
           }
         }
         .time{
-          display: block;
-          width: 100%;
-          text-align: center;
+          display: inline-block;
+          width: 25%;
+          text-align: left;
           padding: 2px 0;
           i{
             span{
               font-size: 0.8em;
+              color: $pink;
+              margin-right: 4px;
             }
           }
         }
@@ -298,7 +311,7 @@
 .signin{
   position: relative;
   height: 100%;
-  background: url('../../../img/signinBckg/hand-person-smartphone-5000.jpg') no-repeat center fixed;
+  background: url('../../../img/signinBckg/band-cheering-club-28502.jpg') no-repeat center fixed;
   -webkit-background-size: cover; /* pour anciens Chrome et Safari */
   background-size: cover; /* version standardisée */
   display: table;

@@ -16,25 +16,28 @@
             <h1 data-ng-bind="evenement.name"></h1>
             <p class="who"><i>par</i> <span data-ng-bind="evenement.user.displayName"></span></p>
             <p class="localisation" ng-if="evenement.localisation[0].name"><span class="icon-location-pin"></span>&nbsp;<span data-ng-bind="evenement.localisation[0].name"></span></p>
-            <div class="calendar"><i class="legend">Débute le</i>
+            <div class="calendar">
                 <div class="date">
-                    <span class="y" data-ng-bind="evenement.beginTimestamp | date:'y'"></span>
                     <span class="d" data-ng-bind="evenement.beginTimestamp | date:'d'"></span>
                     <span class="m" data-ng-bind="evenement.beginTimestamp | date:'m'"></span>
-                </div>
-                <div class="time">
+                    <span class="y" data-ng-bind="evenement.beginTimestamp | date:'y'"></span>
+                </div><!--
+                --><div class="time">
                     <i><span class="icon-clock"></span></i> <span data-ng-bind="beginTime"></span>
-                </div>
+                </div><!--
+                --><i class="legend">Début</i>
+                <span class="calendar-link"></span>
             </div><!--
-            --><div class="calendar"><i class="legend">Fini le</i>
+            --><div class="calendar">
                 <div class="date">
-                    <span class="y" data-ng-bind="evenement.endTimestamp | date:'y'"></span>
                     <span class="d" data-ng-bind="evenement.endTimestamp | date:'d'"></span>
                     <span class="m" data-ng-bind="evenement.endTimestamp | date:'m'"></span>
-                </div>
-                <div class="time">
+                    <span class="y" data-ng-bind="evenement.endTimestamp | date:'y'"></span>
+                </div><!--
+                --><div class="time">
                     <i><span class="icon-clock"></span></i> <span data-ng-bind="endTime"></span>
-                </div>
+                </div><!--
+                --><i class="legend">Fin</i>
             </div>
             <p class="description" ng-if="evenement.description"><span class="icon-info"></span>&nbsp;<span>Infos:</span> <span data-ng-bind="evenement.description"></span></p>
             <div class="list-users">

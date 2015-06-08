@@ -189,7 +189,7 @@ li {
     color: #67bbef;
     font-size: 1em;
     margin: 7px 0;
-    font-weight: 300; }
+    font-weight: 400; }
     .list-users h2 span {
       font-size: 0.9em;
       margin-right: 2px;
@@ -210,7 +210,8 @@ li {
       color: white;
       padding: 8%;
       background-color: #232427;
-      font-size: 0.9em; }
+      font-size: 0.9em;
+      font-weight: 400; }
       .list-users-item .displayName img {
         width: 40px;
         height: 40px;
@@ -312,6 +313,7 @@ img[height] {
     top: 110px; }
 
 .event-view {
+  font-family: 'Roboto', sans-serif;
   background-color: #0e0e11;
   position: relative;
   color: white;
@@ -374,53 +376,65 @@ img[height] {
         color: #67bbef; }
       .event-view .infos .localisation span, .event-view .infos .description span {
         font-weight: 300; }
+    .event-view .infos .calendar + .calendar {
+      border-top: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
     .event-view .infos .calendar {
       display: inline-block;
-      width: 50%;
+      width: 100%;
       position: relative;
-      text-align: center;
+      text-align: left;
       padding: 7px 0;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+      border-top: 1px solid rgba(255, 255, 255, 0.1); }
+      .event-view .infos .calendar-link {
+        position: absolute;
+        width: 4px;
+        height: 40px;
+        top: 55px;
+        left: 23px;
+        background-color: white; }
       .event-view .infos .calendar .legend {
-        display: block;
-        width: 100%;
-        text-align: center; }
+        display: inline-block;
+        width: 25%;
+        color: #cccccb;
+        opacity: .5;
+        font-size: 0.9em;
+        text-align: center;
+        font-weight: 100; }
       .event-view .infos .calendar .date {
         display: inline-block;
         position: relative;
         width: 50%;
-        margin: 2px auto 0;
         padding: 4px 0;
-        border-radius: 2px;
-        border: 1px solid #232427;
-        background-color: rgba(255, 255, 255, 0.1); }
-        .event-view .infos .calendar .date .y {
-          display: block;
-          position: absolute;
-          top: 0;
-          right: 0;
-          font-size: 0.6em;
-          color: #0e0e11; }
+        border-radius: 2px; }
         .event-view .infos .calendar .date .d {
-          padding: 2px 0;
-          display: block;
+          padding: 0;
+          line-height: 50px;
+          display: inline-block;
+          text-align: center;
           font-size: 1.5em;
-          width: 100%;
-          text-align: center;
-          color: #67bbef; }
+          width: 50px;
+          height: 50px;
+          margin-right: 7px;
+          background-color: white;
+          color: #67bbef;
+          font-weight: 100;
+          border-radius: 2px; }
         .event-view .infos .calendar .date .m {
-          display: block;
-          width: 100%;
-          text-align: center;
-          padding: 2px 0; }
+          display: inline-block;
+          padding: 0;
+          font-weight: 500; }
+        .event-view .infos .calendar .date .y {
+          font-weight: 100; }
       .event-view .infos .calendar .time {
-        display: block;
-        width: 100%;
-        text-align: center;
+        display: inline-block;
+        width: 25%;
+        text-align: left;
         padding: 2px 0; }
         .event-view .infos .calendar .time i span {
-          font-size: 0.8em; }
+          font-size: 0.8em;
+          color: #67bbef;
+          margin-right: 4px; }
     .event-view .infos .description {
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       padding: 7px 0;
@@ -536,7 +550,7 @@ img[height] {
 .signin {
   position: relative;
   height: 100%;
-  background: url("../../../img/signinBckg/hand-person-smartphone-5000.jpg") no-repeat center fixed;
+  background: url("../../../img/signinBckg/band-cheering-club-28502.jpg") no-repeat center fixed;
   -webkit-background-size: cover;
   /* pour anciens Chrome et Safari */
   background-size: cover;
@@ -862,7 +876,7 @@ img[height] {
           border-bottom: 1px solid #cccccb;
           color: #cccccb;
           padding: 4px 0 6px 0;
-          font-weight: 300; }
+          font-weight: 100; }
           .posts-list .post .push-right h2:first-letter {
             text-transform: uppercase; }
         .posts-list .post .push-right p {
@@ -1381,7 +1395,8 @@ uiload > div {
   text-decoration: none;
   text-transform: uppercase;
   border-radius: 2px;
-  border: none; }
+  border: none;
+  font-family: 'Roboto', sans-serif; }
   .link-buttons span, input[type="submit"].link-buttons span {
     display: inline-block;
     position: relative;

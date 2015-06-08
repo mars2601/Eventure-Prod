@@ -50,6 +50,11 @@ body{
 
 .profilePicture{
   border-radius: 50%;
+  &-center{
+    display: block;
+    margin: 14px auto 7px;
+    border: 2px solid white;
+  }
 }
 
 .left{

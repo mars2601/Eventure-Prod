@@ -22,7 +22,7 @@
 -->
                     <div class="image-input no-label">
                         <div class="select">
-                            <input type="file" ng-file-select="onFileSelect($files)" accept="image/*"  data-ng-model="evenement.coverImage" id="evenement.coverImage" class="form-control">
+                            <input type="file" capture="camera" ng-file-select="onFileSelect($files)" accept="image/*"  data-ng-model="evenement.coverImage" id="evenement.coverImage" class="form-control">
                         </div>
                         <div class="preview-thumbnail">
                             <img id="image-preview" class="preview" style="position: relative; left:-{{((originalWidth/(originalHeight/80))-80)/2}}px; top:-{{((originalHeight/(originalWidth/80))-80)/2}}px;" ng-class="{reverseDim: originalWidth < originalHeight, originalDim: originalWidth > originalHeight}" ng-src="{{imageSrc && imageSrc || defaultEventCover}}" />
@@ -54,13 +54,12 @@
                     <div class="list-users">
                         <span class="list-users-item"
                               ng-repeat="guest in guests | filter:searchText | filter:notMe(guests) | limitTo: limit">
-                            <label class="displayName"
-                                   ng-class="{'focus': toggle}"
-                                   ng-click="toggle = !toggle">
+                            <label class="displayName">
                                 <img class="profilePicture" ng-src="{{guest.profileImage}}" alt=""/>
-                                <input type="checkbox" name="selectedGuests[]" ng-model="guest.selected" value="{{guest._id}}">{{guest.firstName}} {{guest.lastName}}
+                                <input class="displayName-input" type="checkbox" name="selectedGuests[]" ng-model="guest.selected" value="{{guest._id}}"><p>{{guest.firstName}} {{guest.lastName}}</p>
                             </label>
                         </span>
+                        <p>{{toggle}}</p>
                     </div>
                     <button type="button" ng-hide="guests.length <= limit" ng-click="incrementLimit()">+ Voir plus</button><button type="button" ng-hide="limit <= limitStep" ng-click="decrementLimit()">-</button>
                 </div>

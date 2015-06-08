@@ -21,13 +21,13 @@ var EvenementSchema = new Schema({
         default: ''
     },
     beginTimestamp: {
-        type: String,
-        default: '',
+        type: Date,
+        default: Date.now,
         required: 'Veuillez renseigner la date de début de l\'évenement'
     },
     endTimestamp: {
-        type: String,
-        default: '',
+        type: Date,
+        default: Date.now,
         required: 'Veuillez renseigner la date de fin de l\'évenement'
     },
     localisation: [

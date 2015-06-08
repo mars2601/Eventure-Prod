@@ -4,7 +4,6 @@
             <div class="state" ng-if="eventIsPassed == false">
                 <button class="link-buttons" ng-click="changeState(currentGuest)" ng-show="isGuest">{{buttonValue}}</button>
                 <button class="link-buttons" ng-click="askInvite(evenement)" ng-show="isAny" ng-disabled="askInviteButtonClass" ng-class="askInviteButtonClass ? 'send' : 'not-send'">{{askInviteButton}}</button>
-
                 <p class="state-info" ng-show="isGuest">{{stateValue}}</p>
             </div>
             <div class="sail"></div>
@@ -24,7 +23,7 @@
                     <span class="m" data-ng-bind="evenement.beginTimestamp | date:'m'"></span>
                 </div>
                 <div class="time">
-                    <i><span class="icon-clock"></span></i> <span data-ng-bind="evenement.beginTimestamp | date:'shortTime'"></span>
+                    <i><span class="icon-clock"></span></i> <span data-ng-bind="beginTime"></span>
                 </div>
             </div><!--
             --><div class="calendar"><i class="legend">Fini le</i>
@@ -34,7 +33,7 @@
                     <span class="m" data-ng-bind="evenement.endTimestamp | date:'m'"></span>
                 </div>
                 <div class="time">
-                    <i><span class="icon-clock"></span></i> <span data-ng-bind="evenement.endTimestamp | date:'shortTime'"></span>
+                    <i><span class="icon-clock"></span></i> <span data-ng-bind="endTime"></span>
                 </div>
             </div>
             <p class="description" ng-if="evenement.description"><span class="icon-info"></span>&nbsp;<span>Infos:</span> <span data-ng-bind="evenement.description"></span></p>

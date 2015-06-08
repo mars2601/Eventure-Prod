@@ -18,6 +18,11 @@
     font-size:1.5em;
     margin:0;
     padding-top: 0;
+    text-indent: -1001%;
+    overflow: hidden;
+    background: url('../../../img/logo.svg') 50% 5px no-repeat;
+    background-size: 45px;
+
   }
   &__link{
     display:inline-block;
@@ -26,6 +31,10 @@
     font-size:1.2em;
     margin:0;
     line-height: 55px;
+    &__focus{
+      background-color: $blue;
+      color: $dark-text;
+    }
   }
   &__border-link{
     line-height: 55px;

@@ -4,7 +4,7 @@ angular.module('users').controller('SettingsController', [ '$scope', '$http', '$
 	function($scope, $http, $location, Users,  Authentication) {
 
 		$scope.user = Authentication.user;
-
+        $(".header__link__focus").removeClass("header__link__focus");
 
         var pP;
         var ispP;

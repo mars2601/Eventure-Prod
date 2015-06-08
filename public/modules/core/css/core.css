@@ -186,7 +186,7 @@ li {
     display: block;
     width: 100%; }
   .list-users h2 {
-    color: #ff279c;
+    color: #67bbef;
     font-size: 1em;
     margin: 7px 0;
     font-weight: 300; }
@@ -216,7 +216,7 @@ li {
         height: 40px;
         margin-bottom: 4px; }
     .list-users-item label.focus {
-      background-color: #ff279c; }
+      background-color: #67bbef; }
     .list-users-item input {
       display: none; }
     .list-users-item div:first-child {
@@ -297,6 +297,8 @@ img[height] {
     max-width: 100%;
     max-height: none;
     min-height: 100%;
+    width: 100% !important;
+    height: auto !important;
     left: 0 !important; }
 
 /*------------------------------------*\
@@ -347,6 +349,7 @@ img[height] {
       filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#006b6b6b', endColorstr='#a60e0e11',GradientType=0 );
       /* IE6-9 */ }
   .event-view .infos {
+    background-color: #232427;
     z-index: 1001;
     position: relative;
     padding: 0 4%;
@@ -355,9 +358,9 @@ img[height] {
     .event-view .infos h1 {
       color: white;
       margin: 0;
-      margin-top: -17px;
+      margin-top: -15px;
       font-size: 1.4em;
-      padding-bottom: 7px;
+      padding: 7px 0;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
       .event-view .infos h1::first-letter {
         text-transform: uppercase; }
@@ -368,7 +371,7 @@ img[height] {
       padding: 7px 0 0;
       margin: 7px 0; }
       .event-view .infos .localisation span:nth-child(2), .event-view .infos .description span:nth-child(2) {
-        color: #ff279c; }
+        color: #67bbef; }
       .event-view .infos .localisation span, .event-view .infos .description span {
         font-weight: 300; }
     .event-view .infos .calendar {
@@ -405,7 +408,7 @@ img[height] {
           font-size: 1.5em;
           width: 100%;
           text-align: center;
-          color: #ff279c; }
+          color: #67bbef; }
         .event-view .infos .calendar .date .m {
           display: block;
           width: 100%;
@@ -428,7 +431,9 @@ img[height] {
         font-size: 0.95em; }
       .event-view .infos h1 + p span {
         font-size: 1.025em;
-        color: #ff279c; }
+        color: #67bbef; }
+    .event-view .infos .list-users-item .displayName {
+      background-color: rgba(255, 255, 255, 0.1); }
     .event-view .infos .pull-right {
       padding: 15px 0; }
 .event-create .controls {
@@ -794,210 +799,213 @@ img[height] {
 /*------------------------------------*\
     #Posts
 \*------------------------------------*/
-.posts-list {
-  background-color: rgba(0, 0, 0, 0.9);
-  position: relative; }
-  .posts-list .timeline {
-    position: absolute;
-    display: block;
-    height: 100%;
-    width: 2px;
-    background-color: #2b6ed2;
-    left: 14%;
-    top: 20px;
-    opacity: .6;
-    z-index: 1001; }
-  .posts-list .post {
-    width: 100%;
-    display: block;
-    margin-bottom: 10px;
-    background-color: #232427;
+.posts {
+  margin-top: 10px; }
+  .posts-list {
+    background-color: rgba(0, 0, 0, 0.9);
     position: relative; }
-    .posts-list .post .time {
-      font-size: 0.65em;
+    .posts-list .timeline {
       position: absolute;
-      top: 13px;
-      left: 3%;
-      color: white;
-      z-index: 1004;
-      opacity: .6; }
-    .posts-list .post .push-right {
-      margin-left: 15%;
-      padding: 2% 4% 2%;
+      display: block;
+      height: 100%;
+      width: 2px;
+      background-color: #2b6ed2;
+      left: 14%;
+      top: 20px;
+      opacity: .6;
+      z-index: 1001; }
+    .posts-list .post {
+      width: 100%;
+      display: block;
+      margin-bottom: 10px;
+      background-color: #232427;
       position: relative; }
-      .posts-list .post .push-right .bullet {
+      .posts-list .post .time {
+        font-size: 0.65em;
         position: absolute;
-        display: block;
-        width: 24px;
-        height: 24px;
-        background-color: #232427;
-        left: calc(-1% - 11px);
-        border-radius: 49%;
-        top: 8px;
-        z-index: 1002; }
-        .posts-list .post .push-right .bullet span {
+        top: 13px;
+        left: 3%;
+        color: #cccccb;
+        z-index: 1004; }
+      .posts-list .post .push-right {
+        margin-left: 15%;
+        padding: 5px 4% 2%;
+        position: relative; }
+        .posts-list .post .push-right .bullet {
           position: absolute;
-          width: 10px;
-          height: 10px;
-          top: 7px;
-          left: 7px;
-          background-color: #ff279c;
-          border-radius: 100%;
-          z-index: 1003; }
-      .posts-list .post .push-right .profilePicture {
-        top: 2px;
-        margin: 0 7px 0 0;
-        float: left;
-        width: 25px;
-        height: 25px;
-        position: relative;
-        min-width: inherit !important; }
-      .posts-list .post .push-right h2 {
-        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-        color: white;
-        padding: 4px 0 6px 0;
-        font-weight: 300;
-        opacity: .6; }
-        .posts-list .post .push-right h2:first-letter {
-          text-transform: uppercase; }
-      .posts-list .post .push-right p {
-        padding: 6px 0 4px 0;
-        font-weight: 300;
-        color: white; }
-      .posts-list .post .push-right img.image-post {
-        border: 1px solid white;
-        border-radius: 2px;
-        min-width: 100%;
-        margin: 6px 0; }
-.posts-create .title {
-  font-size: 1.4em;
-  padding: 0;
-  margin: 0;
-  height: 55px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-  background-color: #232427;
-  color: white; }
-.posts-create form {
-  -webkit-background-size: cover;
-  /* pour anciens Chrome et Safari */
-  background-size: cover;
-  /* version standardisée */ }
-  .posts-create form fieldset.bckgImageTrue {
-    background-color: rgba(0, 0, 0, 0.9); }
-  .posts-create form fieldset {
+          display: block;
+          width: 24px;
+          height: 24px;
+          background-color: #232427;
+          left: calc(-1% - 12px);
+          border-radius: 49%;
+          top: 8px;
+          z-index: 1002; }
+          .posts-list .post .push-right .bullet span {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            top: 7px;
+            left: 7px;
+            background-color: #67bbef;
+            border-radius: 100%;
+            z-index: 1003; }
+        .posts-list .post .push-right .profilePicture {
+          top: 2px;
+          margin: 0 7px 0 0;
+          float: left;
+          width: 25px;
+          height: 25px;
+          position: relative;
+          min-width: inherit !important; }
+        .posts-list .post .push-right h2 {
+          border-bottom: 1px solid #cccccb;
+          color: #cccccb;
+          padding: 4px 0 6px 0;
+          font-weight: 300; }
+          .posts-list .post .push-right h2:first-letter {
+            text-transform: uppercase; }
+        .posts-list .post .push-right p {
+          padding: 6px 0 4px 0;
+          font-weight: 300;
+          color: white; }
+        .posts-list .post .push-right img.image-post {
+          border: 1px solid white;
+          border-radius: 2px;
+          min-width: 100%;
+          margin: 6px 0; }
+  .posts-create .title {
+    font-size: 1.4em;
     padding: 0;
     margin: 0;
-    border: none;
-    color: white; }
-    .posts-create form fieldset label {
-      padding: 10px 0 2px;
-      display: block;
-      color: white; }
-    .posts-create form fieldset input[type=file] {
-      padding: 0; }
-    .posts-create form fieldset input[type=file]::-webkit-file-upload-button {
-      height: 60px;
-      font-size: 1.1em;
-      padding: 0 5% 0 0;
-      border: none;
-      color: white;
-      background: #232427;
-      width: 100%;
-      text-indent: -1001%;
-      overflow: hidden; }
-    .posts-create form fieldset input[type=submit] {
-      color: #232427;
-      background: #2b6ed2;
-      width: 100%;
-      text-indent: -1001%;
-      overflow: hidden; }
-    .posts-create form fieldset input, .posts-create form fieldset textarea {
-      padding: 2%;
-      width: 100%;
-      color: white;
-      background: #0e0e11;
-      border: none; }
-      .posts-create form fieldset input:focus, .posts-create form fieldset textarea:focus {
-        outline: none;
-        border: none; }
-    .posts-create form fieldset .image-input {
-      border-top: 1px solid rgba(0, 0, 0, 0.2);
-      width: 100%; }
-      .posts-create form fieldset .image-input .preview-thumbnail {
-        position: relative;
-        -webkit-box-shadow: inset 0px 0px 1px 0px rgba(255, 255, 255, 0.75);
-        -moz-box-shadow: inset 0px 0px 1px 0px rgba(255, 255, 255, 0.75);
-        box-shadow: inset 0px 0px 1px 0px rgba(255, 255, 255, 0.75);
-        float: left;
-        width: 100%; }
-        .posts-create form fieldset .image-input .preview-thumbnail img {
-          width: 100%; }
-    .posts-create form fieldset .select {
-      border-top: 1px solid rgba(0, 0, 0, 0.2);
-      background-color: #232427;
-      width: 100%;
-      height: 55px;
-      position: absolute;
-      bottom: 0; }
-      .posts-create form fieldset .select .wrap {
-        position: relative;
-        padding: 0;
-        margin: 0;
-        width: 33.33%;
-        height: 100%;
-        display: inline-block;
-        vertical-align: top;
-        border: none;
-        border-radius: 0; }
-        .posts-create form fieldset .select .wrap .imageButton {
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          font-size: 10px;
-          font-weight: bold;
-          text-align: center;
-          border: none;
-          background-color: #232427;
-          color: white;
-          text-transform: uppercase; }
-          .posts-create form fieldset .select .wrap .imageButton-blue {
-            background-color: #2b6ed2;
-            color: white; }
-          .posts-create form fieldset .select .wrap .imageButton:focus {
-            outline: none; }
-          .posts-create form fieldset .select .wrap .imageButton span {
-            font-size: 2.2em;
-            display: block;
-            margin-bottom: 1px; }
-.posts .navigation-bottom {
-  z-index: 10000;
-  position: fixed;
-  display: block;
-  width: 100%;
-  bottom: 0;
-  background-color: #232427;
-  -webkit-box-shadow: 0px -1px 1px 0px rgba(50, 50, 50, 0.15);
-  -moz-box-shadow: 0px -1px 1px 0px rgba(50, 50, 50, 0.15);
-  box-shadow: 0px -1px 1px 0px rgba(50, 50, 50, 0.15); }
-  .posts .navigation-bottom button {
-    height: 45px;
-    width: 100%;
-    text-align: center;
+    height: 55px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     background-color: #232427;
-    color: #2b6ed2;
-    border: none;
-    text-transform: uppercase;
-    font-size: 1em;
-    position: relative; }
-    .posts .navigation-bottom button b {
-      position: relative;
-      top: -6px; }
-    .posts .navigation-bottom button span {
-      display: inline-block;
-      font-size: 1.8em;
-      margin-right: 7px; }
-    .posts .navigation-bottom button:focus {
-      outline: none; }
+    color: white; }
+  .posts-create form {
+    -webkit-background-size: cover;
+    /* pour anciens Chrome et Safari */
+    background-size: cover;
+    /* version standardisée */ }
+    .posts-create form fieldset.bckgImageTrue {
+      background-color: rgba(0, 0, 0, 0.9); }
+    .posts-create form fieldset {
+      padding: 0;
+      margin: 0;
+      border: none;
+      color: white; }
+      .posts-create form fieldset label {
+        padding: 10px 0 2px;
+        display: block;
+        color: white; }
+      .posts-create form fieldset input[type=file] {
+        padding: 0; }
+      .posts-create form fieldset input[type=file]::-webkit-file-upload-button {
+        height: 60px;
+        font-size: 1.1em;
+        padding: 0 5% 0 0;
+        border: none;
+        color: white;
+        background: #232427;
+        width: 100%;
+        text-indent: -1001%;
+        overflow: hidden; }
+      .posts-create form fieldset input[type=submit] {
+        color: #232427;
+        background: #2b6ed2;
+        width: 100%;
+        text-indent: -1001%;
+        overflow: hidden; }
+      .posts-create form fieldset input, .posts-create form fieldset textarea {
+        padding: 2%;
+        width: 100%;
+        color: white;
+        background: #0e0e11;
+        border: none; }
+        .posts-create form fieldset input:focus, .posts-create form fieldset textarea:focus {
+          outline: none;
+          border: none; }
+      .posts-create form fieldset .image-input {
+        border-top: 1px solid rgba(0, 0, 0, 0.2);
+        width: 100%; }
+        .posts-create form fieldset .image-input .preview-thumbnail {
+          position: relative;
+          -webkit-box-shadow: inset 0px 0px 1px 0px rgba(255, 255, 255, 0.75);
+          -moz-box-shadow: inset 0px 0px 1px 0px rgba(255, 255, 255, 0.75);
+          box-shadow: inset 0px 0px 1px 0px rgba(255, 255, 255, 0.75);
+          float: left;
+          width: 100%; }
+          .posts-create form fieldset .image-input .preview-thumbnail img {
+            width: 100%; }
+      .posts-create form fieldset .select {
+        border-top: 1px solid rgba(0, 0, 0, 0.2);
+        background-color: #232427;
+        width: 100%;
+        height: 55px;
+        position: absolute;
+        bottom: 0; }
+        .posts-create form fieldset .select .wrap {
+          position: relative;
+          padding: 0;
+          margin: 0;
+          width: 33.33%;
+          height: 100%;
+          display: inline-block;
+          vertical-align: top;
+          border: none;
+          border-radius: 0; }
+          .posts-create form fieldset .select .wrap .imageButton {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            font-size: 10px;
+            font-weight: bold;
+            text-align: center;
+            border: none;
+            background-color: #232427;
+            color: white;
+            text-transform: uppercase; }
+            .posts-create form fieldset .select .wrap .imageButton-blue {
+              background-color: #2b6ed2;
+              color: white; }
+            .posts-create form fieldset .select .wrap .imageButton:focus {
+              outline: none; }
+            .posts-create form fieldset .select .wrap .imageButton span {
+              font-size: 2.2em;
+              display: block;
+              margin-bottom: 1px; }
+  .posts .navigation-bottom {
+    border-top: 1px solid #2b6ed2;
+    opacity: .95;
+    z-index: 10000;
+    position: fixed;
+    display: block;
+    width: 100%;
+    bottom: 0;
+    background-color: #232427;
+    -webkit-box-shadow: 0px -1px 1px 0px rgba(50, 50, 50, 0.15);
+    -moz-box-shadow: 0px -1px 1px 0px rgba(50, 50, 50, 0.15);
+    box-shadow: 0px -1px 1px 0px rgba(50, 50, 50, 0.15); }
+    .posts .navigation-bottom button {
+      height: 45px;
+      width: 100%;
+      text-align: center;
+      background-color: #232427;
+      color: white;
+      border: none;
+      text-transform: uppercase;
+      font-size: 1em;
+      position: relative; }
+      .posts .navigation-bottom button b {
+        position: relative;
+        top: -6px; }
+      .posts .navigation-bottom button span {
+        display: inline-block;
+        font-size: 1.8em;
+        margin-right: 7px;
+        color: white; }
+      .posts .navigation-bottom button:focus {
+        outline: none; }
 
 .ngdialog-content {
   height: 100%;
@@ -1156,7 +1164,11 @@ img[height] {
     text-align: center;
     font-size: 1.5em;
     margin: 0;
-    padding-top: 0; }
+    padding-top: 0;
+    text-indent: -1001%;
+    overflow: hidden;
+    background: url("../../../img/logo.svg") 50% 5px no-repeat;
+    background-size: 45px; }
   .header__link {
     display: inline-block;
     color: #2b6ed2;
@@ -1164,6 +1176,9 @@ img[height] {
     font-size: 1.2em;
     margin: 0;
     line-height: 55px; }
+    .header__link__focus {
+      background-color: #2b6ed2;
+      color: white; }
   .header__border-link {
     line-height: 55px;
     text-align: center;
@@ -1213,6 +1228,8 @@ header .sidebar-menu {
   header .sidebar-menu nav .profile {
     padding-right: 30px;
     color: rgba(0, 0, 0, 0.5); }
+    header .sidebar-menu nav .profile .profilePicture {
+      margin-bottom: 7px; }
     header .sidebar-menu nav .profile span {
       display: inline-block;
       vertical-align: top;
@@ -1573,6 +1590,10 @@ body {
 
 .profilePicture {
   border-radius: 50%; }
+  .profilePicture-center {
+    display: block;
+    margin: 14px auto 7px;
+    border: 2px solid white; }
 
 .left {
   float: left; }

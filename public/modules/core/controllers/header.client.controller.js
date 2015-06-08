@@ -10,6 +10,16 @@ angular.module('core').controller('HeaderController', ['$scope', '$location', 'A
         $scope.menuClassRight = 'close'; /*close the menus*/
         $scope.menuClassLeft = 'close'; /*close the menus*/
 
+            $("#right-menu").click(function(){
+                $(this).toggleClass('header__link__focus');
+                $("#left-menu").removeClass('header__link__focus');
+            });
+            $("#left-menu").click(function(){
+                $(this).toggleClass('header__link__focus');
+                $("#right-menu").removeClass('header__link__focus');
+            });
+
+
         if($scope.authentication.user == ''){
             $scope.showMenu = false;
         }else{

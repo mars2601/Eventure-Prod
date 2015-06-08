@@ -2,7 +2,7 @@
     <div class="sail">
         <div class="signin-section">
             <h3>Edit your profile</h3>
-            <img ng-src="{{profilePicture}}" alt=""/>
+            <img class="profilePicture profilePicture-center" ng-src="{{profilePicture}}" alt=""/>
             <a ng-show="ispP" class="ng-hide btn btn-large btn-primary" href="/#!/settings/accounts">Ajouter une photo via les réseaux sociaux</a>
             <form name="userForm" data-ng-submit="updateUserProfile(userForm.$valid)" autocomplete="off">
                 <fieldset>

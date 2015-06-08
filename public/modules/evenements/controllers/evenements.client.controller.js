@@ -12,6 +12,7 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
         $scope.defaultEventCover = './img/defaultEventCover.png';
         $scope.loading = true;
         $('.uil-ring-css').css("height", $( window ).height());
+        $(".header__link__focus").removeClass("header__link__focus");
 
 
 
@@ -276,8 +277,6 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
 
             };
 
-
-
             $scope.isInvited = function(eve, guest){
                 if(eve){
                     for(var i = 0; i < eve.length; i++){
@@ -301,7 +300,6 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
             }, true);
 
             $scope.checkedIsInvited = function(checked, _id) {
-
                 if(checked === true){
                     for(var i=0; i < $scope.inputDeSelection.length; i++){
                         if($scope.inputDeSelection[i] === _id){
@@ -318,8 +316,14 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
                     $scope.inputDeSelection.push({_id});
                 }
             };
-            $scope.toggle = false;
+            $( window ).load(function() {
+                $( ".displayName-input" ).change(function() {
+                    $(this).parent("label").toggleClass("focus");
+                });
+            });
         };
+
+
 
 		$scope.create = function() {
 			// Create new Evenement object
@@ -327,19 +331,27 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
             var beginDate  = $scope.evenement.beginDate;
             var beginTime  = $scope.evenement.beginTime;
 
+            var endDate  = $scope.evenement.endDate;
+            var endTime  = $scope.evenement.endTime;
+
             beginDate = beginDate.split('-');
+            endDate = endDate.split('-');
+
             var begin1 = new Date();
             var begin2 = begin1.getTimezoneOffset();
             var beginCurrentUTCTimeStamp = (new Date(beginDate[1]+' '+beginDate[1]+', '+beginDate[0]+' '+beginTime).getTime());
-            var beginUTC0TS = beginCurrentUTCTimeStamp + (begin2*60000);
+            var beginUTC0TS = beginCurrentUTCTimeStamp;
+            /*+ (begin2*60000)*/
 
-            var endDate  = $scope.evenement.endDate;
-            var endTime  = $scope.evenement.endTime;
-            endDate = endDate.split('-');
+
+
             var end1 = new Date();
             var end2 = end1.getTimezoneOffset();
             var endCurrentUTCTimeStamp = (new Date(endDate[1]+' '+endDate[1]+', '+endDate[0]+' '+endTime).getTime());
-            var endUTC0TS = endCurrentUTCTimeStamp + (end2*60000);
+            var endUTC0TS = endCurrentUTCTimeStamp;
+            /*+ (end2*60000)*/
+
+
 
 
             var evenement = new Evenements ({
@@ -530,10 +542,11 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
                         if($scope.evenement.guests[j]._id === Authentication.user._id){
                             $scope.isGuest = true;
                             $scope.isAny = false;
-                        }else if($scope.evenement.user._id === Authentication.user._id){
-                            $scope.isAdmin = true;
-                            $scope.isAny = false;
                         }
+                    }
+                    if($scope.evenement.user._id === Authentication.user._id){
+                        $scope.isAdmin = true;
+                        $scope.isAny = false;
                     }
 
                     $scope.loading = false;
@@ -544,34 +557,73 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
                         $scope.eventIsPassed = false;
                     }
 
-                            for (var i = 0; i < $scope.evenement.guests.length; i++) {
+                    var now = new Date();
+                    var TimeZone = now.getTimezoneOffset();
+
+                    var a = $scope.evenement.beginTimestamp.split("T");
+                    a = a[1].split(":");
+                    $scope.beginTime = (a[0]-(TimeZone/60))+":"+a[1];
+                    var b = $scope.evenement.endTimestamp.split("T");
+                    b = b[1].split(":")
+                    $scope.endTime = (b[0]-(TimeZone/60)+":"+b[1]);
+
+
+                    var date1 = new Date($scope.evenement.endTimestamp);
+                    var date2 = new Date($scope.evenement.beginTimestamp);
+                    var diff = dateDiff(date1, date2);
+
+
+                    $scope.diffDay = diff.day;
+                    console.log("Entre le "+date1.toString()+" et "+date2.toString()+" il y a "+diff.day+" jours, "+diff.hour+" heures, "+diff.min+" minutes et "+diff.sec+" secondes");
+
+                    function dateDiff(date1, date2){
+                        var diff = {}                           // Initialisation du retour
+                        var tmp = date2 - date1;
+
+                        tmp = Math.floor(tmp/1000);             // Nombre de secondes entre les 2 dates
+                        diff.sec = tmp % 60;                    // Extraction du nombre de secondes
+
+                        tmp = Math.floor((tmp-diff.sec)/60);    // Nombre de minutes (partie entière)
+                        diff.min = tmp % 60;                    // Extraction du nombre de minutes
+
+                        tmp = Math.floor((tmp-diff.min)/60);    // Nombre d'heures (entières)
+                        diff.hour = tmp % 24;                   // Extraction du nombre d'heures
+
+                        tmp = Math.floor((tmp-diff.hour)/24);   // Nombre de jours restants
+                        diff.day = tmp;
+
+                        return diff;
+                    }
+
+
+
+
+                    for (var i = 0; i < $scope.evenement.guests.length; i++) {
                                 if ($scope.evenement.guests[i]._id === user._id) {
                                     $scope.currentGuest = $scope.evenement.guests[i];
                                 }
                             }
-                            $scope.newGuests = [];
-                    console.log($scope.users.length);
-                    if($scope.users.length > 0){
+                    $scope.newGuests = [];
+                    console.log($scope.guests);
 
+                    if($scope.guests.length > 0){
                         if (Authentication.user._id === $scope.evenement.user._id) {
                             console.log('admin');
-                            for (var j = 0; j < $scope.users.length; j++) {
-                                console.log($scope.users[j].requests);
-                                for(var g = 0; g < $scope.users[j].requests.length; g++){
+                            for (var j = 0; j < $scope.guests.length; j++) {
+                                console.log($scope.guests[j].requests);
+                                for(var g = 0; g < $scope.guests[j].requests.length; g++){
 
-                                    console.log($scope.users[j].requests[g].event_id);
+                                    console.log($scope.guests[j].requests[g].event_id);
                                     console.log($scope.evenement._id);
 
-                                    if ($scope.users[j].requests[g].event_id == $scope.evenement._id) {
-                                        $scope.newGuests.push($scope.users[j]);
+                                    if ($scope.guests[j].requests[g].event_id == $scope.evenement._id) {
+                                        $scope.newGuests.push($scope.guests[j]);
                                     }
                                 }
 
                             }
                         }
                     }
-
-
 
                     $(".event-view-image").load(function(){
                         if($(".event-view-image").height() > $(".event-view-image").width()){
@@ -594,9 +646,6 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
                 $scope.buttonValue = "Viendra";
                 $scope.stateValue = "En attente";
             }
-            $scope.evenement
-
-
 
 
         };

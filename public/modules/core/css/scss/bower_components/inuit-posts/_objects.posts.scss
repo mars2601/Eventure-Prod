@@ -5,6 +5,7 @@
 
 
 .posts{
+  margin-top: 10px;
   &-list{
     background-color: $dark-opacity;
     position: relative;
@@ -30,13 +31,12 @@
         position: absolute;
         top: 13px;
         left:3%;
-        color: $dark-text;
+        color: $light-text;
         z-index: 1004;
-        opacity: .6;
       }
       .push-right{
         margin-left:15%;
-        padding: 2% 4% 2%;
+        padding: 5px 4% 2%;
         position: relative;
         .bullet{
           span{
@@ -54,7 +54,7 @@
           width: 24px;
           height: 24px;
           background-color: $dark;
-          left: calc(-1% - 11px);
+          left: calc(-1% - 12px);
           border-radius: 49%;
           top: 8px;
           z-index: 1002;
@@ -69,11 +69,10 @@
           min-width: inherit !important;
         }
         h2{
-          border-bottom:1px solid rgba(255, 255, 255, 0.3);
-          color: $dark-text;
+          border-bottom:1px solid $light-text;
+          color: $light-text;
           padding: 4px 0 6px 0  ;
           font-weight: 300;
-          opacity: .6;
           &:first-letter{
             text-transform: uppercase;
           }
@@ -212,6 +211,8 @@
     }
   }
   .navigation-bottom{
+    border-top: 1px solid $blue;
+    opacity: .95;
     z-index: 10000;
     position: fixed;
     display: block;
@@ -226,7 +227,7 @@
       width: 100%;
       text-align: center;
       background-color: $dark;
-      color: $blue;
+      color: $dark-text;
       border: none;
       text-transform: uppercase;
       font-size: 1em;
@@ -239,6 +240,7 @@
         display: inline-block;
         font-size: 1.8em;
         margin-right: 7px;
+        color: $dark-text;
       }
       &:focus{
         outline: none;

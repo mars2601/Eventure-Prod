@@ -1,0 +1,26 @@
+/*------------------------------------*\
+    #ERRORS
+\*------------------------------------*/
+
+.text-danger{
+  width: 100%;
+  position: relative;
+  text-align: center;
+  margin-top: 14px;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  strong{
+    padding: 5px 10px;
+    font-size: 0.9em;
+    display: inline-block;
+    margin: 0 auto;
+    width: auto;
+    color: white;
+    background-color: indianred;
+    border-radius: 2px;
+    font-weight: 400;
+  }
+}

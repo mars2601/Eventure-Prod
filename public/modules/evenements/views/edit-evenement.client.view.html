@@ -1,33 +1,8 @@
-<!--<section data-ng-controller="EvenementsController" data-ng-init="findOne()">
-    <div class="page-header">
-        <h1>Edit Evenement</h1>
-    </div>
-    <div class="col-md-12">
-        <form class="form-horizontal" data-ng-submit="update()" novalidate>
-            <fieldset>
-                <div class="form-group">
-                    <label class="control-label" for="name">Name</label>
-                    <div class="controls">
-                        <input type="text" data-ng-model="evenement.name" id="name" class="form-control" placeholder="Name" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Update" class="btn btn-default">
-                </div>
-				<div data-ng-show="error" class="text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
-            </fieldset>
-        </form>
-    </div>
-</section>-->
-
-
 <section class="top-wrapper" data-ng-controller="EvenementsController" data-ng-init="findOne()">
     <div class="event event-create" data-ng-init="createDisplay()">
         <form  data-ng-submit="update()" enctype="multipart/form-data" style="background: url('uploaded/events/cover/{{evenement._id}}.{{evenement.coverImage[0].contentType}}') no-repeat center fixed;" novalidate>
             <fieldset ng-class="{bckgImageTrue: evenement.coverImage[0].contentType}">
-                <div ng-init="restoreData(evenement)">
+                <div data-ng-init="restoreData(evenement)">
                     <label class="control-label" for="evenement.name">Renommer l'évenement</label>
                     <div>
                         <input type="text" data-ng-model="evenement.name" id="evenement.name" class="form-control" placeholder="Ex: House party..." required>
@@ -85,16 +60,21 @@
                     </div>
                     <button type="button" ng-hide="guests.length < limit" ng-click="incrementLimit()">+ Voir plus</button><button type="button" ng-hide="limit <= limitStep" ng-click="decrementLimit()">-</button>
                 </div>-->
-                <div class="guests">
-                    <p>Inviter d'avantages de personnes</p>
-                    <div class="guests-filter">Rechercher: <input type="text" ng-model="searchText" /></div>
-                    <div>
-                        <label ng-repeat="guest in guests | filter:notMe(guests) |  filter:searchText | limitTo: limit">
-                            <input type="checkbox" name="selectedGuests[]" ng-change="checkedIsInvited(guest.selected, guest._id)" ng-checked="isInvited(evenement.guests, guest)" ngTrueValue="{{guest._id}}" ng-model="guest.selected" value="{{guest._id}}">{{guest.displayName}}<br>
-                        </label>
+                <!--<div class="guests">
+                    <div class="guests-filter">
+                        <input id="search-user" class="no-label" type="text" ng-model="searchText" placeholder="Inviter d'avantages de personnes"/>
+                    </div>
+                    <div class="list-users">
+                        <span class="list-users-item"
+                              ng-repeat="guest in guests | filter:searchText | filter:notMe(guests) | limitTo: limit">
+                            <label class="displayName">
+                                <img class="profilePicture" ng-src="{{guest.profileImage}}" alt=""/>
+                                <input class="displayName-input" type="checkbox" name="selectedGuests[]" ng-model="guest.selected" value="{{guest._id}}"><p>{{guest.firstName}} {{guest.lastName}}</p>
+                            </label>
+                        </span>
                     </div>
                     <button type="button" ng-hide="guests.length <= limit" ng-click="incrementLimit()">+ Voir plus</button><button type="button" ng-hide="limit <= limitStep" ng-click="decrementLimit()">-</button>
-                </div>
+                </div>-->
                 <div class="map" data-ng-init="googleMapPointer()">
                     <label class="control-label" for="pac-input">Localisation</label>
                     <input id="pac-input" class="controls" type="text" placeholder="{{evenement.localisation[0].name && evenement.localisation[0].name || 'Ex: Bruxelles'}}">

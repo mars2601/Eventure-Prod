@@ -108,17 +108,21 @@ li {
         position: relative;
         z-index: 101;
         top: 5px;
+        left: 44%;
+        left: -webkit-calc(46% - 12px);
+        left: -moz-calc(46% - 12px);
         left: calc(46% - 12px); }
       .list-filter .search input {
         display: inline-block;
         width: 70%;
         border: none;
+        border-radius: 0;
         margin: 0 10%;
         padding: 0 5%;
         background-color: #2b6ed2;
         border-bottom: 1px solid #232427;
         position: relative;
-        top: -2px;
+        top: 0px;
         font-size: 1em;
         -webkit-transition: all 5ms ease;
         -moz-transition: all 5ms ease;
@@ -134,54 +138,59 @@ li {
         background-color: #518fd2; }
         .list-filter .search-all input {
           background-color: #518fd2; }
-  .list-evenements li a {
-    -webkit-background-size: cover;
-    /* pour anciens Chrome et Safari */
-    background-size: cover;
-    /* version standardisée */
-    position: relative;
-    height: 90px;
-    border-bottom: 1px solid #2b6ed2;
-    display: block; }
-    .list-evenements li a :after {
-      content: '';
-      display: block;
-      clear: both; }
-    .list-evenements li a .preview-thumbnail {
-      width: 90px;
-      height: 90px; }
-    .list-evenements li a .infos {
-      display: inline-block;
-      background-color: rgba(0, 0, 0, 0.9);
-      padding-left: 10px;
-      width: calc(100% - 100px);
-      height: 100%;
-      color: white;
-      vertical-align: top; }
-      .list-evenements li a .infos h4 {
-        padding: 10px 0; }
-        .list-evenements li a .infos h4::first-letter {
-          text-transform: uppercase; }
-      .list-evenements li a .infos p > span {
-        color: #2b6ed2; }
-      .list-evenements li a .infos small {
-        width: 100%;
-        padding-top: 10px;
-        font-size: 0.7em;
-        display: block; }
-        .list-evenements li a .infos small :after {
-          content: '';
-          display: block;
-          clear: both; }
-        .list-evenements li a .infos small span[class^='icon-'] {
-          margin-right: 4px; }
-        .list-evenements li a .infos small span {
-          float: left; }
-        .list-evenements li a .infos small .localisation {
-          text-align: right; }
-        .list-evenements li a .infos small .time {
-          width: calc(50% - 10px);
-          padding-right: 10px; }
+  .list-evenements {
+    background-color: rgba(0, 0, 0, 0.9); }
+    .list-evenements li a {
+      -webkit-background-size: cover;
+      /* pour anciens Chrome et Safari */
+      background-size: cover;
+      /* version standardisée */
+      position: relative;
+      height: 90px;
+      border-bottom: 1px solid #2b6ed2;
+      display: block; }
+      .list-evenements li a :after {
+        content: '';
+        display: block;
+        clear: both; }
+      .list-evenements li a .preview-thumbnail {
+        width: 90px;
+        height: 90px; }
+      .list-evenements li a .infos {
+        display: inline-block;
+        background-color: rgba(0, 0, 0, 0.9);
+        padding-left: 10px;
+        width: 90%;
+        width: -webkit-calc(100% - 100px);
+        width: -moz-calc(100% - 100px);
+        width: calc(100% - 100px);
+        height: 100%;
+        color: white;
+        vertical-align: top; }
+        .list-evenements li a .infos h4 {
+          padding: 10px 0; }
+          .list-evenements li a .infos h4::first-letter {
+            text-transform: uppercase; }
+        .list-evenements li a .infos p > span {
+          color: #2b6ed2; }
+        .list-evenements li a .infos small {
+          width: 100%;
+          padding-top: 10px;
+          font-size: 0.7em;
+          display: block; }
+          .list-evenements li a .infos small :after {
+            content: '';
+            display: block;
+            clear: both; }
+          .list-evenements li a .infos small span[class^='icon-'] {
+            margin-right: 4px; }
+          .list-evenements li a .infos small span {
+            float: left; }
+          .list-evenements li a .infos small .localisation {
+            text-align: right; }
+          .list-evenements li a .infos small .time {
+            width: calc(50% - 10px);
+            padding-right: 10px; }
   .list-w-all li a {
     display: block;
     width: 100%; }
@@ -196,6 +205,10 @@ li {
       color: white; }
   .list-users .guests-filter {
     margin-bottom: 10px; }
+  .list-users-ask {
+    display: block; }
+    .list-users-ask button, .list-users-ask p {
+      display: inline-block; }
   .list-users-item {
     color: #0e0e11;
     width: 23%;
@@ -329,7 +342,18 @@ img[height] {
       position: absolute;
       top: 8%;
       right: 4%;
-      z-index: 1001; }
+      z-index: 1001;
+      background-color: rgba(255, 255, 255, 0.75);
+      border-radius: 2px; }
+      .event-view .preview-thumbnail .state-info {
+        float: left;
+        margin: 7px;
+        color: #67bbef;
+        /*
+                  text-shadow: 0px 0px 3px rgba(0, 0, 0, 1);
+        */ }
+        .event-view .preview-thumbnail .state-info i {
+          color: #0e0e11; }
     .event-view .preview-thumbnail .sail {
       height: 200px;
       width: 100%;
@@ -369,7 +393,6 @@ img[height] {
     .event-view .infos .who i:first-child {
       margin-right: 2px; }
     .event-view .infos .localisation, .event-view .infos .description {
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
       padding: 7px 0 0;
       margin: 7px 0; }
       .event-view .infos .localisation span:nth-child(2), .event-view .infos .description span:nth-child(2) {
@@ -439,6 +462,8 @@ img[height] {
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       padding: 7px 0;
       margin: 0; }
+    .event-view .infos .localisation {
+      margin: 0; }
     .event-view .infos h1 + p {
       margin: 7px 0; }
       .event-view .infos h1 + p i {
@@ -446,10 +471,27 @@ img[height] {
       .event-view .infos h1 + p span {
         font-size: 1.025em;
         color: #67bbef; }
-    .event-view .infos .list-users-item .displayName {
-      background-color: rgba(255, 255, 255, 0.1); }
+    .event-view .infos .list-users {
+      margin: 7px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1); }
+      .event-view .infos .list-users-item .displayName {
+        background-color: rgba(255, 255, 255, 0.1); }
     .event-view .infos .pull-right {
-      padding: 15px 0; }
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0;
+      margin-top: 7px; }
+      .event-view .infos .pull-right .link-buttons {
+        margin: 7px 0;
+        display: inline-block; }
+      .event-view .infos .pull-right h2 {
+        color: #67bbef;
+        font-size: 1em;
+        margin: 7px 0;
+        font-weight: 400; }
+        .event-view .infos .pull-right h2 span {
+          font-size: 0.9em;
+          margin-right: 2px;
+          color: white; }
 .event-create .controls {
   margin-top: 16px;
   border-radius: 2px 0 0 2px;
@@ -487,15 +529,21 @@ img[height] {
       margin-top: 20px; }
     .event-create form fieldset label {
       padding: 10px 0 2px;
-      font-weight: 300;
+      font-weight: 400;
       font-size: 0.6;
       display: inline-block;
       color: rgba(255, 255, 255, 0.6); }
     .event-create form fieldset input[type=file] {
       padding: 0;
-      font-size: 1em; }
+      font-size: 1em;
+      -webkit-appearance: none;
+      -webkit-border-radius: 2px;
+      border: none; }
+    .event-create form fieldset input[type=date], .event-create form fieldset input[type=time] {
+      -webkit-appearance: none; }
     .event-create form fieldset input[type=submit] {
-      width: 100%; }
+      width: 100%;
+      -webkit-appearance: none; }
     .event-create form fieldset input[type=file]::-webkit-file-upload-button {
       height: 60px;
       font-size: 1.1em;
@@ -506,8 +554,8 @@ img[height] {
       width: 100%;
       font-size: 0.72em; }
     .event-create form fieldset input, .event-create form fieldset textarea {
+      -webkit-appearance: none;
       border-radius: 2px;
-      border: none;
       width: 90%;
       padding: 20px 5%;
       color: white;
@@ -515,11 +563,15 @@ img[height] {
       border: 1px solid white; }
       .event-create form fieldset input:focus, .event-create form fieldset textarea:focus {
         outline: none;
-        border: 1px solid #2b6ed2; }
+        background-color: rgba(255, 255, 255, 0.5);
+        border: 2px solid #2b6ed2; }
     .event-create form fieldset .image-input {
       width: 100%;
       height: 30px; }
       .event-create form fieldset .image-input .select {
+        width: calc(90%);
+        width: -webkit-calc(100% - 80px);
+        width: -moz-calc(100% - 80px);
         width: calc(100% - 80px);
         float: left; }
       .event-create form fieldset .image-input .preview-thumbnail {
@@ -630,10 +682,11 @@ img[height] {
         padding: 0 20px;
         margin: 5px auto;
         color: white;
-        background: rgba(0, 0, 0, 0.1); }
+        background: transparent; }
         .signin-section form fieldset input:focus, .signin-section form fieldset textarea:focus {
           outline: none;
-          border: 1px solid black; }
+          border: 2px solid #2b6ed2;
+          background-color: rgba(0, 0, 0, 0.1); }
       .signin-section form fieldset button[type="submit"] {
         background-color: transparent;
         border: 2px solid white;
@@ -659,6 +712,71 @@ img[height] {
   .signin :-ms-input-placeholder {
     /* Internet Explorer 10+ */
     color: white; }
+
+/*------------------------------------*\
+    #TIMELINE
+\*------------------------------------*/
+.timeline-list {
+  padding: 4%;
+  background-color: rgba(0, 0, 0, 0.9); }
+  .timeline-list-item {
+    background-color: #232427;
+    height: auto !important;
+    overflow: hidden;
+    display: block;
+    width: 100%;
+    margin-top: 4%; }
+    .timeline-list-item .global-title {
+      color: white;
+      font-weight: 200;
+      text-align: center; }
+    .timeline-list-item-link {
+      display: block;
+      height: 100%;
+      overflow: hidden;
+      width: 96%;
+      padding: 2%;
+      color: white;
+      font-weight: 400; }
+      .timeline-list-item-link .infos {
+        display: inline-block;
+        width: 85%;
+        width: -webkit-calc(100% - 100px);
+        width: -moz-calc(100% - 100px);
+        width: calc(100% - 100px);
+        vertical-align: top;
+        font-size: 1em; }
+        .timeline-list-item-link .infos-only {
+          width: 100%; }
+        .timeline-list-item-link .infos p {
+          margin: 7px 0; }
+        .timeline-list-item-link .infos .title {
+          margin: 0 0 14px 0;
+          font-weight: 400; }
+          .timeline-list-item-link .infos .title i {
+            font-size: 0.8em;
+            margin: 0 0 4px 0;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #67bbef;
+            width: 100%;
+            display: block;
+            color: #67bbef; }
+          .timeline-list-item-link .infos .title span {
+            color: white;
+            font-size: 1em; }
+      .timeline-list-item-link small {
+        color: white;
+        float: left;
+        padding: 0;
+        margin-bottom: 10px; }
+        .timeline-list-item-link small .time {
+          font-size: 0.9em;
+          margin-right: 20px; }
+      .timeline-list-item-link .preview-thumbnail {
+        width: 90px;
+        height: 90px;
+        float: left;
+        margin-right: 10px; }
 
 @font-face {
   font-family: 'icomoon';
@@ -801,7 +919,8 @@ img[height] {
 .wrapper {
   margin: 0 auto;
   padding: 0;
-  width: 92%; }
+  width: 92%;
+  max-width: 800px; }
 
 /*------------------------------------*\
     #DialogBox of ngDialog
@@ -821,11 +940,11 @@ img[height] {
     .posts-list .timeline {
       position: absolute;
       display: block;
-      height: 100%;
+      height: 105%;
       width: 2px;
       background-color: #2b6ed2;
       left: 14%;
-      top: 20px;
+      top: -5px;
       opacity: .6;
       z-index: 1001; }
     .posts-list .post {
@@ -876,7 +995,7 @@ img[height] {
           border-bottom: 1px solid #cccccb;
           color: #cccccb;
           padding: 4px 0 6px 0;
-          font-weight: 100; }
+          font-weight: 300; }
           .posts-list .post .push-right h2:first-letter {
             text-transform: uppercase; }
         .posts-list .post .push-right p {
@@ -890,9 +1009,10 @@ img[height] {
           margin: 6px 0; }
   .posts-create .title {
     font-size: 1.4em;
-    padding: 0;
+    padding: 0 0 0 4%;
     margin: 0;
     height: 55px;
+    line-height: 55px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     background-color: #232427;
     color: white; }
@@ -909,7 +1029,7 @@ img[height] {
       border: none;
       color: white; }
       .posts-create form fieldset label {
-        padding: 10px 0 2px;
+        padding: 10px 0 2px 4%;
         display: block;
         color: white; }
       .posts-create form fieldset input[type=file] {
@@ -1300,7 +1420,8 @@ header #remote-left-menu.open {
 .wrapper {
   margin: 0 auto;
   padding: 0;
-  width: 92%; }
+  width: 92%;
+  max-width: 800px; }
 
 /*------------------------------------*\
     #LOADER base on $scope.loading
@@ -1376,9 +1497,12 @@ uiload > div {
   width: 160px;
   height: 160px;
   top: 20px;
+  left: 42%;
+  left: -webkit-calc(50% - 80px);
+  left: -moz-calc(50% - 80px);
   left: calc(50% - 80px);
   border-radius: 80px;
-  box-shadow: 0 6px 0 0 #ff279c;
+  box-shadow: 0 6px 0 0 #67bbef;
   -ms-animation: uil-ring-anim 0.9s linear infinite;
   -moz-animation: uil-ring-anim 0.9s linear infinite;
   -webkit-animation: uil-ring-anim 0.9s linear infinite;
@@ -1434,6 +1558,30 @@ uiload > div {
   -webkit-box-shadow: 1px 1px 1px 0px rgba(50, 50, 50, 0.2);
   -moz-box-shadow: 1px 1px 1px 0px rgba(50, 50, 50, 0.2);
   box-shadow: 1px 1px 1px 0px rgba(50, 50, 50, 0.2); }
+
+/*------------------------------------*\
+    #ERRORS
+\*------------------------------------*/
+.text-danger {
+  width: 100%;
+  position: relative;
+  text-align: center;
+  margin-top: 14px;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease; }
+  .text-danger strong {
+    padding: 5px 10px;
+    font-size: 0.9em;
+    display: inline-block;
+    margin: 0 auto;
+    width: auto;
+    color: white;
+    background-color: indianred;
+    border-radius: 2px;
+    font-weight: 400; }
 
 /*------------------------------------*\
     #WIDTHS

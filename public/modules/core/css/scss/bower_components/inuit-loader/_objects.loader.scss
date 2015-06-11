@@ -80,9 +80,12 @@ uiload > div {
   width: 160px;
   height: 160px;
   top: 20px;
+  left: 42%;
+  left: -webkit-calc(50% - 80px);
+  left: -moz-calc(50% - 80px);
   left: calc(50% - 80px);
   border-radius: 80px;
-  box-shadow: 0 6px 0 0 #ff279c;
+  box-shadow: 0 6px 0 0 $pink;
   -ms-animation: uil-ring-anim 0.9s linear infinite;
   -moz-animation: uil-ring-anim 0.9s linear infinite;
   -webkit-animation: uil-ring-anim 0.9s linear infinite;

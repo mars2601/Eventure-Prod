@@ -122,18 +122,22 @@ li {
         position: relative;
         z-index: 101;
         top: 5px;
+        left: 44%;
+        left: -webkit-calc(46% - 12px);
+        left: -moz-calc(46% - 12px);
         left: calc(46% - 12px);
       }
       input{
         display: inline-block;
         width: 70%;
         border: none;
+        border-radius: 0;
         margin:0 10%;
         padding: 0 5%;
         background-color: $blue;
         border-bottom: 1px solid $dark;
         position: relative;
-        top: -2px;
+        top: 0px;
         font-size: 1em;
         -webkit-transition: all 5ms ease;
         -moz-transition: all 5ms ease;
@@ -156,6 +160,7 @@ li {
     }
   }
   &-evenements{
+    background-color: $dark-opacity;
     li{
       a{
         -webkit-background-size: cover; /* pour anciens Chrome et Safari */
@@ -177,6 +182,9 @@ li {
           display: inline-block;
           background-color: $dark-opacity;
           padding-left: 10px;
+          width: 90%;
+          width: -webkit-calc(100% - 100px);
+          width: -moz-calc(100% - 100px);
           width: calc(100% - 100px);
           height: 100%;
           color: $dark-text;
@@ -242,6 +250,12 @@ li {
     }
     .guests-filter{
       margin-bottom: 10px;
+    }
+    &-ask{
+      display: block;
+      button, p{
+        display: inline-block;
+      }
     }
     &-item{
       color: $bckg;

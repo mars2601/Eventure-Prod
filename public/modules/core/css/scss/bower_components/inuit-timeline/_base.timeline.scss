@@ -1,0 +1,81 @@
+/*------------------------------------*\
+    #TIMELINE
+\*------------------------------------*/
+
+.timeline-list{
+  padding: 4%;
+  background-color: $dark-opacity;
+
+  &-item{
+    background-color: $dark;
+    height: auto !important;
+    overflow: hidden;
+    display: block;
+    width: 100%;
+    margin-top: 4%;
+    .global-title{
+      color: $dark-text;
+      font-weight: 200;
+      text-align: center;
+    }
+    &-link{
+      display: block;
+      height: 100%;
+      overflow: hidden;
+      width: 96%;
+      padding: 2%;
+      color: $dark-text;
+      font-weight: 400;
+      .infos{
+        display: inline-block;
+        width: 85%;
+        width: -webkit-calc(100% - 100px);
+        width: -moz-calc(100% - 100px);
+        width: calc(100% - 100px);
+        vertical-align: top;
+        font-size: 1em;
+        &-only{
+          width: 100%;
+        }
+        p{
+          margin: 7px 0;
+        }
+        .title{
+          margin: 0 0 14px 0;
+          font-weight: 400;
+          i{
+            font-size: 0.8em;
+            margin: 0 0 4px 0;
+            padding-bottom: 4px;
+            border-bottom: 1px solid $pink;
+            width: 100%;
+            display: block;
+            color: $pink;
+          }
+          span{
+            color: $dark-text;
+            font-size: 1em;
+          }
+        }
+      }
+      small{
+        color: $dark-text;
+        float: left;
+        padding: 0;
+        margin-bottom: 10px;
+        .time{
+          font-size: 0.9em;
+          margin-right: 20px;
+        }
+      }
+      small+small{
+      }
+      .preview-thumbnail {
+        width: 90px;
+        height: 90px;
+        float: left;
+        margin-right: 10px;
+      }
+    }
+  }
+}

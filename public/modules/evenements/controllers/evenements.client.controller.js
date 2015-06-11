@@ -9,15 +9,18 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
         $scope.placeName = '';
         $scope.lat = '';
         $scope.long = '';
-        $scope.defaultEventCover = './img/defaultEventCover.png';
+        $scope.defaultEventCover = './img/defaultEventCover.jpg';
+        $scope.defaultUserCover = './img/defaultUserCover.jpg';
         $scope.loading = true;
         $('.uil-ring-css').css("height", $( window ).height());
         $(".header__link__focus").removeClass("header__link__focus");
-
+        $(".nav-item").click(function(){
+            $(".header__link").removeClass("header__link__focus");
+        });
 
 
         $scope.openCreatePost = function(){
-            ngDialog.open({ template: 'templateId',
+            ngDialog.open({ template: 'postTemplate',
                             controller: 'PostsController',
                             scope: $scope,
                             overlay: true,
@@ -33,19 +36,6 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
             });
         };
 
-        /*        $scope.createPost = function(){
-        }*/
-
-
-
-        /*global Google */
-
- /*       $scope.uploadFile = function(){
-            var file = $scope.myFile;
-            console.log('file is ' + JSON.stringify(file));
-            var uploadUrl = "/fileUpload";
-            fileUpload.uploadFileToUrl(file, uploadUrl);
-        };*/
 
         /* users Filtered by guest, see if he's guest or not*/
         $scope.UserFilterGuest = function(eve) {
@@ -115,95 +105,6 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
         };
 
         $scope.googleMapPointer = function(){
-        /*    // This example adds a search box to a map, using the Google Place Autocomplete
-// feature. People can enter geographical searches. The search box will return a
-// pick list containing a mix of places and predicted search terms.
-            var map;
-            var input;
-            function initialize() {
-                var markers = [];
-
-                var mapOptions = {
-                    zoom: 8,
-                    center: new google.maps.LatLng(-34.397, 150.644),
-                    mapTypeControl: false,
-                    streetViewControl: false
-                };
-
-
-                map = new google.maps.Map(document.getElementById('map-canvas'),
-                    mapOptions);
-
-                var defaultBounds = new google.maps.LatLngBounds(
-                    new google.maps.LatLng(-33.8902, 151.1759),
-                    new google.maps.LatLng(-33.8474, 151.2631));
-                    map.fitBounds(defaultBounds);
-
-                // Create the search box and link it to the UI element.
-                input = (document.getElementById('pac-input'));
-                map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-                var searchBox = new google.maps.places.SearchBox((input));
-
-                // Listen for the event fired when the user selects an item from the
-                // pick list. Retrieve the matching places for that item.
-                google.maps.event.addListener(searchBox, 'places_changed', function() {
-                    var places = searchBox.getPlaces();
-
-                    if (places.length === 0) {
-                        return;
-                    }
-                    var i;
-                    var marker;
-                    for (i = 0; marker = markers[i]; i++) {
-                        marker.setMap(null);
-                    }
-
-                    // For each place, get the icon, place name, and location.
-                    markers = [];
-                    var bounds = new google.maps.LatLngBounds();
-                    var i;
-                    var place;
-                    for (i = 0; place = places[i]; i++) {
-                        var image = {
-                            url: place.icon,
-                            size: new google.maps.Size(71, 71),
-                            origin: new google.maps.Point(0, 0),
-                            anchor: new google.maps.Point(17, 34),
-                            scaledSize: new google.maps.Size(25, 25)
-                        };
-
-                        // Create a marker for each place.
-                        var marker = new google.maps.Marker({
-                            map: map,
-                            icon: image,
-                            title: place.name,
-                            position: place.geometry.location
-                        });
-
-                        markers.push(marker);
-
-                        bounds.extend(place.geometry.location);
-
-                        $scope.placeName = place.name;
-                        $scope.lat = place.geometry.location.A;
-                        $scope.long = place.geometry.location.F;
-                    }
-
-                    map.fitBounds(bounds);
-                });
-
-                // Bias the SearchBox results towards places that are within the bounds of the
-                // current map's viewport.
-                google.maps.event.addListener(map, 'bounds_changed', function() {
-                    var bounds = map.getBounds();
-                    searchBox.setBounds(bounds);
-                });
-            }
-            initialize();
-*//*
-            google.maps.event.addDomListener(window, 'load', initialize);
-*/
             function initialize() {
 
                 var input = (document.getElementById('pac-input'));
@@ -306,14 +207,14 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
                             $scope.inputDeSelection.splice(i, i+1);
                         }
                     }
-                    $scope.inputSelection.push({_id});
+                    $scope.inputSelection.push(_id);
                 }else if(checked === false){
                     for(var j=0; j < $scope.inputSelection.length; j++){
                         if($scope.inputSelection[j] === _id){
                             $scope.inputSelection.splice(j, j+1);
                         }
                     }
-                    $scope.inputDeSelection.push({_id});
+                    $scope.inputDeSelection.push(_id);
                 }
             };
             $( window ).load(function() {
@@ -549,6 +450,7 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
                         $scope.isAny = false;
                     }
 
+
                     $scope.loading = false;
 
                     if($scope.evenement.endTimestamp < Date.now()){
@@ -604,18 +506,12 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
                                 }
                             }
                     $scope.newGuests = [];
-                    console.log($scope.guests);
 
                     if($scope.guests.length > 0){
                         if (Authentication.user._id === $scope.evenement.user._id) {
-                            console.log('admin');
                             for (var j = 0; j < $scope.guests.length; j++) {
                                 console.log($scope.guests[j].requests);
                                 for(var g = 0; g < $scope.guests[j].requests.length; g++){
-
-                                    console.log($scope.guests[j].requests[g].event_id);
-                                    console.log($scope.evenement._id);
-
                                     if ($scope.guests[j].requests[g].event_id == $scope.evenement._id) {
                                         $scope.newGuests.push($scope.guests[j]);
                                     }
@@ -784,7 +680,8 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
 
 
         $scope.restoreData = function(evenement) {
-            evenement.$promise.then(function(data){
+            console.log(evenement);
+            /*evenement.$promise.then(function(data){
                 $scope.evenement = data;
 
                 function addZeroBefore(n) { // add 0 before the single digits
@@ -805,7 +702,7 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
                 month = addZeroBefore(month); day = addZeroBefore(day);
                 $scope.evenement.endTime = hours+':'+minutes+':'+seconds;
                 $scope.evenement.endDate = year+'-'+month+'-'+day;
-            });
+            });*/
         };
 	}
 ]);

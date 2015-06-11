@@ -1,119 +1,119 @@
-<section class="top-wrapper" data-ng-controller="EvenementsController" data-ng-init="findOne()">
+<section class="top-wrapper ng-scope" data-ng-controller="EvenementsController" data-ng-init="findOne()">
     <div class="event event-view">
         <div class="preview-thumbnail">
-            <div class="state" ng-if="eventIsPassed == false">
-                <button class="link-buttons" ng-click="changeState(currentGuest)" ng-show="isGuest">{{buttonValue}}</button>
-                <button class="link-buttons" ng-click="askInvite(evenement)" ng-show="isAny" ng-disabled="askInviteButtonClass" ng-class="askInviteButtonClass ? 'send' : 'not-send'">{{askInviteButton}}</button>
-                <p class="state-info" ng-show="isGuest">{{stateValue}}</p>
+            <div class="state ng-scope" ng-if="eventIsPassed == false">
+                <button class="link-buttons ng-binding ng-hide" ng-click="changeState(currentGuest)" ng-show="isGuest">{{buttonValue}}</button>
+                <button class="link-buttons ng-binding ng-hide not-send" ng-click="askInvite(evenement)" ng-show="isAny" ng-disabled="askInviteButtonClass" ng-class="askInviteButtonClass ? 'send' : 'not-send'">{{askInviteButton}}</button>
+                <p class="state-info ng-binding ng-hide" ng-show="isGuest"><i>Votre statut: </i>{{stateValue}}</p>
             </div>
-            <div class="sail"></div>
-            <img class="event-view-image"
-                 style="position: relative;"
-                 ng-class="{reverseDim: evenement.coverImage[0].width < evenement.coverImage[0].height, noCrop: evenement.coverImage[0].width > evenement.coverImage[0].height}"
-                 ng-src="uploaded/events/cover/{{evenement._id}}.{{evenement.coverImage[0].contentType}}"/>
+                <div class="sail"></div>
+                <img class="event-view-image"
+                     style="position: relative;"
+                     ng-class="{reverseDim: evenement.coverImage[0].width < evenement.coverImage[0].height, noCrop: evenement.coverImage[0].width > evenement.coverImage[0].height}"
+                     ng-src="uploaded/events/cover/{{evenement._id}}.{{evenement.coverImage[0].contentType}}"/>
         </div>
         <div class="infos">
-            <h1 data-ng-bind="evenement.name"></h1>
-            <p class="who"><i>par</i> <span data-ng-bind="evenement.user.displayName"></span></p>
-            <p class="localisation" ng-if="evenement.localisation[0].name"><span class="icon-location-pin"></span>&nbsp;<span data-ng-bind="evenement.localisation[0].name"></span></p>
+            <h1 data-ng-bind="evenement.name" class="ng-binding"></h1>
+            <p class="who"><i>par</i> <span data-ng-bind="evenement.user.displayName" class="ng-binding"></span></p>
+            <!-- ngIf: evenement.localisation[0].name -->
             <div class="calendar">
                 <div class="date">
-                    <span class="d" data-ng-bind="evenement.beginTimestamp | date:'d'"></span>
-                    <span class="m" data-ng-bind="evenement.beginTimestamp | date:'m'"></span>
-                    <span class="y" data-ng-bind="evenement.beginTimestamp | date:'y'"></span>
+                    <span class="d ng-binding" data-ng-bind="evenement.beginTimestamp | date:'d'"></span>
+                    <span class="m ng-binding" data-ng-bind="evenement.beginTimestamp | date:'m'"></span>
+                    <span class="y ng-binding" data-ng-bind="evenement.beginTimestamp | date:'y'"></span>
                 </div><!--
                 --><div class="time">
-                    <i><span class="icon-clock"></span></i> <span data-ng-bind="beginTime"></span>
-                </div><!--
+                <i><span class="icon-clock"></span></i> <span data-ng-bind="beginTime" class="ng-binding"></span>
+            </div><!--
                 --><i class="legend">Début</i>
                 <span class="calendar-link"></span>
             </div><!--
             --><div class="calendar">
-                <div class="date">
-                    <span class="d" data-ng-bind="evenement.endTimestamp | date:'d'"></span>
-                    <span class="m" data-ng-bind="evenement.endTimestamp | date:'m'"></span>
-                    <span class="y" data-ng-bind="evenement.endTimestamp | date:'y'"></span>
-                </div><!--
+            <div class="date">
+                <span class="d ng-binding" data-ng-bind="evenement.endTimestamp | date:'d'"></span>
+                <span class="m ng-binding" data-ng-bind="evenement.endTimestamp | date:'m'"></span>
+                <span class="y ng-binding" data-ng-bind="evenement.endTimestamp | date:'y'"></span>
+            </div><!--
                 --><div class="time">
-                    <i><span class="icon-clock"></span></i> <span data-ng-bind="endTime"></span>
-                </div><!--
+            <i><span class="icon-clock"></span></i> <span data-ng-bind="endTime" class="ng-binding"></span>
+        </div><!--
                 --><i class="legend">Fin</i>
-            </div>
-            <p class="description" ng-if="evenement.description"><span class="icon-info"></span>&nbsp;<span>Infos:</span> <span data-ng-bind="evenement.description"></span></p>
-            <div class="list-users">
-                <h2><span class="icon-users"></span>&nbsp;Liste d'invités</h2>
-                <a data-ng-repeat="user in users | filter:UserFilterGuest(evenement)"  class="list-users-item">
-                    <div data-ng-init="displayGuests(user)" class="displayName">
-                        <img class="profilePicture" ng-src="{{user.profileImage}}" alt=""/><p class="name" data-ng-bind="user.firstName">
-                        <p class="name" data-ng-bind="user.lastName"></p>
-                    </div>
-                </a>
+        </div>
+            <!-- ngIf: evenement.description -->
 
-            </div>
-            <div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == evenement.user._id))">
-                <a class="link-buttons link-buttons-admin" href="/#!/evenements/{{evenement._id}}/edit">
+            <p class="description" ng-if="evenement.description"><span class="icon-info"></span>&nbsp;<span>Infos:</span> <span data-ng-bind="evenement.description"></span></p>
+            <p class="localisation" ng-if="evenement.localisation.name != ''"><span class="icon-location-pin"></span>&nbsp;<span>Localisation:</span> <span data-ng-bind="evenement.localisation[0].name"></span></p>
+
+            <ul class="list-users">
+                <h2><span class="icon-users"></span>&nbsp;Liste d'invités</h2>
+                <!-- ngRepeat: user in users | filter:UserFilterGuest(evenement) -->
+                        <li class="list-users-item" ng-repeat="user in users | filter:UserFilterGuest(evenement)">
+                            <div class="displayName">
+                                <img class="profilePicture" ng-src="{{user.profileImage}}" alt=""/>
+                                {{user.firstName}} {{user.lastName}}
+                            </div>
+
+                        </li>
+            </ul>
+            <div class="pull-right" data-ng-show="((authentication.user) &amp;&amp; (authentication.user._id == evenement.user._id))">
+                <h2><span class="icon-users"></span>&nbsp;Espace hôte</h2>
+                <a class="link-buttons link-buttons-admin" href="/#!/evenements/5572e52e1ba977fe9c469c64/edit">
                     <span class="icon-new-message"></span> Edit
                 </a>
                 <a class="link-buttons link-buttons-admin" data-ng-click="remove();">
                     <span class="icon-circle-with-cross"></span> Delete
                 </a>
-                <br/>
-                <ul>
-                    <li data-ng-repeat="newGuest in newGuests" ng-init="adminInviteRequest()">
-                        <p>Demande d'invitation :</p><br/>
-                        {{newGuest.firstName}}
-                        {{newGuest.lastName}} :
+                <ul ng-if="newGuests.length" class="list-users ng-scope">
+                    <h2><span class="icon-add-"></span>Demande d'invitation :</h2>
+                    <li class="list-users-ask ng-scope" data-ng-repeat="newGuest in newGuests" ng-init="adminInviteRequest()">
+                        <p class="ng-binding">{{newGuest.firstName}}&nbsp;{{newGuest.lastName}}:&nbsp;</p>
                         <button ng-click="accept(newGuest)" class="link-buttons link-buttons-admin">Accepter</button>
                         <button ng-click="refuse(newGuest)" class="link-buttons link-buttons-admin">Refuser</button>
                     </li>
                 </ul>
             </div>
         </div>
-
-        <div class="posts posts-list" ng-if="eventIsPassed == false" data-ng-controller="PostsController" data-ng-init="findPosts(evenement)">
-            <ul>
-                <span class="timeline"></span>
-                <li class="post" data-ng-repeat="post in posts" ng-init="currentUser = findAuthor(post.user_id)">
-                    <span class="time" data-ng-bind="post.created | date:'shortTime'"></span>
-                    <div class="push-right">
-                        <span class="bullet"><span></span></span>
-                        <img class="profilePicture" width="25" height="25" ng-hide="{{currentUser.profileImage === undefined}}" ng-src="{{currentUser.profileImage}}" alt=""/>
-                        <h2>{{currentUser.displayName}}</h2>
-                        <p data-ng-bind="post.textContent"></p>
-                        <img class="image-post" ng-if="post.coverImage[0].contentType != ''" ng-src="uploaded/posts/{{post._id}}.{{post.coverImage[0].contentType}}" alt=""/>
-                    </div>
-                </li>
-            </ul>
+        <!-- ngIf: isGuest == true || isAdmin == true -->
+        <div class="posts posts-list ng-scope" ng-show="eventIsPassed == false" ng-if="isGuest == true || isAdmin == true" data-ng-controller="PostsController" data-ng-init="findPosts(evenement)">
+        <ul>
+            <span class="timeline"></span>
+            <li class="post" data-ng-repeat="post in posts" ng-init="currentUser = findAuthor(post.user_id)">
+                <span class="time" data-ng-bind="post.created | date:'shortTime'"></span>
+                <div class="push-right">
+                    <span class="bullet"><span></span></span>
+                    <img class="profilePicture" width="25" height="25" ng-src="{{currentUser.profileImage && currentUser.profileImage || defaultUserCover}}" alt=""/>
+                    <h2>{{currentUser.displayName}}</h2>
+                    <p data-ng-bind="post.textContent"></p>
+                    <img class="image-post" ng-if="post.coverImage[0].contentType != ''" ng-src="uploaded/posts/{{post._id}}.{{post.coverImage[0].contentType}}" alt=""/>
+                </div>
+            </li>
+        </ul>
             <span class="navigation navigation-bottom">
                     <button ng-click="openCreatePost()"><span class="icon-camera_alt"></span><b>Post</b></button>
             </span>
-            <script type="text/ng-template" id="templateId" data-ng-init="findPosts(evenement)">
-                <div class="posts-create">
-                    <h1 class="title">Create Post</h1>
-                    <form data-ng-submit="createPost(evenement)" novalidate>
-                        <fieldset>
+        <script type="text/ng-template" id="postTemplate" data-ng-init="findPosts(evenement)">
+            <div class="posts-create">
+                <h1 class="title">Nouveau post</h1>
+                <form data-ng-submit="createPost(evenement)" novalidate>
+                    <fieldset>
+                        <div>
                             <div>
-                                <div>
-                                    <textarea rows="5" data-ng-model="post.textContent" id="post.textContent" class="form-control" placeholder="Yepaaa"></textarea>
-                                </div>
-                                <div class="image-input">
-                                    <div class="preview-thumbnail">
-                                        <img id="image-preview" class="preview" style="position: relative; left:-{{((originalWidth/(originalHeight/80))-80)/2}}px; top:-{{((originalHeight/(originalWidth/80))-80)/2}}px;" ng-class="{reverseDim: originalWidth < originalHeight, originalDim: originalWidth > originalHeight}" ng-src="{{imageSrc || defaultEventCover}}"/>
-                                    </div>
-                                </div>
-                                <div class="select">
-                                    <input class="wrap" type="checkbox" data-ng-model="post.type" name="post.type" id="post.type"><!--
+                                <textarea rows="5" data-ng-model="post.textContent" id="post.textContent" class="form-control" placeholder="Votre texte ici."></textarea>
+                            </div>
+                            <div class="preview-thumbnail">
+                                <img id="image-preview" class="preview" style="position: relative; left:-{{((originalWidth/(originalHeight/80))-80)/2}}px; top:-{{((originalHeight/(originalWidth/80))-80)/2}}px;" ng-class="{reverseDim: originalWidth < originalHeight, originalDim: originalWidth > originalHeight}" ng-src="{{imageSrc || defaultEventCover}}"/>
+                            </div>
+                            <div class="select">
+                                <input class="wrap" type="checkbox" data-ng-model="post.type" name="post.type" id="post.type"><!--
                                     --><div class="wrap"><button class="imageButton imageButton-photo"><span class="icon-camera_alt"></span>Photo</button><input type="file" ng-file-select="onFileSelect($files)" accept="image/*"  data-ng-model="post.coverImage" id="post.coverImage" class="inputFile"></div><!--
                                     --><div class="wrap"><button class="imageButton imageButton-blue"><span class='icon-done'></span>Poster</button><input class="link-buttons inputSubmit" type="submit" value=""/></div>
-                                </div>
-
                             </div>
-                        </fieldset>
-                    </form>
-                </div>
-            </script>
-        </div>
-	</div>
-</section>
 
-
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </script>
+    </div><!-- end ngIf: isGuest == true || isAdmin == true -->
+    </div>
+</section>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               

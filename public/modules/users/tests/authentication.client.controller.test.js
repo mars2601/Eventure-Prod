@@ -61,14 +61,14 @@
 		it('$scope.signin() should fail to log in with nothing', function() {
 			// Test expected POST request
 			$httpBackend.expectPOST('/auth/signin').respond(400, {
-				'message': 'Missing credentials'
+				'message': 'Veuillez remplir les champs'
 			});
 
 			scope.signin();
 			$httpBackend.flush();
 
 			// Test scope value
-			expect(scope.error).toEqual('Missing credentials');
+			expect(scope.error).toEqual('Veuillez remplir les champs');
 		});
 
 		it('$scope.signin() should fail to log in with wrong credentials', function() {
@@ -78,14 +78,14 @@
 
 			// Test expected POST request
 			$httpBackend.expectPOST('/auth/signin').respond(400, {
-				'message': 'Unknown user'
+				'message': 'Utilisateur inconnu'
 			});
 
 			scope.signin();
 			$httpBackend.flush();
 
 			// Test scope value
-			expect(scope.error).toEqual('Unknown user');
+			expect(scope.error).toEqual('Utilisateur inconnu');
 		});
 
 		it('$scope.signup() should register with correct data', function() {
@@ -105,14 +105,14 @@
 		it('$scope.signup() should fail to register with duplicate Username', function() {
 			// Test expected POST request
 			$httpBackend.when('POST', '/auth/signup').respond(400, {
-				'message': 'Username already exists'
+				'message': 'Le nom d\'utilisateur est déja utilisé'
 			});
 
 			scope.signup();
 			$httpBackend.flush();
 
 			// Test scope value
-			expect(scope.error).toBe('Username already exists');
+			expect(scope.error).toBe('Le nom d\'utilisateur est déja utilisé');
 		});
 	});
 }());

@@ -4,6 +4,7 @@
 @import "bower_components/inuit-lists/base.lists";
 @import "bower_components/inuit-images/base.images";
 @import "bower_components/inuit-view/base.view";
+@import "bower_components/inuit-timeline/base.timeline";
 
 @import "bower_components/inuit-mixins/tools.mixins";
 
@@ -19,6 +20,7 @@
 @import "bower_components/inuit-wrapper/objects.wrapper";
 @import "bower_components/inuit-loader/objects.loader";
 @import "bower_components/inuit-buttons/objects.linkButtons";
+@import "bower_components/inuit-errors/objects.errors";
 
 
 
@@ -35,6 +37,7 @@ body{
   height: 100%;
   background-color: $dark;
 }
+
 
 /* single property*/
 

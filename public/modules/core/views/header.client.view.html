@@ -1,4 +1,4 @@
-<div ng-show="showMenu" class="container header-container" data-ng-controller="HeaderController">
+<div ng-show="{{showMenu}}" class="container header-container" data-ng-controller="HeaderController">
     <div class="header page mobile-header">
         <header class="header__container layout--flush">
             <a id="left-menu" ng-click="toggleMenu('left')" class="showMenu header__border-link header__link layout__item three-twelfths">
@@ -18,10 +18,10 @@
                         <p data-ng-bind="item.title"></p>
                     <ul ng-switch-when="dropdown" class="dropdown-menu">
                         <li data-ng-repeat="subitem in item.items | orderBy: 'position'"  data-ng-if="subitem.shouldRender(authentication.user);" ui-route="{{subitem.uiRoute}}" ng-class="{active: $uiRoute}">
-                            <a ng-click="toggleMenu('left', '/{{subitem.link}}')" data-ng-bind="subitem.title"></a>
+                            <a ng-click="toggleMenu('left', '/{{subitem.link}}')" class="nav-item" data-ng-bind="subitem.title"></a>
                         </li>
                     </ul>
-                    <a ng-switch-default  ng-click="toggleMenu('left', '/{{item.link}}')" data-ng-bind="item.title"></a>
+                    <a ng-switch-default class="nav-item"  ng-click="toggleMenu('left', '/{{item.link}}')" data-ng-bind="item.title"></a>
                 </li>
             </ul>
         </nav>
@@ -35,10 +35,10 @@
                         </div>
 
                         <li class="navigation-list--item">
-                            <a ng-click="toggleMenu('right', '/settings/profile')" >Modifier mon profil</a>
+                            <a ng-click="toggleMenu('right', '/settings/profile')" class="nav-item" >Modifier mon profil</a>
                         </li>
                         <li class="navigation-list--item">
-                            <a href="/auth/signout" >Se déconnecter</a>
+                            <a href="/auth/signout" class="nav-item" >Se déconnecter</a>
                         </li>
             </ul>
         </nav>

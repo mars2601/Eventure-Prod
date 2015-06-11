@@ -53,8 +53,7 @@ angular.module('posts').controller('PostsController', ['$scope', '$stateParams',
                 post.type.type[0] = 'flash';
             }
 
-            if(post.coverImage[0].contentType == undefined){
-                console.log("no image, just text")
+            if(post.coverImage[0].contentType === undefined){
                 post.type.type[0] = 'text';
                 post.coverImage[0].contentType = '';
                 post.coverImage[0].dataUrl = '';
@@ -76,7 +75,7 @@ angular.module('posts').controller('PostsController', ['$scope', '$stateParams',
 			});
 
 
-		}
+		};
 
 		// Remove existing Post
 		$scope.remove = function(post) {

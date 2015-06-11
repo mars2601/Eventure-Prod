@@ -21,7 +21,7 @@ exports.create = function(req, res) {
     var imageBuffer = new Buffer(post.coverImage[0].dataUrl, 'base64');
     var imagePath = uploadPath+postCoverPath+post._id+'.'+post.coverImage[0].contentType;
 
-    if(post.coverImage[0].dataUrl != ''){
+    if(post.coverImage[0].dataUrl !== ''){
         fs.writeFile( imagePath, imageBuffer, function(err) {
             if (err) {
                 return res.status(400).send({

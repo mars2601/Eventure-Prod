@@ -34,12 +34,12 @@ module.exports = {
     facebook: {
         clientID: process.env.FACEBOOK_ID || '1382193778748790',
         clientSecret: process.env.FACEBOOK_SECRET || 'b449a91f961f5cea3f541f5c13f241d4',
-        callbackURL: 'eventure-app.marcel-pirnay.be/auth/facebook/callback'
+        callbackURL: 'http://eventure-app.marcel-pirnay.be/auth/facebook/callback'
     },
     twitter: {
         clientID: process.env.TWITTER_KEY || 'QEgtRtXbDsmHthB9BWOEi9esw',
         clientSecret: process.env.TWITTER_SECRET || 'tWDvq5UkfTnO7jv7ff66GxQF4JVIRkYlRH7l6eDAr3YVYdvgRC',
-        callbackURL: 'eventure-app.marcel-pirnay.be/auth/twitter/callback'
+        callbackURL: 'http://eventure-app.marcel-pirnay.be/auth/twitter/callback'
     },
 	google: {
 		clientID: process.env.GOOGLE_ID || 'APP_ID',

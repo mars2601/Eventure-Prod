@@ -4,6 +4,7 @@ module.exports = function(app) {
 	var users = require('../../app/controllers/users.server.controller');
 	var evenements = require('../../app/controllers/evenements.server.controller');
 
+
 	// Evenements Routes
 	app.route('/evenements')
 		.get(evenements.list)
@@ -22,9 +23,11 @@ module.exports = function(app) {
 		.get(evenements.read)
 		.put(users.requiresLogin, evenements.hasAuthorization, evenements.update)
 		.delete(users.requiresLogin, evenements.hasAuthorization, evenements.delete)
-        .put(users.update);
+        .put(users.update)
+        .post(users.sendEmail);
 
 
-	// Finish by binding the Evenement middleware
+
+    // Finish by binding the Evenement middleware
 	app.param('evenementId', evenements.evenementByID);
 };

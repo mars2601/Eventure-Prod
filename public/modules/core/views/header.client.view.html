@@ -4,10 +4,11 @@
             <a id="left-menu" ng-click="toggleMenu('left')" class="showMenu header__border-link header__link layout__item three-twelfths">
                     <span class="icon-menu"></span>
             </a><!--
-              --><a href="/#!/" class="header__link header__title layout__item six-twelfths"">Eventure</a><!--
-                          --><a id="right-menu" ng-click="toggleMenu('right')" class="showMenu header__border-link header__link layout__item three-twelfths">
-                  <span class="icon-user"></span>
-        </a>
+              --><a href="/#!/" ng-click="toggleMenu('')" class="header__link header__title nav-item layout__item six-twelfths">Eventure</a><!--
+
+            --><a id="right-menu" ng-click="toggleMenu('right')" class="showMenu header__border-link header__link layout__item three-twelfths">
+            <span class="icon-user"></span>
+            </a>
         </header>
     </div>
     <!-- off side menu -->
@@ -26,12 +27,12 @@
             </ul>
         </nav>
     </div>
-    <div id="remote-right-menu" ng-class="menuClassRight" ngSwipeRight="toggleMenu('right')"     class="sidebar-menu right">
+    <div id="remote-right-menu" ng-class="menuClassRight" ng-swipe-rigth="toggleMenu('right')" class="sidebar-menu right">
         <nav class="navigation">
             <ul class="navigation-list" data-ng-show="authentication.user">
                         <div class="profile">
                             <span data-ng-bind="authentication.user.displayName"></span>
-                            <img class="profilePicture" ng-src="{{authentication.user.profileImage}}" alt=""/>
+                            <img class="profilePicture" ng-src="{{authentication.user.profileImage || profilePicture}}" width="40px" height="40px" alt=""/>
                         </div>
 
                         <li class="navigation-list--item">

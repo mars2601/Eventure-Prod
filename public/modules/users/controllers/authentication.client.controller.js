@@ -3,8 +3,8 @@
 angular.module('users').controller('AuthenticationController', ['$scope', '$http', '$location', 'Authentication',
 	function($scope, $http, $location, Authentication) {
 		$scope.authentication = Authentication;
-        console.log($scope.authentication.user);
 
+        $(".signin").parent("section").css("height", "100%");
 
         // If user is signed in then redirect back home
 		if ($scope.authentication.user) $location.path('/timeline');

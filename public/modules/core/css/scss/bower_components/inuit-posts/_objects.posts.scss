@@ -150,23 +150,24 @@
             border: none;
           }
         }
+        .preview-thumbnail{
+          border-top: 1px solid $dark-text;
+          top: -5px;
+          position: relative;
+          -webkit-box-shadow: inset 0px 0px 1px 0px rgba(255, 255, 255, 0.75);
+          -moz-box-shadow:    inset 0px 0px 1px 0px rgba(255, 255, 255, 0.75);
+          box-shadow:         inset 0px 0px 1px 0px rgba(255, 255, 255, 0.75);
+          float: left;
+          width: 100%;
+          img{
+            width: 100%;
+          }
+        }
         .image-input{
           border-top: 1px solid rgba(0, 0, 0, 0.2);
           width: 100%;
-          .preview-thumbnail{
-            position: relative;
-            -webkit-box-shadow: inset 0px 0px 1px 0px rgba(255, 255, 255, 0.75);
-            -moz-box-shadow:    inset 0px 0px 1px 0px rgba(255, 255, 255, 0.75);
-            box-shadow:         inset 0px 0px 1px 0px rgba(255, 255, 255, 0.75);
-            float: left;
-            width: 100%;
-            img{
-              width: 100%;
-            }
-          }
         }
         .select{
-          border-top: 1px solid rgba(0, 0, 0, 0.2);
           background-color: $dark;
           width: 100%;
           height: 55px;
@@ -174,6 +175,14 @@
           bottom: 0;
           .wrap{
             position: relative;
+            padding: 0;
+            margin: 0;
+            width: 50%;
+            height: 100%;
+            display: inline-block;
+            vertical-align: top;
+            border: none;
+            border-radius: 0;
             .imageButton{
               position: absolute;
               width: 100%;
@@ -198,14 +207,7 @@
                 margin-bottom: 1px;
               }
             }
-            padding: 0;
-            margin: 0;
-            width: 33.33%;
-            height: 100%;
-            display: inline-block;
-            vertical-align: top;
-            border: none;
-            border-radius: 0;
+
           }
         }
       }
@@ -213,7 +215,7 @@
   }
   .navigation-bottom{
     border-top: 1px solid $blue;
-    opacity: .95;
+    opacity: .975;
     z-index: 10000;
     position: fixed;
     display: block;

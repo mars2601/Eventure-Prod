@@ -1,15 +1,16 @@
 'use strict';
 
 // Evenements controller
-angular.module('evenements').controller('EvenementsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Evenements', 'Users', 'fileReader', 'Menus', 'ngDialog',
-	function($scope, $stateParams, $location, Authentication, Evenements, Users, fileReader, Menus, ngDialog) {
+angular.module('evenements').controller('EvenementsController', ['$scope', '$stateParams', '$location', '$timeout', '$http', 'Authentication', 'Evenements', 'Users', 'fileReader', 'Menus', 'ngDialog',
+	function($scope, $stateParams, $location, $timeout, $http, Authentication, Evenements, Users, fileReader, Menus, ngDialog) {
 		$scope.authentication = Authentication;
-        $scope.guests = Users.query();
+        $scope.guests = Users.query({all:true});
         $scope.menu = Menus.getMenu('bottombar');
         $scope.placeName = '';
         $scope.lat = '';
         $scope.long = '';
         $scope.defaultEventCover = './img/defaultEventCover.jpg';
+        $scope.defaultEventCover2 = './img/defaultEventCover2.jpg';
         $scope.defaultUserCover = './img/defaultUserCover.jpg';
         $scope.loading = true;
         $('.uil-ring-css').css("height", $( window ).height());
@@ -17,9 +18,39 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
         $(".nav-item").click(function(){
             $(".header__link").removeClass("header__link__focus");
         });
+        var limitStep = 4;
+        $scope.limitStep = limitStep;
+        $scope.limit = limitStep;
+        $scope.incrementLimit = function() {
+            $scope.limit += limitStep;
+        };
+        $scope.decrementLimit = function() {
+            $scope.limit -= limitStep;
+        };
+
+        $scope.$watch('limit + searchText', function() {
+
+            $timeout( function(){
+                console.log($scope.limit);
+                console.log($( ".displayName-input").length);
+                $( ".displayName-input").unbind( "click" );
+                for(var d = 0; d < $( ".displayName-input").length; d++){
+                    $( ".displayName-input:eq( "+d+" )" ).click(function() {
+                        $(this).parent("label").toggleClass("focus");
+                    });
+                }
+                $( ".displayName-input").each(function(){
+                    if($( this).is(":checked")){
+                        $(this).parent("label").addClass("focus");
+                    }
+                });
+            }, 500);
+        });
 
 
-        $scope.openCreatePost = function(){
+
+
+            $scope.openCreatePost = function(){
             ngDialog.open({ template: 'postTemplate',
                             controller: 'PostsController',
                             scope: $scope,
@@ -120,8 +151,6 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
                         $scope.placeName = place.name;
                         $scope.lat = place.geometry.location.A;
                         $scope.long = place.geometry.location.F;
-                        alert($scope.long);
-                        alert($scope.placeName);
                     }
                 });
             }
@@ -156,15 +185,7 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
             $scope.inputSelection = [];
             $scope.inputDeSelection = [];
 
-            var limitStep = 4;
-            $scope.limitStep = limitStep;
-            $scope.limit = limitStep;
-            $scope.incrementLimit = function() {
-                $scope.limit += limitStep;
-            };
-            $scope.decrementLimit = function() {
-                $scope.limit -= limitStep;
-            };
+
 
             $scope.notMe = function( guests ){
                 return function( guests ) {
@@ -217,11 +238,6 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
                     $scope.inputDeSelection.push(_id);
                 }
             };
-            $( window ).load(function() {
-                $( ".displayName-input" ).change(function() {
-                    $(this).parent("label").toggleClass("focus");
-                });
-            });
         };
 
 
@@ -286,7 +302,7 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
 				// Clear form fields
 				$scope.name = '';
 			}, function(errorResponse) {
-                alert('aie');
+                alert('aie, Il y a une erreur');
                 $scope.error = errorResponse.data.message;
 			});
 		};
@@ -331,13 +347,13 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
 
             var newGuests = previousGuests.concat($scope.selection);
 
-            console.log(JSON.stringify($scope.inputSelection));
+            /*console.log(JSON.stringify($scope.inputSelection));
             console.log("-----deselect--------");
 
             console.log(JSON.stringify($scope.inputDeSelection));
 
             console.log("-----previous--------");
-            console.log(JSON.stringify(previousGuests));
+            console.log(JSON.stringify(previousGuests));*/
 
 
             var previousGuests1 = previousGuests;
@@ -356,18 +372,20 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
                 }
             }
 
-            console.log("-----previous - deselect--------");
+            /*console.log("-----previous - deselect--------");
 
             console.log(JSON.stringify(previousGuests));
 
-            console.log("------guests------");
+            console.log("------guests------");*/
 
 
             for (var j = 0; j < $scope.selection.length; j++){
                 evenement.guests.push({_id: $scope.selection[j]});
             }
 
+/*
             console.log(JSON.stringify($scope.evenement.guests));
+*/
 
 			evenement.$update(function() {
 				$location.path('evenements/' + evenement._id);
@@ -378,7 +396,7 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
 
 		// Find a specific list of Evenements
         $scope.find = function(type) {
-            $scope.users = Users.query();
+            $scope.users = Users.query({all:true});
             Evenements.query({all:false}).$promise.then(function(data) {
                 // success handler
                 $scope.evenements = data;
@@ -408,19 +426,15 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
             }, function(error) {
                 // error handler
             });
-            $scope.users = Users.query();
+            $scope.users = Users.query({all:true});
             $("#searchText").focus();
         };
 
 		// Find existing Evenement
 		$scope.findOne = function() {
             $scope.askInviteButton = 'Demander un invitation';
-            Users.query().$promise.then(function(data) {
-                // success handler
-                $scope.users = data;
-            }, function(error) {
-                // error handler
-            });
+
+
             Evenements.get({
 				evenementId: $stateParams.evenementId
 			}).$promise.then(function(data) {
@@ -476,7 +490,9 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
 
 
                     $scope.diffDay = diff.day;
+/*
                     console.log("Entre le "+date1.toString()+" et "+date2.toString()+" il y a "+diff.day+" jours, "+diff.hour+" heures, "+diff.min+" minutes et "+diff.sec+" secondes");
+*/
 
                     function dateDiff(date1, date2){
                         var diff = {}                           // Initialisation du retour
@@ -510,7 +526,6 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
                     if($scope.guests.length > 0){
                         if (Authentication.user._id === $scope.evenement.user._id) {
                             for (var j = 0; j < $scope.guests.length; j++) {
-                                console.log($scope.guests[j].requests);
                                 for(var g = 0; g < $scope.guests[j].requests.length; g++){
                                     if ($scope.guests[j].requests[g].event_id == $scope.evenement._id) {
                                         $scope.newGuests.push($scope.guests[j]);
@@ -534,10 +549,24 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
 
                     });
 
+                    var guests = $scope.evenement.guests;
+                    var guestTab = [];
+
+                    for(var k = 0; k < guests.length; k++){
+                        guestTab.push($scope.evenement.guests[k]._id);
+                    }
+
+                    Users.query({all:false, eve:guestTab}).$promise.then(function(data) {
+                        // success handler
+                        $scope.users = data;
+
+                    }, function(error) {
+                        // error handler
+                    });
 
 
                 });
-            $scope.users = Users.query();
+
             if($scope.buttonValue == undefined && $scope.stateValue == undefined){
                 $scope.buttonValue = "Viendra";
                 $scope.stateValue = "En attente";
@@ -547,35 +576,29 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
         };
 
             $scope.changeState = function(currentGuest){
-                console.log(currentGuest);
                 switch(currentGuest.state[0]) {
                     case 'waiting':
                         currentGuest.state[0] = 'willcome';
                         $scope.buttonValue = "En route";
                         $scope.stateValue = "Sera présent";
-                        alert('Vous comptez être présent à l\'évenement !');
                         break;
                     case 'willcome':
                         currentGuest.state[0] = 'income';
                         $scope.buttonValue = "Est présent";
                         $scope.stateValue = "En route";
-                        alert('Vous vous rendez vers l\'évenement !');
                         break;
                     case 'income':
                         currentGuest.state[0] = 'present';
                         $scope.buttonValue = "Retourne";
                         $scope.stateValue = "Est présent";
-                        alert('Vous êtes présent à l\'évenement !');
                         break;
                     case 'present':
                         currentGuest.state[0] = 'return';
                         $scope.buttonValue = "Yop";
                         $scope.stateValue = "Est retourné";
-                        alert('Vous partez de l\'évenement !');
                         break;
                     case 'return':
                         currentGuest.state[0] = 'return';
-                        alert('En espérant que vous ayez fais bonne route !');
                         break;
                 }
                 for(var i = 0; i < $scope.evenement.guests.length; i++){
@@ -585,7 +608,6 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
                 };
 
                 var evenement = $scope.evenement;
-                console.log(evenement);
                 evenement.$update(function() {
                     $location.path('evenements/' + evenement._id);
                 }, function(errorResponse) {
@@ -595,6 +617,7 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
 
         $scope.askInvite = function(eve){
             var allow = true;
+
 
             for(var i = 0; i < Authentication.user.requests.length; i++){
                 if(Authentication.user.requests[i].event_id == eve._id){
@@ -606,23 +629,31 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
                                                     state: ['waiting']
                                                 });
                 $scope.user = Authentication.user;
-                console.log(Authentication.user);
 
                 var user = new Users($scope.user);
-                console.log(user);
+
+                $http.post('/evenements/'+eve._id, $scope.credentials).success(function(response) {
+                    // Show user success message and clear form
+                    $scope.credentials = null;
+                    $scope.success = response.message;
+
+                }).error(function(response) {
+                    // Show user error message and clear form
+                    $scope.credentials = null;
+                    $scope.error = response.message;
+                });
 
                 user.$update(function(response) {
                     $scope.success = true;
                     Authentication.user = response;
-                    console.log('votre demande a bien été effectuée');
                     $scope.askInviteButton = 'Demande d\'invitation envoyée';
                     $scope.askInviteButtonClass = true;
                 }, function(response) {
                     $scope.error = response.data.message;
                 });
 
+
             }else{
-                console.log('vous êtes en attente de demande d\'invitations');
                 $scope.askInviteButton = 'Demande d\'invitation envoyée';
                 $scope.askInviteButtonClass = true;
             }
@@ -680,7 +711,6 @@ angular.module('evenements').controller('EvenementsController', ['$scope', '$sta
 
 
         $scope.restoreData = function(evenement) {
-            console.log(evenement);
             /*evenement.$promise.then(function(data){
                 $scope.evenement = data;
 
@@ -716,5 +746,10 @@ angular.module('evenements').directive('ngFileSelect',function(){
             });
         }
     };
+}).directive('usersRepeatDirective', function() {
+    $( ".displayName-input" ).change(function() {
+        $(this).parent("label").toggleClass("focus");
+    });
+
 });
 

@@ -1,6 +1,6 @@
 <section class="top-wrapper" data-ng-controller="EvenementsController" data-ng-init="createDisplay()">
     <div class="event event-create">
-        <form  data-ng-submit="create()" enctype="multipart/form-data" style="background: url('{{imageSrc}}') no-repeat center fixed;" novalidate>
+        <form  data-ng-submit="create()" enctype="multipart/form-data" novalidate>
             <fieldset ng-class="{bckgImageTrue: imageSrc}">
                 <div>
 <!--
@@ -50,16 +50,16 @@
                     <div class="guests-filter">
                         <input id="search-user" class="no-label" type="text" ng-model="searchText" placeholder="Rechercher des personnes que vous connaissez"/>
                     </div>
-                    <div class="list-users">
+                    <div id="a" class="list-users">
                         <span class="list-users-item"
-                              ng-repeat="guest in guests | filter:searchText | filter:notMe(guests) | limitTo: limit">
+                              ng-repeat="guest in guests | filter:searchText | filter:notMe(guests) | limitTo: limit" users-repeat-directive>
                             <label class="displayName">
                                 <img class="profilePicture" ng-src="{{guest.profileImage  && guest.profileImage || defaultUserCover}}" alt=""/>
-                                <input class="displayName-input" type="checkbox" name="selectedGuests[]" ng-model="guest.selected" value="{{guest._id}}"><p>{{guest.firstName}} {{guest.lastName}}</p>
-                            </label>
+                                <input class="displayName-input" type="checkbox" name="selectedGuests[]" ng-model="guest.selected" value="{{guest._id}}"><p data-ng-bind="guest.firstName || guest.providerData.name"></p><p data-ng-bind="guest.lastName"></p>
                         </span>
                     </div>
-                    <button type="button" class="link-buttons" ng-hide="guests.length <= limit" ng-click="incrementLimit()">+ Voir plus</button><button type="button" ng-hide="limit <= limitStep" ng-click="decrementLimit()">-</button>
+                    <button type="button" class="link-buttons" ng-hide="guests.length <= limit" ng-click="incrementLimit()" users-repeat-directive><span class="icon-chevron-down"></span>&nbsp;&nbsp;Voir plus</button>
+                    <button type="button" class="link-buttons" ng-hide="limit <= limitStep" ng-click="decrementLimit()"><span class="icon-chevron-up"></span></button>
                 </div>
                 <div class="map no-label" data-ng-init="googleMapPointer()">
                     <input id="pac-input" class="controls" type="text" placeholder="Localisation de l'évenement">
@@ -77,5 +77,6 @@
 
             </fieldset>
         </form>
+
     </div>
 </section>

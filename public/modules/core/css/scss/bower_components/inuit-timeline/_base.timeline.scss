@@ -3,7 +3,8 @@
 \*------------------------------------*/
 
 .timeline-list{
-  padding: 4%;
+  padding-left: 4%;
+  padding-right: 4%;
   background-color: $dark-opacity;
 
   &-item{
@@ -45,6 +46,7 @@
           font-weight: 400;
           i{
             font-size: 0.8em;
+            font-style: normal;
             margin: 0 0 4px 0;
             padding-bottom: 4px;
             border-bottom: 1px solid $pink;

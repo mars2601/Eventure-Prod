@@ -55,7 +55,7 @@ exports.forgot = function(req, res, next) {
 			}
 		},
 		function(token, user, done) {
-			res.render('templates/reset-password-email', {
+            res.render('templates/reset-password-email', {
 				name: user.displayName,
 				appName: config.app.title,
 				url: 'http://' + req.headers.host + '/auth/reset/' + token
@@ -65,7 +65,8 @@ exports.forgot = function(req, res, next) {
 		},
 		// If valid email, send reset email using service
 		function(emailHTML, user, done) {
-			var smtpTransport = nodemailer.createTransport(config.mailer.options);
+            console.error('email');
+            var smtpTransport = nodemailer.createTransport(config.mailer.options);
 			var mailOptions = {
 				to: user.email,
 				from: config.mailer.from,

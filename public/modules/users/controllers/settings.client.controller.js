@@ -21,11 +21,13 @@ angular.module('users').controller('SettingsController', [ '$scope', '$http', '$
         $scope.ispP = (pP === '') ? true : false;
         $scope.profilePicture = pP;
 
+        $(".signin").parent("section").css("height", "100%");
+
 		// If user is not signed in then redirect back home
 		if (!$scope.user) $location.path('/');
 
         $scope.findAll = function (){
-            $scope.allUsers = Users.query();
+            $scope.allUsers = Users.query({all:true});
             console.log($scope.allUsers);
         };
 

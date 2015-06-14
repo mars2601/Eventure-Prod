@@ -16,16 +16,49 @@ var _ = require('lodash'),
  * List of Users
  */
 exports.list = function(req, res) {
-    User.find({}, function(err, users){
-        if (err) {
-            return res.status(400).send({
-                message: errorHandler.getErrorMessage(err)
-            });
-        } else {
-            res.jsonp(users);
+    if(req.query.all === 'true'){
+        User.find({}, function(err, users){
+            if (err) {
+                return res.status(400).send({
+                    message: errorHandler.getErrorMessage(err)
+                });
+            } else {
+                res.jsonp(users);
+            }
+        });
+    }else{
+        console.error(req.query.eve);
+        console.error(Array.isArray(req.query.eve));
+
+        if(req.query.eve){
+            if(Array.isArray(req.query.eve) === true){
+                User.find({ _id: { $in: req.query.eve } }).exec(function(err, users){
+                    if (err) {
+                        return res.status(400).send({
+                            message: errorHandler.getErrorMessage(err)
+                        });
+                    } else {
+                        res.jsonp(users);
+                    }
+                });
+            }else{
+                User.find({ _id: req.query.eve }).exec(function(err, users){
+                    if (err) {
+                        return res.status(400).send({
+                            message: errorHandler.getErrorMessage(err)
+                        });
+                    } else {
+                        res.jsonp(users);
+                    }
+                });
+            }
+
         }
-    });
+
+    }
 };
+
+
 
 /*exports.askInvite = function(req, res) {
     User.find({}, function(err, users){
@@ -69,7 +102,6 @@ exports.signup = function(req, res) {
 				if (err) {
 					res.status(400).send(err);
 				} else {
-                    console.error(user);
                     res.json(user);
 				}
 			});
@@ -93,7 +125,6 @@ exports.signin = function(req, res, next) {
 				if (err) {
 					res.status(400).send(err);
 				} else {
-                    console.error(user);
                     res.json(user);
 				}
 			});
@@ -187,14 +218,14 @@ exports.saveOAuthUserProfile = function(req, providerUserProfile, done) {
 						});
 
 
-                        console.log (user);
-/*
+                        /*console.log (user);
+*//*
                         user.push({});
-*/
+*//*
                         console.log (user);
 
                         console.error(user);
-                        console.error('ok');
+                        console.error('ok');*/
                         // And save the user
 						user.save(function(err) {
 							return done(err, user);

@@ -10,7 +10,7 @@ angular.module('posts').controller('PostsController', ['$scope', '$stateParams',
 
 
         $scope.findAuthor = function(user_id) {
-            Users.query().$promise.then(function(data) {
+            Users.query({all:true}).$promise.then(function(data) {
                 // success handler
                 $scope.users = data;
             }, function(error) {

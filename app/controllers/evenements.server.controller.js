@@ -12,6 +12,7 @@ var mongoose = require('mongoose'),
 	_ = require('lodash');
 
 
+
 /**
  * Create a Evenement
  */
@@ -56,7 +57,6 @@ exports.read = function(req, res) {
  */
 exports.update = function(req, res) {
 	var evenement = req.evenement ;
-    console.error(evenement);
 	evenement = _.extend(evenement , req.body);
 
 	evenement.save(function(err) {

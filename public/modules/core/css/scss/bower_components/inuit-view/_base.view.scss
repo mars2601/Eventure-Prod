@@ -3,11 +3,13 @@
 \*------------------------------------*/
 .top-wrapper{
   position: relative;
-  top: 55px;
-  padding-bottom: 55px;
+  padding-top: 55px;
   &-filter{
-    top: 110px;
+    padding-top: 110px;
   }
+}
+.bottom-wrapper{
+  padding-bottom: 55px;
 }
 
 .event{
@@ -31,7 +33,11 @@
         background-color: rgba(255, 255, 255, 0.75);
         border-radius: 2px;
         button{
-
+          margin-left: 0;
+        }
+        button.send{
+          background-color: $dark-text;
+          color: $blue;
         }
         &-info{
           float: left;
@@ -90,9 +96,10 @@
       .localisation, .description{
         span:nth-child(2){
           color: $pink;
+          font-weight: 400;
         }
         span{
-          font-weight: 300;
+          font-weight: 200;
         }
         padding:7px 0 0;
         margin: 7px 0;
@@ -195,6 +202,14 @@
             background-color: rgba(255, 255, 255, 0.1);
           }
         }
+
+        &-item:nth-child(4n){
+          margin:2% 2% 2% 0;
+        }
+        &-item:nth-child(4n+1){
+          margin: 2% 0;
+        }
+
       }
 
       .pull-right{
@@ -272,12 +287,27 @@
           display: inline-block;
           color: rgba(255, 255, 255, 0.6);
         }
+        input[type=text], input[type=date], input[type=time], textarea{
+          -webkit-appearance: none;
+          border-radius: 2px;
+          width: 90%;
+          padding: 20px 5%;
+          color: $dark-text;
+          background: rgba(0, 0, 0, 0.1);
+          border: 1px solid white;
+          &:focus{
+            outline:none;
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 2px solid $blue;
+          }
+        }
         input[type=file]{
           padding: 0;
           font-size: 1em;
           -webkit-appearance: none;
           -webkit-border-radius:2px;
           border: none;
+          width: 90%;
         }
         input[type=date], input[type=time]{
           -webkit-appearance: none;
@@ -288,27 +318,12 @@
         }
         input[type=file]::-webkit-file-upload-button{
           height: 60px;
-          font-size: 1.1em;
           padding: 0 5% 0 0;
           border:none;
           color: $bckg;
           background: $dark-text;
           width: 100%;
           font-size: 0.72em;
-        }
-        input, textarea{
-          -webkit-appearance: none;
-          border-radius: 2px;
-          width: 90%;
-          padding: 20px 5%;
-          color: $dark-text;
-          background: rgba(0, 0, 0, 0.1);
-          border: 1px solid white;
-          &:focus{
-            outline:none;
-            background-color: rgba(255, 255, 255, 0.5);
-            border: 2px solid $blue;
-          }
         }
         .image-input{
           width: 100%;
@@ -378,6 +393,7 @@
     max-width: 500px;
     margin: 0 auto;
     display: block;
+    text-align: center;
     h3{
       font-size: 0.8em;
       text-align: center;
@@ -470,6 +486,11 @@
 
         }
       }
+    }
+    .link-buttons{
+      top: 40px;
+      position: relative;
+      font-size: 1em;
     }
   }
   ::-webkit-input-placeholder { /* WebKit browsers */

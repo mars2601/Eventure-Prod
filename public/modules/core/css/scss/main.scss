@@ -44,9 +44,7 @@ body{
 .content{
   .container{
     height: 100%;
-    section:first-child{
-      height: 100%;
-    }
+    background-color: $bckg;
   }
   height: 100%;
 }

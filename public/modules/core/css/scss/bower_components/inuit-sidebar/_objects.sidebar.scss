@@ -2,9 +2,11 @@ header{
   .right{
     text-align: right;
     padding-top: 10px;
+    border-left: 1px solid rgba(255, 255, 255, 0.3);
   }
   .left{
     text-align: left;
+    border-right: 1px solid rgba(255, 255, 255, 0.3);
   }
   .sidebar-menu{
     top: 55px;
@@ -43,15 +45,15 @@ header{
         color: rgba(0, 0, 0, 0.5);
         .profilePicture{
           margin-bottom: 7px;
+          border: 2px solid $dark-text;
         }
         span{
           display: inline-block;
           vertical-align: top;
           line-height: 50px;
           padding: 0 15px 0 0;
-          &:first-letter{
-            text-transform: uppercase;
-          }
+          color: rgba(255, 255, 255, 0.7);
+          text-transform: uppercase;
         }
       }
       ul{

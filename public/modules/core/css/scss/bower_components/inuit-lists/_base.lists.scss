@@ -47,7 +47,6 @@ li {
 
 .event-empty{
   position: absolute;
-  top: 0;
   padding: 20px 0;
   width: 100%;
   text-align: center;
@@ -259,10 +258,10 @@ li {
     }
     &-item{
       color: $bckg;
-      width: 23%;
+      width: 23.5%;
       display: inline-block;
       vertical-align: top;
-      margin: 1%;
+      margin:2% 2% 2% 0;
       text-align: center;
       .displayName{
         overflow: hidden;
@@ -273,14 +272,20 @@ li {
         background-color: $dark;
         font-size: 0.9em;
         font-weight: 400;
+        border-bottom: 2px solid $dark-text;
         img{
           width: 40px;
           height: 40px;
           margin-bottom: 4px;
         }
+        p{
+          margin: 0;
+          font-weight: 200;
+        }
       }
       label.focus{
         background-color: $pink;
+        border-bottom: 2px solid $blue;
       }
       input{
         display: none;
@@ -303,6 +308,16 @@ li {
         &::first-letter{
           text-transform: uppercase;
         }
+      }
+    }
+    &-item:nth-child(4n){
+      margin: 2% 0;
+    }
+    .link-buttons{
+      margin-right: 7px;
+      span{
+        left: 0;
+        font-size: 1em;
       }
     }
   }

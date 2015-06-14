@@ -19,7 +19,7 @@
         </a>
         <a ng-if="filtered.length == 0" class="timeline-list-item-link" href="/#!/evenements/create">
             <span class="infos infos-only">
-                <h3 class="title"><i>Vous n'organisé aucun événement</i></h3>
+                <h3 class="title"><i>Aucun événement organisé</i></h3>
                 <p>N'hésitez pas, créez un évenement et invitez y des amis !</p>
                 <button class="link-buttons" href="/#!/evenements/create">Créer un évenement</button>
             </span>
@@ -32,7 +32,7 @@
                 <img id="list-preview" style="position: relative; left:-{{((myLastInvitation.coverImage[0].width/(myLastInvitation.coverImage[0].height/90))-90)/2}}px; top:-{{((myLastInvitation.coverImage[0].height/(myLastInvitation.coverImage[0].width/90))-90)/2}}px;" ng-class="{reverseDim: myLastInvitation.coverImage[0].width < myLastInvitation.coverImage[0].height, originalDim: myLastInvitation.coverImage[0].width > myLastInvitation.coverImage[0].height}" class="image image-thumbnail"  ng-src="uploaded/events/cover/{{myLastInvitation._id}}.{{myLastInvitation.coverImage[0].contentType}}"/>
             </div><!--
             --><span class="infos">
-                <h3 class="title"><i>Prochain événement invité</i> <span data-ng-bind="myLastInvitation.name"></span></h3>
+                <h3 class="title"><i>Votre prochain invitation</i> <span data-ng-bind="myLastInvitation.name"></span></h3>
             </span>
             <small>
                 <span class="icon-calendar"></span>&nbsp;<span class="time" data-ng-bind="myLastInvitation.beginTimestamp | date:'fullDate'"></span>
@@ -45,14 +45,14 @@
         </a>
         <a ng-if="filtered.length == 0" class="timeline-list-item-link" href="/#!/all-evenements">
             <span class="infos infos-only">
-                <h3 class="title"><i>Vous n'êtes invité à aucun événement</i></h3>
+                <h3 class="title"><i>Aucune invitation</i></h3>
                 <p>Parcourez les évenements et demandez d'y être invité !</p>
                 <button class="link-buttons" href="/#!/all-evenements">Voir tous les évenements</button>
             </span>
         </a>
     </section>
 
-    <section class="timeline-list-item myInvitations" data-ng-init="findMyInvitations()">
+   <!-- <section class="timeline-list-item myInvitations" data-ng-init="findMyInvitations()">
         <a ng-if="filtered.length" class="timeline-list-item-link" data-ng-href="#!/evenements/{{myLastInvitation._id}}"
            data-ng-init="findUsers(myInvitations)">
             <span class="infos">
@@ -64,5 +64,5 @@
                 </li>
             </ul>
         </a>
-    </section>
+    </section>-->
 </section>

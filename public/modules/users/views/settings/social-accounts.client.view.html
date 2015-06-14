@@ -1,29 +1,16 @@
-<section class="top-wrapper" data-ng-controller="SettingsController">
-	<h3 class="col-md-12 text-center" data-ng-show="hasConnectedAdditionalSocialAccounts()">Connected social accounts:</h3>
-	<div class="col-md-12 text-center">
-		<div data-ng-repeat="(providerName, providerData) in user.additionalProvidersData" class="remove-account-container">
-			<img ng-src="/modules/users/img/buttons/{{providerName}}.png">
-			<a class="btn btn-danger btn-remove-account" data-ng-click="removeUserSocialAccount(providerName)">
-				<i class="glyphicon glyphicon-trash"></i>
-			</a>
-		</div>
-	</div>
-	<h3 class="col-md-12 text-center">Connect other social accounts:</h3>
-	<div class="col-md-12 text-center">
-		<a href="/auth/facebook" data-ng-hide="isConnectedSocialAccount('facebook')" class="undecorated-link">
-			<img src="/modules/users/img/buttons/facebook.png">
-		</a>
-		<a href="/auth/twitter" data-ng-hide="isConnectedSocialAccount('twitter')" class="undecorated-link">
-			<img src="/modules/users/img/buttons/twitter.png">
-		</a>
-		<a href="/auth/google" data-ng-hide="isConnectedSocialAccount('google')" class="undecorated-link">
-			<img src="/modules/users/img/buttons/google.png">
-		</a>
-		<a href="/auth/linkedin" data-ng-hide="isConnectedSocialAccount('linkedin')" class="undecorated-link">
-			<img src="/modules/users/img/buttons/linkedin.png">
-		</a>
-		<a href="/auth/github" data-ng-hide="isConnectedSocialAccount('github')" class="undecorated-link">
-			<img src="/modules/users/img/buttons/github.png">
-		</a>
-	</div>
+<section class="top-wrapper signin" data-ng-controller="SettingsController">
+    <div class="sail">
+        <div class="signin-section">
+            <h3>Se connectez à un réseau social:</h3>
+            <br/>
+            <a href="/auth/facebook" data-ng-hide="isConnectedSocialAccount('facebook')" class="entry entry-fb">Facebook
+            </a>
+            <a href="/auth/twitter" data-ng-hide="isConnectedSocialAccount('twitter')" class="entry entry-tw">Twitter
+            </a>
+            <br/>
+            <div class="forgot-password">
+                <a href="/#!/signin" class="show-signup">Retour à ma page de profil <span class="icon-chevron-left"></span></a>
+            </div>
+        </div>
+    </div>
 </section>

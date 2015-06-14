@@ -3,7 +3,6 @@
         <div class="signin-section">
             <h3>Edit your profile</h3>
             <img class="profilePicture profilePicture-center" ng-src="{{profilePicture}}" alt=""/>
-            <a ng-show="ispP" class="ng-hide btn btn-large btn-primary" href="/#!/settings/accounts">Ajouter une photo via les réseaux sociaux</a>
             <form name="userForm" data-ng-submit="updateUserProfile(userForm.$valid)" autocomplete="off">
                 <fieldset>
                     <div class="form-group">
@@ -33,6 +32,7 @@
                     <a href="/#!/settings/password" class="btn btn-large btn-primary">Changer de mot de passe</a>
                 </div>
             </form>
+            <a ng-show="ispP" class="link-buttons" href="/#!/settings/accounts">Ajouter une photo</a>
         </div>
     </div>
 </section>

@@ -1,4 +1,4 @@
-<section class="top-wrapper ng-scope" data-ng-controller="EvenementsController" data-ng-init="findOne()">
+<section class="top-wrapper bottom-wrapper ng-scope" data-ng-controller="EvenementsController" data-ng-init="findOne()">
     <div class="event event-view">
         <div class="preview-thumbnail">
             <div class="state ng-scope" ng-if="eventIsPassed == false">
@@ -47,21 +47,22 @@
             <ul class="list-users">
                 <h2><span class="icon-users"></span>&nbsp;Liste d'invités</h2>
                 <!-- ngRepeat: user in users | filter:UserFilterGuest(evenement) -->
-                        <li class="list-users-item" ng-repeat="user in users | filter:UserFilterGuest(evenement)">
+                        <li class="list-users-item" ng-repeat="user in users  |  limitTo: limit">
                             <div class="displayName">
-                                <img class="profilePicture" ng-src="{{user.profileImage}}" alt=""/>
-                                {{user.firstName}} {{user.lastName}}
+                                <img class="profilePicture" ng-src="{{user.profileImage  && user.profileImage || defaultUserCover}}" alt=""/>
+                                <p data-ng-bind="user.firstName || user.providerData.name"></p><p data-ng-bind="user.lastName"></p>
                             </div>
-
                         </li>
             </ul>
+            <button type="button" class="link-buttons" ng-hide="users.length <= limit" ng-click="incrementLimit()"><span class="icon-chevron-down"></span>&nbsp;&nbsp;Voir plus</button>
+            <button type="button" class="link-buttons" ng-hide="limit <= limitStep" ng-click="decrementLimit()"><span class="icon-chevron-up"></span></button>
             <div class="pull-right" data-ng-show="((authentication.user) &amp;&amp; (authentication.user._id == evenement.user._id))">
                 <h2><span class="icon-users"></span>&nbsp;Espace hôte</h2>
-                <a class="link-buttons link-buttons-admin" href="/#!/evenements/5572e52e1ba977fe9c469c64/edit">
+                <!--<a class="link-buttons link-buttons-admin" href="/#!/evenements/5572e52e1ba977fe9c469c64/edit">
                     <span class="icon-new-message"></span> Edit
-                </a>
+                </a>-->
                 <a class="link-buttons link-buttons-admin" data-ng-click="remove();">
-                    <span class="icon-circle-with-cross"></span> Delete
+                    <span class="icon-circle-with-cross"></span> Supprimer l'évenement
                 </a>
                 <ul ng-if="newGuests.length" class="list-users ng-scope">
                     <h2><span class="icon-add-"></span>Demande d'invitation :</h2>
@@ -74,7 +75,7 @@
             </div>
         </div>
         <!-- ngIf: isGuest == true || isAdmin == true -->
-        <div class="posts posts-list ng-scope" ng-show="eventIsPassed == false" ng-if="isGuest == true || isAdmin == true" data-ng-controller="PostsController" data-ng-init="findPosts(evenement)">
+        <div class="posts posts-list ng-scope" ng-if="isGuest == true || isAdmin == true && eventIsPassed == false" data-ng-controller="PostsController" data-ng-init="findPosts(evenement)">
         <ul>
             <span class="timeline"></span>
             <li class="post" data-ng-repeat="post in posts" ng-init="currentUser = findAuthor(post.user_id)">
@@ -89,27 +90,21 @@
             </li>
         </ul>
             <span class="navigation navigation-bottom">
-                    <button ng-click="openCreatePost()"><span class="icon-camera_alt"></span><b>Post</b></button>
+                    <button ng-click="openCreatePost()"><span class="icon-camera_alt"></span><b>Poster</b></button>
             </span>
         <script type="text/ng-template" id="postTemplate" data-ng-init="findPosts(evenement)">
             <div class="posts-create">
                 <h1 class="title">Nouveau post</h1>
                 <form data-ng-submit="createPost(evenement)" novalidate>
                     <fieldset>
-                        <div>
-                            <div>
-                                <textarea rows="5" data-ng-model="post.textContent" id="post.textContent" class="form-control" placeholder="Votre texte ici."></textarea>
-                            </div>
+                            <textarea rows="5" data-ng-model="post.textContent" id="post.textContent" class="form-control" placeholder="Votre texte ici."></textarea>
                             <div class="preview-thumbnail">
-                                <img id="image-preview" class="preview" style="position: relative; left:-{{((originalWidth/(originalHeight/80))-80)/2}}px; top:-{{((originalHeight/(originalWidth/80))-80)/2}}px;" ng-class="{reverseDim: originalWidth < originalHeight, originalDim: originalWidth > originalHeight}" ng-src="{{imageSrc || defaultEventCover}}"/>
+                                <img id="image-preview" class="preview" style="position: relative; left:-{{((originalWidth/(originalHeight/80))-80)/2}}px; top:-{{((originalHeight/(originalWidth/80))-80)/2}}px;" ng-class="{reverseDim: originalWidth < originalHeight, originalDim: originalWidth > originalHeight}" ng-src="{{imageSrc || defaultEventCover2}}"/>
                             </div>
                             <div class="select">
-                                <input class="wrap" type="checkbox" data-ng-model="post.type" name="post.type" id="post.type"><!--
-                                    --><div class="wrap"><button class="imageButton imageButton-photo"><span class="icon-camera_alt"></span>Photo</button><input type="file" ng-file-select="onFileSelect($files)" accept="image/*"  data-ng-model="post.coverImage" id="post.coverImage" class="inputFile"></div><!--
+                                    <div class="wrap"><button class="imageButton imageButton-photo"><span ng-hide="imageSrc" class="icon-camera_alt"></span><span ng-show="imageSrc" class="icon-done"></span>Photo</button><input type="file" ng-file-select="onFileSelect($files)" accept="image/*"  data-ng-model="post.coverImage" id="post.coverImage" class="inputFile"></div><!--
                                     --><div class="wrap"><button class="imageButton imageButton-blue"><span class='icon-done'></span>Poster</button><input class="link-buttons inputSubmit" type="submit" value=""/></div>
                             </div>
-
-                        </div>
                     </fieldset>
                 </form>
             </div>
